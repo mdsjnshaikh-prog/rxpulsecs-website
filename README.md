@@ -15,3 +15,6 @@ Static marketing and legal website for RxPulse Clinician Suite.
 ## Notes
 
 The refund page link has intentionally been removed. The current Windows installer is marked as coming soon until public release.
+
+
+Step 10 update: Added support.html and improved early tester/support mailto templates.
