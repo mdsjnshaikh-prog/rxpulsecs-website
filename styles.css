@@ -234,3 +234,18 @@ footer a {
 .legal-page ul {
   padding-left: 24px;
 }
+.download-box {
+  background: #ffffff;
+}
+
+.center-card {
+  text-align: center;
+}
+
+.narrow {
+  width: min(760px, 92%);
+}
+
+.muted {
+  background: #eef7f7;
+}
