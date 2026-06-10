@@ -18,3 +18,13 @@ The refund page link has intentionally been removed. The current Windows install
 
 
 Step 10 update: Added support.html and improved early tester/support mailto templates.
+
+
+## Public auth placeholder pages
+
+This static website includes placeholder UI pages for:
+- `/doctor-signup`
+- `/forgot-password`
+- `/reset-password`
+
+These pages are intentionally not connected to Supabase yet. Keep them as UI/safe support pages until the exact app-compatible doctor signup and password reset backend flow is verified.
