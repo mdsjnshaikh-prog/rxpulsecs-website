@@ -28,3 +28,9 @@ This static website includes placeholder UI pages for:
 - `/reset-password`
 
 These pages are intentionally not connected to Supabase yet. Keep them as UI/safe support pages until the exact app-compatible doctor signup and password reset backend flow is verified.
+
+## Cloudflare Pages routing note
+
+This version intentionally does not include a `_redirects` file. Cloudflare Pages was producing redirect loops on extensionless paths such as `/download` and `/support` when `_redirects` rewrites were present.
+
+Internal navigation uses explicit `.html` pages such as `/download.html` and `/support.html` to avoid redirect loops. If clean extensionless URLs are needed later, test them after deployment before reintroducing `_redirects`.
