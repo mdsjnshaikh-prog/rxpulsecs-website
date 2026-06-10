@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup Success | RxPulse Clinician Suite</title>
+  <meta name="description" content="RxPulse doctor account email verification success page." />
+  <link rel="canonical" href="https://www.rxpulsecs.com/signup-success.html" />
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="/script.js" defer></script>
+
+</head>
+<body class="auth-page success-page">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="/index.html" aria-label="RxPulse home">
+      <span class="brand-mark">Rx</span>
+      <span>Pulse</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+      <a href="/index.html" data-en="Home" data-bn="হোম">হোম</a>
+      <a href="/features.html" data-en="Features" data-bn="ফিচার">ফিচার</a>
+      <a href="/workflow.html" data-en="Workflow" data-bn="ওয়ার্কফ্লো">ওয়ার্কফ্লো</a>
+      <a href="/pricing.html" data-en="Pricing" data-bn="মূল্য">মূল্য</a>
+      <a href="/download.html" data-en="Download" data-bn="ডাউনলোড">ডাউনলোড</a>
+      <a href="/support.html" data-en="Support" data-bn="সাপোর্ট">সাপোর্ট</a>
+      <a class="nav-cta" href="/doctor-signup.html" data-en="Create Account" data-bn="অ্যাকাউন্ট তৈরি">অ্যাকাউন্ট তৈরি</a>
+      <button class="lang-toggle" type="button" data-language-toggle aria-label="Switch language">EN</button>
+    </nav>
+  </div>
+</header>
+<main id="main-content">
+
+<section class="success-hero">
+  <div class="container success-wrap">
+    <div class="success-card">
+      <div id="success-icon" class="success-icon" aria-hidden="true">✓</div>
+      <p class="eyebrow" data-en="Email verified" data-bn="Email verified">Email verified</p>
+      <h1 id="success-title" data-en="Congratulations, your account is ready" data-bn="অভিনন্দন, আপনার account ready">অভিনন্দন, আপনার account ready</h1>
+      <p id="success-copy" class="auth-lead" data-en="You can now open the RxPulse app and log in with your email and password. Next, complete your professional profile and tap Save & Apply for Admin approval." data-bn="এখন RxPulse app খুলে email ও password দিয়ে login করুন। এরপর professional profile complete করে Admin approval-এর জন্য Save & Apply চাপুন।">এখন RxPulse app খুলে email ও password দিয়ে login করুন। এরপর professional profile complete করে Admin approval-এর জন্য Save & Apply চাপুন।</p>
+
+      <div class="success-steps">
+        <div><strong>1</strong><span data-en="Open RxPulse software" data-bn="RxPulse software খুলুন">RxPulse software খুলুন</span></div>
+        <div><strong>2</strong><span data-en="Login with your credentials" data-bn="Credentials দিয়ে login করুন">Credentials দিয়ে login করুন</span></div>
+        <div><strong>3</strong><span data-en="Complete profile and apply" data-bn="Profile complete করে apply করুন">Profile complete করে apply করুন</span></div>
+      </div>
+
+      <div class="actions center-actions">
+        <a class="button primary" href="/download.html" data-en="Download RxPulse" data-bn="RxPulse Download">RxPulse Download</a>
+        <a class="button secondary" href="/support.html" data-en="Need support?" data-bn="সাপোর্ট দরকার?">সাপোর্ট দরকার?</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const hash = new URLSearchParams((window.location.hash || '').replace(/^#/, ''));
+    const error = params.get('error') || hash.get('error');
+    const errorDescription = params.get('error_description') || hash.get('error_description');
+
+    if (error || errorDescription) {
+      const icon = document.getElementById('success-icon');
+      const title = document.getElementById('success-title');
+      const copy = document.getElementById('success-copy');
+      if (icon) { icon.textContent = '!'; icon.classList.add('warning'); }
+      if (title) {
+        title.textContent = 'Verification link needs attention';
+        title.dataset.en = 'Verification link needs attention';
+        title.dataset.bn = 'Verification link needs attention';
+      }
+      if (copy) {
+        copy.textContent = errorDescription || 'This verification link may be expired or invalid. Please try again or contact RxPulse support.';
+        copy.dataset.en = copy.textContent;
+        copy.dataset.bn = copy.textContent;
+      }
+    }
+  })();
+</script>
+
+</main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="brand footer-brand" href="/index.html" aria-label="RxPulse home">
+        <span class="brand-mark">Rx</span>
+        <span>Pulse</span>
+      </a>
+      <p data-en="A practical prescription and EMR suite for Bangladeshi doctors." data-bn="বাংলাদেশি ডাক্তারদের জন্য practical prescription ও EMR suite।">বাংলাদেশি ডাক্তারদের জন্য practical prescription ও EMR suite।</p>
+    </div>
+    <div>
+      <h3 data-en="Product" data-bn="প্রোডাক্ট">প্রোডাক্ট</h3>
+      <a href="/features.html" data-en="Features" data-bn="ফিচার">ফিচার</a>
+      <a href="/workflow.html" data-en="Workflow" data-bn="ওয়ার্কফ্লো">ওয়ার্কফ্লো</a>
+      <a href="/pricing.html" data-en="Pricing" data-bn="মূল্য">মূল্য</a>
+      <a href="/download.html" data-en="Download" data-bn="ডাউনলোড">ডাউনলোড</a>
+    </div>
+    <div>
+      <h3 data-en="Account" data-bn="অ্যাকাউন্ট">অ্যাকাউন্ট</h3>
+      <a href="/doctor-signup.html" data-en="Doctor signup" data-bn="ডাক্তার signup">ডাক্তার signup</a>
+      <a href="/forgot-password.html" data-en="Reset password" data-bn="পাসওয়ার্ড রিসেট">পাসওয়ার্ড রিসেট</a>
+      <a href="/support.html" data-en="Support" data-bn="সাপোর্ট">সাপোর্ট</a>
+    </div>
+    <div>
+      <h3 data-en="Legal" data-bn="আইনি">আইনি</h3>
+      <a href="/privacy.html" data-en="Privacy" data-bn="প্রাইভেসি">প্রাইভেসি</a>
+      <a href="/terms.html" data-en="Terms" data-bn="শর্তাবলি">শর্তাবলি</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 RxPulse Clinician Suite. All rights reserved.</span>
+    <span data-en="Support: support@rxpulsecs.com" data-bn="সাপোর্ট: support@rxpulsecs.com">সাপোর্ট: support@rxpulsecs.com</span>
+  </div>
+</footer>
+</body>
+</html>
