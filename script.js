@@ -21,8 +21,8 @@
   }
 
   function initLanguage() {
-    let lang = "bn";
-    try { lang = localStorage.getItem(STORAGE_KEY) || "bn"; } catch (_) {}
+    let lang = "en";
+    try { lang = localStorage.getItem(STORAGE_KEY) || "en"; } catch (_) {}
     applyLanguage(lang);
   }
 

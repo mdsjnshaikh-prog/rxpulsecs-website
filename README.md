@@ -7,7 +7,6 @@ Complete static public website package for `rxpulsecs.com`.
 - `index.html`
 - `features.html`
 - `workflow.html`
-- `pricing.html`
 - `download.html`
 - `support.html`
 - `doctor-signup.html`

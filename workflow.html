@@ -1,94 +1,89 @@
 <!DOCTYPE html>
-<html lang="bn">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Workflow | RxPulse Clinician Suite</title>
-  <meta name="description" content="Understand the RxPulse doctor signup, email verification, profile completion, Save & Apply, and admin approval workflow." />
-  <link rel="canonical" href="https://www.rxpulsecs.com/workflow.html" />
-  <link rel="stylesheet" href="/styles.css" />
-  <script src="/script.js" defer></script>
 
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Workflow | RxPulse Clinician Suite</title>
+<meta content="Learn the RxPulse onboarding workflow from doctor account creation and email verification to in-app profile completion and Admin approval." name="description"/>
+<link href="https://www.rxpulsecs.com/workflow.html" rel="canonical"/>
+<link href="/styles.css" rel="stylesheet"/>
+<script defer="" src="/script.js"></script>
 </head>
 <body class="">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header">
-  <div class="container nav">
-    <a class="brand" href="/index.html" aria-label="RxPulse home">
-      <span class="brand-mark">Rx</span>
-      <span>Pulse</span>
-    </a>
+<div class="container nav">
+<a aria-label="RxPulse home" class="brand" href="/index.html">
+<span class="brand-mark">Rx</span>
+<span>Pulse</span>
+</a>
+<button aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" type="button">
+<span></span><span></span><span></span>
+</button>
+<nav aria-label="Primary navigation" class="site-nav" id="site-nav">
+<a data-bn="হোম" data-en="Home" href="/index.html">Home</a>
+<a data-bn="ফিচার" data-en="Features" href="/features.html">Features</a>
+<a data-bn="ওয়ার্কফ্লো" data-en="Workflow" href="/workflow.html">Workflow</a>
 
-    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
-      <a href="/index.html" data-en="Home" data-bn="হোম">হোম</a>
-      <a href="/features.html" data-en="Features" data-bn="ফিচার">ফিচার</a>
-      <a href="/workflow.html" data-en="Workflow" data-bn="ওয়ার্কফ্লো">ওয়ার্কফ্লো</a>
-      <a href="/pricing.html" data-en="Pricing" data-bn="মূল্য">মূল্য</a>
-      <a href="/download.html" data-en="Download" data-bn="ডাউনলোড">ডাউনলোড</a>
-      <a href="/support.html" data-en="Support" data-bn="সাপোর্ট">সাপোর্ট</a>
-      <a class="nav-cta" href="/doctor-signup.html" data-en="Create Account" data-bn="অ্যাকাউন্ট তৈরি">অ্যাকাউন্ট তৈরি</a>
-      <button class="lang-toggle" type="button" data-language-toggle aria-label="Switch language">EN</button>
-    </nav>
-  </div>
+<a data-bn="ডাউনলোড" data-en="Download" href="/download.html">Download</a>
+<a data-bn="সাপোর্ট" data-en="Support" href="/support.html">Support</a>
+<a class="nav-cta" data-bn="অ্যাকাউন্ট তৈরি" data-en="Create Account" href="/doctor-signup.html">Create Account</a>
+<button aria-label="Switch language" class="lang-toggle" data-language-toggle="" type="button">EN</button>
+</nav>
+</div>
 </header>
 <main id="main-content">
-
 <section class="page-hero">
-  <div class="container narrow">
-    <p class="eyebrow" data-en="Workflow" data-bn="ওয়ার্কফ্লো">ওয়ার্কফ্লো</p>
-    <h1 data-en="A clean path from signup to approved clinical use." data-bn="Signup থেকে approved clinical use পর্যন্ত clean path।">Signup থেকে approved clinical use পর্যন্ত clean path।</h1>
-    <p data-en="RxPulse separates account creation from professional approval. This keeps public signup simple and keeps doctor identity review inside the app." data-bn="RxPulse account creation ও professional approval আলাদা রাখে। এতে public signup simple থাকে এবং doctor identity review app-এর ভিতরে হয়।">RxPulse account creation ও professional approval আলাদা রাখে। এতে public signup simple থাকে এবং doctor identity review app-এর ভিতরে হয়।</p>
-  </div>
+<div class="container narrow">
+<p class="eyebrow" data-bn="ওয়ার্কফ্লো" data-en="Workflow">Workflow</p>
+<h1 data-bn="Account creation থেকে approved clinical use পর্যন্ত simple path।" data-en="A simple path from account creation to approved clinical use.">A simple path from account creation to approved clinical use.</h1>
+<p data-bn="RxPulse public account creation ও professional approval আলাদা রাখে। Doctor email verification দিয়ে শুরু করেন, তারপর app-এর ভিতরে professional details complete করেন, যাতে Admin identity, BMDC information এবং account readiness review করে access enable করতে পারেন।" data-en="RxPulse separates public account creation from professional approval. A doctor starts with email verification, then completes professional details inside the app so Admin can review identity, BMDC information, and account readiness before access is enabled.">RxPulse separates public account creation from professional approval. A doctor starts with email verification, then completes professional details inside the app so Admin can review identity, BMDC information, and account readiness before access is enabled.</p>
+</div>
 </section>
-
 <section class="section">
-  <div class="container timeline">
-    <div class="timeline-item"><span>1</span><div><h2 data-en="Create account" data-bn="Account তৈরি">Account তৈরি</h2><p data-en="Doctor enters only email and password on the public signup page. Turnstile protects the page from automated abuse." data-bn="Doctor public signup page-এ শুধু email ও password দেন। Turnstile automated abuse থেকে page protect করে।">Doctor public signup page-এ শুধু email ও password দেন। Turnstile automated abuse থেকে page protect করে।</p></div></div>
-    <div class="timeline-item"><span>2</span><div><h2 data-en="Verify email" data-bn="Email verify">Email verify</h2><p data-en="The verification link expires in 5 minutes. After clicking it, the doctor sees the signup success page." data-bn="Verification link ৫ মিনিটে expire হয়। Click করার পর doctor signup success page দেখেন।">Verification link ৫ মিনিটে expire হয়। Click করার পর doctor signup success page দেখেন।</p></div></div>
-    <div class="timeline-item"><span>3</span><div><h2 data-en="Login to RxPulse app" data-bn="RxPulse app-এ login">RxPulse app-এ login</h2><p data-en="After verification, the doctor opens the RxPulse software and logs in with the same email and password." data-bn="Verification শেষে doctor RxPulse software খুলে একই email ও password দিয়ে login করেন।">Verification শেষে doctor RxPulse software খুলে একই email ও password দিয়ে login করেন।</p></div></div>
-    <div class="timeline-item"><span>4</span><div><h2 data-en="Complete profile once" data-bn="Profile একবার complete">Profile একবার complete</h2><p data-en="BMDC, professional name, degree, specialty, and chamber details are entered inside the app before applying." data-bn="BMDC, professional name, degree, specialty ও chamber details apply করার আগে app-এর ভিতরে দেওয়া হয়।">BMDC, professional name, degree, specialty ও chamber details apply করার আগে app-এর ভিতরে দেওয়া হয়।</p></div></div>
-    <div class="timeline-item"><span>5</span><div><h2 data-en="Save & Apply" data-bn="Save & Apply">Save & Apply</h2><p data-en="One button saves the profile and sends the approval request to Admin. After submission, these approval details are not casually edited." data-bn="একটি button profile save করে এবং Admin approval request পাঠায়। Submit করার পর approval details সহজে edit করা যায় না।">একটি button profile save করে এবং Admin approval request পাঠায়। Submit করার পর approval details সহজে edit করা যায় না।</p></div></div>
-    <div class="timeline-item"><span>6</span><div><h2 data-en="Admin review" data-bn="Admin review">Admin review</h2><p data-en="Admin approves, rejects, or approves with trial based on the doctor’s submitted information and account status." data-bn="Doctor-এর submitted information ও account status দেখে Admin approve, reject অথবা trial সহ approve করেন।">Doctor-এর submitted information ও account status দেখে Admin approve, reject অথবা trial সহ approve করেন।</p></div></div>
-  </div>
+<div class="container timeline">
+<div class="timeline-item"><span>1</span><div><h2 data-bn="Account তৈরি" data-en="Create account">Create account</h2><p data-bn="Public signup page শুধু essentials নেয়: email ও password। এখানে professional information নেওয়া হয় না, তাই onboarding simple থাকে এবং প্রথম ধাপে mistake কমে।" data-en="The public signup page asks only for the essentials: email and password. Professional information is not collected here, which keeps onboarding simple and reduces mistakes at the first step.">The public signup page asks only for the essentials: email and password. Professional information is not collected here, which keeps onboarding simple and reduces mistakes at the first step.</p></div></div>
+<div class="timeline-item"><span>2</span><div><h2 data-bn="Email verify" data-en="Verify email">Verify email</h2><p data-bn="Doctor latest verification email খুলে ৫ মিনিটের মধ্যে account confirm করেন। এতে software login ও approval request-এর আগে email ownership confirm হয়।" data-en="The doctor opens the latest verification email and confirms the account within 5 minutes. This confirms ownership of the email before the software login and approval request.">The doctor opens the latest verification email and confirms the account within 5 minutes. This confirms ownership of the email before the software login and approval request.</p></div></div>
+<div class="timeline-item"><span>3</span><div><h2 data-bn="RxPulse app-এ login" data-en="Login to RxPulse app">Login to RxPulse app</h2><p data-bn="Verification শেষে doctor RxPulse app বা desktop release খুলে signup-এর সময় ব্যবহৃত একই credentials দিয়ে login করেন।" data-en="After verification, the doctor opens the RxPulse app or desktop release and logs in with the same credentials used during signup.">After verification, the doctor opens the RxPulse app or desktop release and logs in with the same credentials used during signup.</p></div></div>
+<div class="timeline-item"><span>4</span><div><h2 data-bn="Profile একবার complete" data-en="Complete profile once">Complete profile once</h2><p data-bn="App-এর ভিতরে doctor BMDC number, professional name, degree, specialty, chamber information এবং approval details submit করার আগে একবার দেন।" data-en="Inside the app, the doctor enters BMDC number, professional name, degree, specialty, chamber information, and other approval details only once before submission.">Inside the app, the doctor enters BMDC number, professional name, degree, specialty, chamber information, and other approval details only once before submission.</p></div></div>
+<div class="timeline-item"><span>5</span><div><h2 data-bn="Save &amp; Apply" data-en="Save &amp; Apply">Save &amp; Apply</h2><p data-bn="Save &amp; Apply profile save করে Admin review-এর জন্য পাঠায়। Approval request submit হওয়ার পর details controlled থাকলে accidental change কমে।" data-en="Save &amp; Apply stores the profile and sends it for Admin review. Keeping these details controlled helps prevent accidental changes after the approval request is submitted.">Save &amp; Apply stores the profile and sends it for Admin review. Keeping these details controlled helps prevent accidental changes after the approval request is submitted.</p></div></div>
+<div class="timeline-item"><span>6</span><div><h2 data-bn="Admin review" data-en="Admin review">Admin review</h2><p data-bn="Admin submitted profile review করে account status ও RxPulse policy অনুযায়ী access approve, trial সহ approve, reject, disable অথবা correction request করতে পারেন।" data-en="Admin reviews the submitted profile and can approve access, approve with trial, reject, disable, or request correction according to account status and RxPulse policy.">Admin reviews the submitted profile and can approve access, approve with trial, reject, disable, or request correction according to account status and RxPulse policy.</p></div></div>
+</div>
 </section>
-
 </main>
 <footer class="site-footer">
-  <div class="container footer-grid">
-    <div>
-      <a class="brand footer-brand" href="/index.html" aria-label="RxPulse home">
-        <span class="brand-mark">Rx</span>
-        <span>Pulse</span>
-      </a>
-      <p data-en="A practical prescription and EMR suite for Bangladeshi doctors." data-bn="বাংলাদেশি ডাক্তারদের জন্য practical prescription ও EMR suite।">বাংলাদেশি ডাক্তারদের জন্য practical prescription ও EMR suite।</p>
-    </div>
-    <div>
-      <h3 data-en="Product" data-bn="প্রোডাক্ট">প্রোডাক্ট</h3>
-      <a href="/features.html" data-en="Features" data-bn="ফিচার">ফিচার</a>
-      <a href="/workflow.html" data-en="Workflow" data-bn="ওয়ার্কফ্লো">ওয়ার্কফ্লো</a>
-      <a href="/pricing.html" data-en="Pricing" data-bn="মূল্য">মূল্য</a>
-      <a href="/download.html" data-en="Download" data-bn="ডাউনলোড">ডাউনলোড</a>
-    </div>
-    <div>
-      <h3 data-en="Account" data-bn="অ্যাকাউন্ট">অ্যাকাউন্ট</h3>
-      <a href="/doctor-signup.html" data-en="Doctor signup" data-bn="ডাক্তার signup">ডাক্তার signup</a>
-      <a href="/forgot-password.html" data-en="Reset password" data-bn="পাসওয়ার্ড রিসেট">পাসওয়ার্ড রিসেট</a>
-      <a href="/support.html" data-en="Support" data-bn="সাপোর্ট">সাপোর্ট</a>
-    </div>
-    <div>
-      <h3 data-en="Legal" data-bn="আইনি">আইনি</h3>
-      <a href="/privacy.html" data-en="Privacy" data-bn="প্রাইভেসি">প্রাইভেসি</a>
-      <a href="/terms.html" data-en="Terms" data-bn="শর্তাবলি">শর্তাবলি</a>
-    </div>
-  </div>
-  <div class="container footer-bottom">
-    <span>© 2026 RxPulse Clinician Suite. All rights reserved.</span>
-    <span data-en="Support: support@rxpulsecs.com" data-bn="সাপোর্ট: support@rxpulsecs.com">সাপোর্ট: support@rxpulsecs.com</span>
-  </div>
+<div class="container footer-grid">
+<div>
+<a aria-label="RxPulse home" class="brand footer-brand" href="/index.html">
+<span class="brand-mark">Rx</span>
+<span>Pulse</span>
+</a>
+<p data-bn="বাংলাদেশি ডাক্তারদের জন্য practical prescription ও EMR suite—secure onboarding, offline-friendly chamber workflow এবং reliable patient record-এর জন্য তৈরি।" data-en="A practical prescription and EMR suite for Bangladeshi doctors, built for secure onboarding, offline-friendly chamber work, and reliable patient records.">A practical prescription and EMR suite for Bangladeshi doctors, built for secure onboarding, offline-friendly chamber work, and reliable patient records.</p>
+</div>
+<div>
+<h3 data-bn="প্রোডাক্ট" data-en="Product">Product</h3>
+<a data-bn="ফিচার" data-en="Features" href="/features.html">Features</a>
+<a data-bn="ওয়ার্কফ্লো" data-en="Workflow" href="/workflow.html">Workflow</a>
+
+<a data-bn="ডাউনলোড" data-en="Download" href="/download.html">Download</a>
+</div>
+<div>
+<h3 data-bn="অ্যাকাউন্ট" data-en="Account">Account</h3>
+<a data-bn="ডাক্তার signup" data-en="Doctor signup" href="/doctor-signup.html">Doctor signup</a>
+<a data-bn="পাসওয়ার্ড রিসেট" data-en="Reset password" href="/forgot-password.html">Reset password</a>
+<a data-bn="সাপোর্ট" data-en="Support" href="/support.html">Support</a>
+</div>
+<div>
+<h3 data-bn="আইনি" data-en="Legal">Legal</h3>
+<a data-bn="প্রাইভেসি" data-en="Privacy" href="/privacy.html">Privacy</a>
+<a data-bn="শর্তাবলি" data-en="Terms" href="/terms.html">Terms</a>
+</div>
+</div>
+<div class="container footer-bottom">
+<span>© 2026 RxPulse Clinician Suite. All rights reserved.</span>
+<span data-bn="সাপোর্ট: support@rxpulsecs.com" data-en="Support: support@rxpulsecs.com">Support: support@rxpulsecs.com</span>
+</div>
 </footer>
 </body>
 </html>

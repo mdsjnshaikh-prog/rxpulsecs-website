@@ -1244,3 +1244,140 @@ button:disabled {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Comfortable typography refinement: lighter weights and calmer headings across all pages. */
+body {
+  line-height: 1.72;
+}
+
+.brand {
+  font-weight: 760;
+  letter-spacing: -0.028em;
+}
+
+.site-nav a,
+.lang-toggle {
+  font-weight: 650;
+}
+
+.eyebrow {
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  letter-spacing: -0.032em;
+  line-height: 1.12;
+}
+
+h1 {
+  font-size: clamp(34px, 4.7vw, 58px);
+}
+
+h2 {
+  font-size: clamp(26px, 3vw, 38px);
+}
+
+h3 {
+  font-size: clamp(18px, 1.8vw, 22px);
+}
+
+.hero-lead,
+.page-hero p,
+.auth-lead {
+  font-size: clamp(16px, 1.35vw, 18px);
+  line-height: 1.75;
+}
+
+.button {
+  font-weight: 700;
+}
+
+.trust-row span,
+.status-pill,
+.form-message,
+.success-steps div {
+  font-weight: 600;
+}
+
+.preview-top strong,
+.medicine-row strong,
+.card h3,
+.feature-card h2,
+.download-card h2,
+.auth-panel-header h2,
+.legal h2 {
+  font-weight: 680;
+}
+
+.metric-grid strong {
+  font-weight: 700;
+  font-size: 23px;
+}
+
+.medicine-row span,
+.sync-strip,
+.feature-card span,
+.step-list span,
+.auth-actions a,
+.footer-grid h3 {
+  font-weight: 650;
+}
+
+.step-list strong,
+.timeline-item > span,
+.flow-card span,
+.success-steps strong,
+.success-icon {
+  font-weight: 700;
+}
+
+.timeline-item h2 {
+  font-size: clamp(22px, 2.35vw, 30px);
+  font-weight: 680;
+}
+
+.auth-story h1 {
+  font-size: clamp(34px, 4.2vw, 54px);
+  font-weight: 700;
+}
+
+.auth-panel-header h2 {
+  font-size: clamp(24px, 2.4vw, 30px);
+}
+
+.auth-form label {
+  font-weight: 650;
+}
+
+.footer-grid a {
+  font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  h1,
+  .auth-story h1,
+  .page-hero h1 {
+    font-size: clamp(32px, 8vw, 44px);
+  }
+
+  h2 {
+    font-size: clamp(24px, 6vw, 34px);
+  }
+}
+
+@media (max-width: 560px) {
+  h1,
+  .auth-story h1,
+  .page-hero h1 {
+    font-size: clamp(30px, 9vw, 40px);
+  }
+
+  .site-nav a,
+  .lang-toggle {
+    font-weight: 620;
+  }
+}
