@@ -1,21 +1,21 @@
 (function () {
   const STORAGE_KEY = "rxpulse-public-language";
-  const toggle = document.querySelector("[data-language-toggle]");
+  const toggles = Array.from(document.querySelectorAll("[data-language-toggle]"));
   const navToggle = document.querySelector(".nav-toggle");
   const nav = document.getElementById("site-nav");
 
   function applyLanguage(lang) {
-    const nextLang = lang === "en" ? "en" : "bn";
+    const nextLang = lang === "bn" ? "bn" : "en";
     document.documentElement.lang = nextLang;
 
     document.querySelectorAll("[data-en][data-bn]").forEach(function (el) {
       el.textContent = el.dataset[nextLang] || el.textContent;
     });
 
-    if (toggle) {
+    toggles.forEach(function (toggle) {
       toggle.textContent = nextLang === "en" ? "বাংলা" : "EN";
       toggle.setAttribute("aria-label", nextLang === "en" ? "Switch to Bangla" : "Switch to English");
-    }
+    });
 
     try { localStorage.setItem(STORAGE_KEY, nextLang); } catch (_) {}
   }
@@ -68,12 +68,12 @@
     });
   }
 
-  if (toggle) {
+  toggles.forEach(function (toggle) {
     toggle.addEventListener("click", function () {
-      const current = document.documentElement.lang === "en" ? "en" : "bn";
+      const current = document.documentElement.lang === "bn" ? "bn" : "en";
       applyLanguage(current === "en" ? "bn" : "en");
     });
-  }
+  });
 
   initNavigation();
   initLanguage();

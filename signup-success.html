@@ -4,8 +4,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Signup Success | RxPulse Clinician Suite</title>
-<meta content="RxPulse doctor account email verification success page." name="description"/>
+<title>Email Confirmed | RxPulse Clinician Suite</title>
+<meta content="Your RxPulse email is confirmed. Open RxPulse, sign in, add professional details, and send them for review." name="description"/>
 <link href="https://www.rxpulsecs.com/signup-success.html" rel="canonical"/>
 <link href="/styles.css" rel="stylesheet"/>
 <script defer="" src="/script.js"></script>
@@ -18,13 +18,13 @@
 <span class="brand-mark">Rx</span>
 <span>Pulse</span>
 </a>
-<button aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" type="button">
+<button aria-label="Switch language" class="lang-toggle mobile-lang-toggle" data-language-toggle="" type="button">বাংলা</button><button aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" type="button">
 <span></span><span></span><span></span>
 </button>
 <nav aria-label="Primary navigation" class="site-nav" id="site-nav">
 <a data-bn="হোম" data-en="Home" href="/index.html">Home</a>
 <a data-bn="ফিচার" data-en="Features" href="/features.html">Features</a>
-<a data-bn="ওয়ার্কফ্লো" data-en="Workflow" href="/workflow.html">Workflow</a>
+<a data-bn="কীভাবে কাজ করে" data-en="How It Works" href="/workflow.html">How It Works</a>
 <a data-bn="ডাউনলোড" data-en="Download" href="/download.html">Download</a>
 <a data-bn="সাপোর্ট" data-en="Support" href="/support.html">Support</a>
 <a class="nav-cta" data-bn="অ্যাকাউন্ট তৈরি" data-en="Create Account" href="/doctor-signup.html">Create Account</a>
@@ -37,17 +37,17 @@
 <div class="container success-wrap">
 <div class="success-card">
 <div aria-hidden="true" class="success-icon" id="success-icon">✓</div>
-<p class="eyebrow" data-bn="Email verified" data-en="Email verified">Email verified</p>
-<h1 data-bn="আপনার RxPulse account verified হয়েছে।" data-en="Your RxPulse account is verified." id="success-title">Your RxPulse account is verified.</h1>
-<p class="auth-lead" data-bn="আপনার email verified হয়েছে। এখন RxPulse খুলে email ও password দিয়ে login করুন, professional profile complete করুন এবং Save &amp; Apply দিয়ে Admin approval-এর জন্য পাঠান।" data-en="Your email is verified. Now open RxPulse, log in with your email and password, complete the professional profile, and use Save &amp; Apply to send it for Admin approval." id="success-copy">Your email is verified. Now open RxPulse, log in with your email and password, complete the professional profile, and use Save &amp; Apply to send it for Admin approval.</p>
+<p class="eyebrow" data-bn="ইমেইল নিশ্চিত হয়েছে" data-en="Email confirmed">Email confirmed</p>
+<h1 data-bn="আপনার RxPulse ইমেইল নিশ্চিত হয়েছে" data-en="Your RxPulse email is confirmed" id="success-title">Your RxPulse email is confirmed</h1>
+<p class="auth-lead" data-bn="আপনার ইমেইল নিশ্চিত হয়েছে। এখন RxPulse খুলে ইমেইল ও পাসওয়ার্ড দিয়ে sign in করুন, পেশাগত তথ্য দিন এবং যাচাইয়ের জন্য পাঠান।" data-en="Your email has been confirmed. Now open RxPulse, sign in with your email and password, add your professional details, and send them for review." id="success-copy">Your email has been confirmed. Now open RxPulse, sign in with your email and password, add your professional details, and send them for review.</p>
 <div class="success-steps">
-<div><strong>1</strong><span data-bn="RxPulse software খুলুন" data-en="Open RxPulse software">Open RxPulse software</span></div>
-<div><strong>2</strong><span data-bn="Credentials দিয়ে login করুন" data-en="Login with your credentials">Login with your credentials</span></div>
-<div><strong>3</strong><span data-bn="Profile complete করে apply করুন" data-en="Complete profile and apply">Complete profile and apply</span></div>
+<div><strong>1</strong><span data-bn="RxPulse খুলুন" data-en="Open RxPulse">Open RxPulse</span></div>
+<div><strong>2</strong><span data-bn="ইমেইল ও পাসওয়ার্ড দিয়ে sign in করুন" data-en="Sign in with your email and password">Sign in with your email and password</span></div>
+<div><strong>3</strong><span data-bn="তথ্য দিয়ে যাচাইয়ের জন্য পাঠান" data-en="Add details and send for review">Add details and send for review</span></div>
 </div>
 <div class="actions center-actions">
-<a class="button primary" data-bn="RxPulse Download" data-en="Download RxPulse" href="/download.html">Download RxPulse</a>
-<a class="button secondary" data-bn="সাপোর্ট দরকার?" data-en="Need support?" href="/support.html">Need support?</a>
+<a class="button primary" data-bn="RxPulse ডাউনলোড" data-en="Download RxPulse" href="/download.html">Download RxPulse</a>
+<a class="button secondary" data-bn="সহায়তা দরকার?" data-en="Need support?" href="/support.html">Need support?</a>
 </div>
 </div>
 </div>
@@ -70,7 +70,7 @@
         title.dataset.bn = 'Verification link needs attention';
       }
       if (copy) {
-        copy.textContent = errorDescription || 'This verification link may be expired or invalid. Please try again or contact RxPulse support.';
+        copy.textContent = errorDescription || 'This email confirmation may no longer work. Please try again or contact RxPulse support.';
         copy.dataset.en = copy.textContent;
         copy.dataset.bn = copy.textContent;
       }
@@ -85,18 +85,18 @@
 <span class="brand-mark">Rx</span>
 <span>Pulse</span>
 </a>
-<p data-bn="বাংলাদেশি ডাক্তারদের জন্য focused prescription ও EMR suite—secure onboarding, offline-friendly chamber work এবং গুছানো patient record-এর জন্য তৈরি।" data-en="A focused prescription and EMR suite for Bangladeshi doctors, built for secure onboarding, offline-friendly chamber work, and organized patient records.">A focused prescription and EMR suite for Bangladeshi doctors, built for secure onboarding, offline-friendly chamber work, and organized patient records.</p>
+<p data-bn="বাংলাদেশি ডাক্তারদের জন্য সহজ প্রেসক্রিপশন ও রোগীর রেকর্ড সফটওয়্যার। দৈনন্দিন চেম্বার ভিজিট, ফলো-আপ রেকর্ড এবং পরিষ্কার প্রিন্টেড প্রেসক্রিপশনে সহায়তা করে।" data-en="A simple prescription and patient record software for Bangladeshi doctors. It helps with daily visits, follow-up records, and clean printed prescriptions.">A simple prescription and patient record software for Bangladeshi doctors. It helps with daily visits, follow-up records, and clean printed prescriptions.</p>
 </div>
 <div>
 <h3 data-bn="প্রোডাক্ট" data-en="Product">Product</h3>
 <a data-bn="ফিচার" data-en="Features" href="/features.html">Features</a>
-<a data-bn="ওয়ার্কফ্লো" data-en="Workflow" href="/workflow.html">Workflow</a>
+<a data-bn="কীভাবে কাজ করে" data-en="How It Works" href="/workflow.html">How It Works</a>
 <a data-bn="ডাউনলোড" data-en="Download" href="/download.html">Download</a>
 </div>
 <div>
 <h3 data-bn="অ্যাকাউন্ট" data-en="Account">Account</h3>
 <a data-bn="ডাক্তার অ্যাকাউন্ট" data-en="Doctor account" href="/doctor-signup.html">Doctor account</a>
-<a data-bn="পাসওয়ার্ড রিসেট" data-en="Reset password" href="/forgot-password.html">Reset password</a>
+<a data-bn="পাসওয়ার্ড রিসেট" data-en="Reset password" href="/forgot-password.html">Reset password</a>
 <a data-bn="সাপোর্ট" data-en="Support" href="/support.html">Support</a>
 </div>
 <div>

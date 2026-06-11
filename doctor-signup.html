@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Doctor Signup | RxPulse Clinician Suite</title>
-<meta content="Create a secure RxPulse doctor account with email verification and Cloudflare Turnstile protection." name="description"/>
+<meta content="Create a RxPulse doctor account with email and password, confirm your email, and send professional details for review." name="description"/>
 <link href="https://www.rxpulsecs.com/doctor-signup.html" rel="canonical"/>
 <link href="/styles.css" rel="stylesheet"/>
 <script defer="" src="/script.js"></script>
@@ -21,13 +21,13 @@
 <span class="brand-mark">Rx</span>
 <span>Pulse</span>
 </a>
-<button aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" type="button">
+<button aria-label="Switch language" class="lang-toggle mobile-lang-toggle" data-language-toggle="" type="button">বাংলা</button><button aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" type="button">
 <span></span><span></span><span></span>
 </button>
 <nav aria-label="Primary navigation" class="site-nav" id="site-nav">
 <a data-bn="হোম" data-en="Home" href="/index.html">Home</a>
 <a data-bn="ফিচার" data-en="Features" href="/features.html">Features</a>
-<a data-bn="ওয়ার্কফ্লো" data-en="Workflow" href="/workflow.html">Workflow</a>
+<a data-bn="কীভাবে কাজ করে" data-en="How It Works" href="/workflow.html">How It Works</a>
 <a data-bn="ডাউনলোড" data-en="Download" href="/download.html">Download</a>
 <a data-bn="সাপোর্ট" data-en="Support" href="/support.html">Support</a>
 <a class="nav-cta" data-bn="অ্যাকাউন্ট তৈরি" data-en="Create Account" href="/doctor-signup.html">Create Account</a>
@@ -39,24 +39,24 @@
 <section class="auth-hero">
 <div class="container auth-layout">
 <aside aria-label="RxPulse onboarding information" class="auth-story">
-<p class="eyebrow" data-bn="ডাক্তার অনবোর্ডিং" data-en="Doctor onboarding">Doctor onboarding</p>
-<h1 data-bn="আপনার RxPulse doctor account তৈরি করুন।" data-en="Create your RxPulse doctor account.">Create your RxPulse doctor account.</h1>
-<p class="auth-lead" data-bn="Secure email-password login দিয়ে শুরু করুন। Verification শেষে RxPulse খুলে software-এর ভিতরে professional profile complete করুন এবং Admin review-এর জন্য একবার approval request পাঠান।" data-en="Start with a secure email-password login. After verification, open RxPulse, complete your professional profile inside the software, and send one approval request for Admin review.">Start with a secure email-password login. After verification, open RxPulse, complete your professional profile inside the software, and send one approval request for Admin review.</p>
+<p class="eyebrow" data-bn="ডাক্তার সাইনআপ" data-en="Doctor signup">Doctor signup</p>
+<h1 data-bn="আপনার RxPulse ডাক্তার অ্যাকাউন্ট তৈরি করুন" data-en="Create your RxPulse doctor account">Create your RxPulse doctor account</h1>
+<p class="auth-lead" data-bn="ইমেইল ও পাসওয়ার্ড দিয়ে শুরু করুন। ইমেইল নিশ্চিত করার পর RxPulse খুলে পেশাগত তথ্য দিন এবং যাচাইয়ের জন্য পাঠান।" data-en="Start with your email and password. After confirming your email, open RxPulse, add your professional details, and send them for review.">Start with your email and password. After confirming your email, open RxPulse, add your professional details, and send them for review.</p>
 <div class="flow-card">
-<div><span>1</span><strong data-bn="Create account" data-en="Create account">Create account</strong><p data-bn="Registered email ও strong password ব্যবহার করুন। Professional details পরে app-এর ভিতরে নেওয়া হবে।" data-en="Use your registered email and a strong password. Professional details will be collected later inside the app.">Use your registered email and a strong password. Professional details will be collected later inside the app.</p></div>
-<div><span>2</span><strong data-bn="Email verify" data-en="Verify email">Verify email</strong><p data-bn="Latest verification email খুলে ৫ মিনিটের মধ্যে account confirm করুন, তারপর login করুন।" data-en="Open the latest verification email and confirm the account within 5 minutes before logging in.">Open the latest verification email and confirm the account within 5 minutes before logging in.</p></div>
-<div><span>3</span><strong data-bn="App-এ profile complete" data-en="Complete profile in app">Complete profile in app</strong><p data-bn="BMDC, degree, specialty এবং chamber details শুধু RxPulse-এ login করার পর submit হবে।" data-en="BMDC, degree, specialty, and chamber details are submitted only after you log in to RxPulse.">BMDC, degree, specialty, and chamber details are submitted only after you log in to RxPulse.</p></div>
+<div><span>1</span><strong data-bn="অ্যাকাউন্ট তৈরি" data-en="Create account">Create account</strong><p data-bn="যে ইমেইল এখনই খুলতে পারবেন সেটি ব্যবহার করুন এবং শক্তিশালী পাসওয়ার্ড দিন। পেশাগত তথ্য পরে RxPulse-এ যোগ করা হবে।" data-en="Use an email you can open now and choose a strong password. Professional details are added later in RxPulse.">Use an email you can open now and choose a strong password. Professional details are added later in RxPulse.</p></div>
+<div><span>2</span><strong data-bn="ইমেইল নিশ্চিত করুন" data-en="Confirm your email">Confirm your email</strong><p data-bn="কনফার্মেশন ইমেইল খুলে sign in করার আগে ইমেইল যাচাই সম্পন্ন করুন।" data-en="Open the confirmation email and complete the email check before signing in.">Open the confirmation email and complete the email check before signing in.</p></div>
+<div><span>3</span><strong data-bn="পেশাগত তথ্য দিন" data-en="Add professional details">Add professional details</strong><p data-bn="RxPulse খোলার পর BMDC, ডিগ্রি, স্পেশালিটি ও চেম্বারের তথ্য যোগ করা হবে।" data-en="BMDC, degree, specialty, and chamber information are added after you open RxPulse.">BMDC, degree, specialty, and chamber information are added after you open RxPulse.</p></div>
 </div>
 <div class="security-note">
-<strong data-bn="Public signup-এ BMDC নেই" data-en="No BMDC on public signup">No BMDC on public signup</strong>
-<p data-bn="Public signup ইচ্ছাকৃতভাবে simple রাখা হয়েছে। Approval apply করার আগে BMDC, degree, specialty এবং chamber information RxPulse-এর ভিতরে নেওয়া হবে।" data-en="Public signup stays intentionally simple. Your BMDC, degree, specialty, and chamber information are collected inside RxPulse before you apply for approval.">Public signup stays intentionally simple. Your BMDC, degree, specialty, and chamber information are collected inside RxPulse before you apply for approval.</p>
+<strong data-bn="পেশাগত তথ্য পরে যোগ করা হবে" data-en="Professional details are added later">Professional details are added later</strong>
+<p data-bn="এই সাইনআপ পেজে শুধু ইমেইল ও পাসওয়ার্ড লাগে। অনুমোদনের আগে BMDC, ডিগ্রি, স্পেশালিটি ও চেম্বারের তথ্য পরে যোগ করা হবে।" data-en="This signup page asks only for email and password. BMDC, degree, specialty, and chamber information are added later before approval.">This signup page asks only for email and password. BMDC, degree, specialty, and chamber information are added later before approval.</p>
 </div>
 </aside>
 <section aria-label="Create doctor account" class="auth-panel">
 <div class="auth-panel-header">
-<span class="status-pill" data-bn="সুরক্ষিত signup" data-en="Secure signup">Secure signup</span>
-<h2 data-bn="Doctor account" data-en="Doctor account">Doctor account</h2>
-<p data-bn="এমন email ব্যবহার করুন যা এখনই access করতে পারবেন। Verification link time-limited, এবং professional details পরে RxPulse-এর ভিতরে নেওয়া হবে।" data-en="Use an email you can access immediately. The verification link is time-limited, and professional details will be collected later inside RxPulse.">Use an email you can access immediately. The verification link is time-limited, and professional details will be collected later inside RxPulse.</p>
+<span class="status-pill" data-bn="অ্যাকাউন্ট সাইনআপ" data-en="Account signup">Account signup</span>
+<h2 data-bn="ডাক্তার অ্যাকাউন্ট" data-en="Doctor account">Doctor account</h2>
+<p data-bn="RxPulse ব্যবহারের জন্য যে অ্যাকাউন্ট লাগবে সেটি তৈরি করুন। এমন ইমেইল ব্যবহার করুন যা এখনই খুলতে পারবেন, কারণ সাইনআপের পর কনফার্মেশন ইমেইল যাবে।" data-en="Create the account you will use for RxPulse. Use an email you can open now because a confirmation email will be sent after signup.">Create the account you will use for RxPulse. Use an email you can open now because a confirmation email will be sent after signup.</p>
 </div>
 <div aria-live="polite" class="form-message" id="signup-message" role="status"></div>
 <form class="auth-form enterprise-form" id="doctor-signup-form" novalidate="">
@@ -69,11 +69,11 @@
 <div class="turnstile-box">
 <div class="cf-turnstile" data-callback="rxpulseSignupTurnstileSuccess" data-error-callback="rxpulseSignupTurnstileExpired" data-expired-callback="rxpulseSignupTurnstileExpired" data-sitekey="0x4AAAAAADh1hSwbScv1YXhK"></div>
 </div>
-<button class="button primary full-width" data-bn="Create account" data-en="Create account" id="signup-submit" type="submit">Create account</button>
+<button class="button primary full-width" data-bn="অ্যাকাউন্ট তৈরি" data-en="Create account" id="signup-submit" type="submit">Create account</button>
 </form>
 <div class="auth-actions between">
-<a data-bn="Verify হয়েছে? App download করুন" data-en="Already verified? Download app" href="/download.html">Already verified? Download app</a>
-<a data-bn="পাসওয়ার্ড রিসেট" data-en="Reset password" href="/forgot-password.html">Reset password</a>
+<a data-bn="ইমেইল নিশ্চিত হয়েছে? RxPulse ডাউনলোড করুন" data-en="Already confirmed? Download RxPulse" href="/download.html">Already confirmed? Download RxPulse</a>
+<a data-bn="পাসওয়ার্ড রিসেট" data-en="Reset password" href="/forgot-password.html">Reset password</a>
 </div>
 </section>
 </div>
@@ -86,18 +86,18 @@
 <span class="brand-mark">Rx</span>
 <span>Pulse</span>
 </a>
-<p data-bn="বাংলাদেশি ডাক্তারদের জন্য focused prescription ও EMR suite—secure onboarding, offline-friendly chamber work এবং গুছানো patient record-এর জন্য তৈরি।" data-en="A focused prescription and EMR suite for Bangladeshi doctors, built for secure onboarding, offline-friendly chamber work, and organized patient records.">A focused prescription and EMR suite for Bangladeshi doctors, built for secure onboarding, offline-friendly chamber work, and organized patient records.</p>
+<p data-bn="বাংলাদেশি ডাক্তারদের জন্য সহজ প্রেসক্রিপশন ও রোগীর রেকর্ড সফটওয়্যার। দৈনন্দিন চেম্বার ভিজিট, ফলো-আপ রেকর্ড এবং পরিষ্কার প্রিন্টেড প্রেসক্রিপশনে সহায়তা করে।" data-en="A simple prescription and patient record software for Bangladeshi doctors. It helps with daily visits, follow-up records, and clean printed prescriptions.">A simple prescription and patient record software for Bangladeshi doctors. It helps with daily visits, follow-up records, and clean printed prescriptions.</p>
 </div>
 <div>
 <h3 data-bn="প্রোডাক্ট" data-en="Product">Product</h3>
 <a data-bn="ফিচার" data-en="Features" href="/features.html">Features</a>
-<a data-bn="ওয়ার্কফ্লো" data-en="Workflow" href="/workflow.html">Workflow</a>
+<a data-bn="কীভাবে কাজ করে" data-en="How It Works" href="/workflow.html">How It Works</a>
 <a data-bn="ডাউনলোড" data-en="Download" href="/download.html">Download</a>
 </div>
 <div>
 <h3 data-bn="অ্যাকাউন্ট" data-en="Account">Account</h3>
 <a data-bn="ডাক্তার অ্যাকাউন্ট" data-en="Doctor account" href="/doctor-signup.html">Doctor account</a>
-<a data-bn="পাসওয়ার্ড রিসেট" data-en="Reset password" href="/forgot-password.html">Reset password</a>
+<a data-bn="পাসওয়ার্ড রিসেট" data-en="Reset password" href="/forgot-password.html">Reset password</a>
 <a data-bn="সাপোর্ট" data-en="Support" href="/support.html">Support</a>
 </div>
 <div>
