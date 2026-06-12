@@ -22,11 +22,58 @@
 
   function $(id) { return document.getElementById(id); }
 
+  // Returns the currently active language ("en" or "bn").
+  // Reads document.documentElement.lang which script.js keeps in sync.
+  function currentLang() {
+    return document.documentElement.lang === "bn" ? "bn" : "en";
+  }
+
   function setMessage(target, type, text) {
     const el = typeof target === "string" ? $(target) : target;
     if (!el) return;
     el.className = "form-message " + (type || "");
     el.textContent = text || "";
+  }
+
+  // Sets a rich HTML message block (warning style) with a "Contact Support" CTA.
+  // Used for the account_admin_deleted case only — content is fully controlled
+  // (no user input interpolated into HTML), so innerHTML is safe here.
+  function showAdminDeletedBlock(messageId) {
+    var el = $(messageId);
+    if (!el) return;
+
+    var lang = currentLang();
+
+    var heading = lang === "bn"
+      ? "অ্যাকাউন্ট সীমাবদ্ধ"
+      : "Account Restricted";
+
+    var body = lang === "bn"
+      ? "এই ইমেইলটি এমন একটি অ্যাকাউন্টের সাথে যুক্ত ছিল যা প্রশাসক কর্তৃক মুছে দেওয়া হয়েছে। পুনরায় অ্যাকাউন্ট খুলতে সহায়তার জন্য সাপোর্টে যোগাযোগ করুন।"
+      : "This email is associated with an account that was removed by an administrator. Please contact support if you need assistance re-registering.";
+
+    var btnText = lang === "bn"
+      ? "সাপোর্টে যোগাযোগ করুন"
+      : "Contact Support";
+
+    var mailtoHref =
+      "mailto:support@rxpulsecs.com" +
+      "?subject=" + encodeURIComponent("Account Re-registration Request") +
+      "&body=" + encodeURIComponent(
+        "Hello RxPulse Support,\n\n" +
+        "I am trying to create a new account but I was informed that my email " +
+        "is associated with an account that was previously removed by an administrator.\n\n" +
+        "Please help me understand my options.\n\nThank you."
+      );
+
+    el.className = "form-message warning";
+    el.innerHTML =
+      "<strong>" + heading + "</strong>" +
+      "<p style=\"margin:6px 0 12px;font-weight:400;font-size:0.92em;\">" + body + "</p>" +
+      "<a href=\"" + mailtoHref + "\" " +
+        "style=\"display:inline-block;background:#b45309;color:#fff;padding:8px 18px;" +
+        "border-radius:9999px;font-size:0.85rem;font-weight:700;text-decoration:none;" +
+        "letter-spacing:0.01em;\">" + btnText + "</a>";
   }
 
   function validEmail(email) {
@@ -38,6 +85,10 @@
     return error.message || error.error || fallback;
   }
 
+  // postJson — POSTs JSON, returns parsed response on success.
+  // On failure (HTTP error OR success===false), throws an Error.
+  // The error_code from the backend is attached as `err.code` so callers
+  // can branch on specific codes without parsing the message string.
   async function postJson(url, payload) {
     const res = await fetch(url, {
       method: "POST",
@@ -48,8 +99,13 @@
     const data = await res.json().catch(function () { return {}; });
 
     if (!res.ok || data.success === false) {
-      const detail = data.remaining_seconds ? " Please wait " + data.remaining_seconds + " seconds." : "";
-      throw new Error((data.message || data.error || "Request failed.") + detail);
+      const detail = data.remaining_seconds
+        ? " Please wait " + data.remaining_seconds + " seconds."
+        : "";
+      const err = new Error((data.message || data.error || "Request failed.") + detail);
+      // Attach the structured error code so callers can handle specific cases.
+      err.code = data.error_code || "";
+      throw err;
     }
 
     return data;
@@ -115,8 +171,18 @@
         form.reset();
         state.signupTurnstileToken = "";
         resetTurnstile();
+
       } catch (error) {
-        setMessage("signup-message", "error", friendlyError(error, "Signup failed. Please try again or contact support."));
+        // account_admin_deleted: render a rich warning block with a support CTA.
+        // The password fields are cleared so the doctor cannot accidentally resubmit.
+        if (error.code === "account_admin_deleted") {
+          showAdminDeletedBlock("signup-message");
+          if (passwordInput) passwordInput.value = "";
+          if (confirmInput) confirmInput.value = "";
+        } else {
+          setMessage("signup-message", "error", friendlyError(error, "Signup failed. Please try again or contact support."));
+        }
+
         state.signupTurnstileToken = "";
         resetTurnstile();
       } finally {
