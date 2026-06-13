@@ -161,13 +161,19 @@
       setMessage("signup-message", "", "Creating your account...");
 
       try {
-        await postJson(SIGNUP_ENDPOINT, {
+        const data = await postJson(SIGNUP_ENDPOINT, {
           email: email,
           password: password,
           turnstileToken: state.signupTurnstileToken
         });
 
-        setMessage("signup-message", "success", "Account request accepted. Please check your email and open the verification link within 5 minutes.");
+        setMessage(
+          "signup-message",
+          "success",
+          data && data.message
+            ? data.message
+            : "Account request accepted. Please check your email and open the verification link."
+        );
         form.reset();
         state.signupTurnstileToken = "";
         resetTurnstile();
