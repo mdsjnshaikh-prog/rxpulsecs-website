@@ -155,16 +155,24 @@
 
     const submit = $("signup-submit");
     const emailInput = $("signup-email");
+    let signupSubmitting = false;
 
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault();
+    async function handleSignupStart(event) {
+      if (event && typeof event.preventDefault === "function") event.preventDefault();
+      if (signupSubmitting) return;
+
       setMessage("signup-message", "", "");
 
-      const email = (emailInput.value || "").trim();
+      if (!SIGNUP_START_ENDPOINT) {
+        setMessage("signup-message", "error", "Signup is not configured. Please contact support.");
+        return;
+      }
+
+      const email = (emailInput && emailInput.value ? emailInput.value : "").trim();
 
       if (!validEmail(email)) {
         setMessage("signup-message", "error", "Please enter a valid email address.");
-        emailInput.focus();
+        if (emailInput) emailInput.focus();
         return;
       }
 
@@ -173,7 +181,8 @@
         return;
       }
 
-      submit.disabled = true;
+      signupSubmitting = true;
+      if (submit) submit.disabled = true;
       setMessage("signup-message", "", "Sending verification email...");
 
       try {
@@ -206,9 +215,19 @@
         state.signupTurnstileToken = "";
         resetTurnstile();
       } finally {
-        submit.disabled = false;
+        signupSubmitting = false;
+        if (submit) submit.disabled = false;
       }
-    });
+    }
+
+    form.addEventListener("submit", handleSignupStart);
+
+    // Mobile/browser-cache safety: some browsers keep an older cached JS handler
+    // or fail to submit when a security widget is focused. A direct click listener
+    // ensures the visible button always triggers the same guarded request.
+    if (submit) {
+      submit.addEventListener("click", handleSignupStart);
+    }
   }
 
   function initCompleteSignup() {
