@@ -3,7 +3,10 @@
 // NEVER paste service-role keys or private secrets here.
 
 window.RXPULSE_SUPABASE_URL = "https://szlmjdamoupuugldnkda.supabase.co";
-window.RXPULSE_PUBLIC_SIGNUP_FUNCTION = "https://szlmjdamoupuugldnkda.supabase.co/functions/v1/public-doctor-signup";
+window.RXPULSE_PUBLIC_SIGNUP_START_FUNCTION = "https://szlmjdamoupuugldnkda.supabase.co/functions/v1/public-doctor-signup-start";
+window.RXPULSE_PUBLIC_SIGNUP_COMPLETE_FUNCTION = "https://szlmjdamoupuugldnkda.supabase.co/functions/v1/public-doctor-signup-complete";
+// Kept for backward compatibility with older deployed pages. New signup uses START/COMPLETE endpoints above.
+window.RXPULSE_PUBLIC_SIGNUP_FUNCTION = window.RXPULSE_PUBLIC_SIGNUP_START_FUNCTION;
 window.RXPULSE_FORGOT_PASSWORD_FUNCTION = "https://szlmjdamoupuugldnkda.supabase.co/functions/v1/forgot-password";
 window.RXPULSE_TURNSTILE_SITE_KEY = "0x4AAAAAADh1hSwbScv1YXhK";
 

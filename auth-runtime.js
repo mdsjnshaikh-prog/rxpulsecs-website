@@ -1,5 +1,6 @@
 (function () {
-  const SIGNUP_ENDPOINT = window.RXPULSE_PUBLIC_SIGNUP_FUNCTION;
+  const SIGNUP_START_ENDPOINT = window.RXPULSE_PUBLIC_SIGNUP_START_FUNCTION || window.RXPULSE_PUBLIC_SIGNUP_FUNCTION;
+  const SIGNUP_COMPLETE_ENDPOINT = window.RXPULSE_PUBLIC_SIGNUP_COMPLETE_FUNCTION;
   const FORGOT_ENDPOINT = window.RXPULSE_FORGOT_PASSWORD_FUNCTION;
 
   const state = {
@@ -104,7 +105,8 @@
         : "";
       const err = new Error((data.message || data.error || "Request failed.") + detail);
       // Attach the structured error code so callers can handle specific cases.
-      err.code = data.error_code || "";
+      err.code = data.error_code || data.code || "";
+      err.retryAfterSeconds = data.retry_after_seconds || data.remaining_seconds || 0;
       throw err;
     }
 
@@ -117,38 +119,52 @@
     }
   }
 
+  function supportMailto(subject, body) {
+    return "mailto:support@rxpulsecs.com" +
+      "?subject=" + encodeURIComponent(subject || "RxPulse Support") +
+      "&body=" + encodeURIComponent(body || "Hello RxPulse Support,\n\nI need help with my RxPulse account.\n\nThank you.");
+  }
+
+  function signupErrorMessage(error) {
+    var code = error && error.code;
+    var waitText = error && error.retryAfterSeconds
+      ? " Please try again after " + Math.ceil(error.retryAfterSeconds / 60) + " minute(s)."
+      : "";
+
+    switch (code) {
+      case "signup_verification_cooldown":
+        return "A verification email was sent recently. Please check your inbox/spam folder." + waitText;
+      case "account_exists":
+        return "This email already has an account. Please log in from the RxPulse app or reset your password.";
+      case "legacy_unconfirmed_auth_user":
+        return "This signup needs support review. Please contact RxPulse support.";
+      case "turnstile_failed":
+        return "Security verification failed. Please complete the security check again.";
+      case "account_admin_deleted":
+        return "This account was previously removed by admin. Please contact support.";
+      case "email_send_failed":
+        return "Could not send the verification email. Please try again later.";
+      default:
+        return friendlyError(error, "Signup could not be started. Please try again or contact support.");
+    }
+  }
+
   function initSignup() {
     const form = $("doctor-signup-form");
     if (!form) return;
 
     const submit = $("signup-submit");
     const emailInput = $("signup-email");
-    const passwordInput = $("signup-password");
-    const confirmInput = $("signup-confirm-password");
 
     form.addEventListener("submit", async function (event) {
       event.preventDefault();
       setMessage("signup-message", "", "");
 
       const email = (emailInput.value || "").trim();
-      const password = passwordInput.value || "";
-      const confirmPassword = confirmInput.value || "";
 
       if (!validEmail(email)) {
         setMessage("signup-message", "error", "Please enter a valid email address.");
         emailInput.focus();
-        return;
-      }
-
-      if (password.length < 8) {
-        setMessage("signup-message", "error", "Password must be at least 8 characters.");
-        passwordInput.focus();
-        return;
-      }
-
-      if (password !== confirmPassword) {
-        setMessage("signup-message", "error", "Passwords do not match.");
-        confirmInput.focus();
         return;
       }
 
@@ -158,12 +174,11 @@
       }
 
       submit.disabled = true;
-      setMessage("signup-message", "", "Creating your account...");
+      setMessage("signup-message", "", "Sending verification email...");
 
       try {
-        const data = await postJson(SIGNUP_ENDPOINT, {
+        const data = await postJson(SIGNUP_START_ENDPOINT, {
           email: email,
-          password: password,
           turnstileToken: state.signupTurnstileToken
         });
 
@@ -172,25 +187,109 @@
           "success",
           data && data.message
             ? data.message
-            : "Account request accepted. Please check your email and open the verification link."
+            : "Please check your email. The signup verification link is valid for 5 minutes."
         );
         form.reset();
         state.signupTurnstileToken = "";
         resetTurnstile();
 
       } catch (error) {
-        // account_admin_deleted: render a rich warning block with a support CTA.
-        // The password fields are cleared so the doctor cannot accidentally resubmit.
         if (error.code === "account_admin_deleted") {
           showAdminDeletedBlock("signup-message");
-          if (passwordInput) passwordInput.value = "";
-          if (confirmInput) confirmInput.value = "";
+        } else if (error.code === "legacy_unconfirmed_auth_user") {
+          const messageEl = $("signup-message");
+          setMessage(messageEl, "warning", signupErrorMessage(error));
         } else {
-          setMessage("signup-message", "error", friendlyError(error, "Signup failed. Please try again or contact support."));
+          setMessage("signup-message", "error", signupErrorMessage(error));
         }
 
         state.signupTurnstileToken = "";
         resetTurnstile();
+      } finally {
+        submit.disabled = false;
+      }
+    });
+  }
+
+  function initCompleteSignup() {
+    const form = $("complete-signup-form");
+    if (!form) return;
+
+    const submit = $("complete-submit");
+    const passwordInput = $("complete-password");
+    const confirmInput = $("complete-confirm-password");
+    const params = new URLSearchParams(window.location.search);
+    const token = (params.get("token") || "").trim();
+
+    if (!SIGNUP_COMPLETE_ENDPOINT) {
+      setMessage("complete-message", "error", "Signup completion is not configured. Please contact support.");
+      if (submit) submit.disabled = true;
+      return;
+    }
+
+    if (!token || token.length < 32) {
+      setMessage("complete-message", "error", "This signup link is invalid or expired. Please start signup again.");
+      if (submit) submit.disabled = true;
+      return;
+    }
+
+    setMessage("complete-message", "success", "Email verification link detected. Please set your password within 5 minutes of receiving the email.");
+
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const password = passwordInput.value || "";
+      const confirmPassword = confirmInput.value || "";
+
+      if (password.length < 8) {
+        setMessage("complete-message", "error", "Password must be at least 8 characters.");
+        passwordInput.focus();
+        return;
+      }
+
+      if (password.length > 128) {
+        setMessage("complete-message", "error", "Password is too long. Please use 128 characters or fewer.");
+        passwordInput.focus();
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        setMessage("complete-message", "error", "Passwords do not match.");
+        confirmInput.focus();
+        return;
+      }
+
+      submit.disabled = true;
+      setMessage("complete-message", "", "Creating your RxPulse account...");
+
+      try {
+        const data = await postJson(SIGNUP_COMPLETE_ENDPOINT, {
+          token: token,
+          password: password
+        });
+
+        setMessage(
+          "complete-message",
+          "success",
+          data && data.message
+            ? data.message
+            : "Your account has been created. Please log in to complete your doctor profile."
+        );
+        form.reset();
+        setTimeout(function () {
+          window.location.href = "https://app.rxpulsecs.com/#/login";
+        }, 2200);
+      } catch (error) {
+        var code = error && error.code;
+        if (code === "invalid_or_expired_token") {
+          setMessage("complete-message", "error", "This signup link is invalid or expired. Please start signup again from the doctor signup page.");
+        } else if (code === "account_exists") {
+          setMessage("complete-message", "error", "This email already has an account. Please log in or reset your password.");
+        } else if (code === "legacy_unconfirmed_auth_user" || code === "account_admin_deleted") {
+          setMessage("complete-message", "warning", friendlyError(error, "This signup needs support review. Please contact support."));
+        } else {
+          setMessage("complete-message", "error", friendlyError(error, "Account creation failed. Please try again or contact support."));
+        }
       } finally {
         submit.disabled = false;
       }
@@ -348,6 +447,7 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     initSignup();
+    initCompleteSignup();
     initForgotPassword();
     initResetPassword();
   });
