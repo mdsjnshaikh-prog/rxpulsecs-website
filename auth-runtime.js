@@ -34,6 +34,13 @@
     if (!el) return;
     el.className = "form-message " + (type || "");
     el.textContent = text || "";
+
+    // Also surface final success/error/warning states as a small site toast.
+    // This gives users clear feedback even when the message box is below the fold
+    // on smaller phones. Loading/progress messages intentionally stay inline only.
+    if (text && type && window.rxpulseShowToast) {
+      window.rxpulseShowToast(text, type === "error" ? "error" : type === "warning" ? "warning" : "success", 4200);
+    }
   }
 
   // Sets a rich HTML message block (warning style) with a "Contact Support" CTA.

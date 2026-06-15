@@ -2,8 +2,8 @@
   const root = document.getElementById("doctor-profile-root");
   const DAYS = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
   const STATUS_LABELS = {
-    Available: { en: "Available", bn: "খোলা" },
-    Limited: { en: "Limited", bn: "সীমিত" },
+    Available: { en: "Open", bn: "চেম্বার খোলা" },
+    Limited: { en: "Limited hours", bn: "সীমিত সময়" },
     Closed: { en: "Closed", bn: "বন্ধ" },
     Cancelled: { en: "Cancelled", bn: "বাতিল" },
   };
@@ -87,13 +87,32 @@
     return false;
   }
 
+  function normalizeSlug(value) {
+    if (!value || typeof value !== "string") return "";
+    return value
+      .trim()
+      .replace(/^https?:\/\/[^/]+/i, "")
+      .replace(/^\/+/, "")
+      .replace(/^doctors\//i, "")
+      .replace(/^u\//i, "")
+      .replace(/\/+$/, "");
+  }
+
   function currentSlugFromPath() {
     const path = window.location.pathname.replace(/\/+$/, "");
     const parts = path.split("/").filter(Boolean).map(decodeURIComponent);
+    const params = new URLSearchParams(window.location.search || "");
+    const querySlug = normalizeSlug(params.get("slug") || params.get("profile") || params.get("doctor") || "");
+
     if (parts[0] === "doctors" && parts.length >= 3) {
-      return `${parts[1]}/${parts.slice(2).join("/")}`;
+      return normalizeSlug(`${parts[1]}/${parts.slice(2).join("/")}`);
     }
-    if (parts[0] === "u" && parts[1]) return parts[1];
+    if (parts[0] === "doctors" && parts.length === 2) {
+      return normalizeSlug(parts[1]);
+    }
+    if (parts[0] === "doctors.html" && querySlug) return querySlug;
+    if (parts[0] === "u" && parts[1]) return normalizeSlug(parts[1]);
+    if (querySlug) return querySlug;
     return "";
   }
 
@@ -139,19 +158,32 @@
     return response.json();
   }
 
+  function doctorCodeFromSlug(slug) {
+    const normalized = normalizeSlug(slug);
+    const firstPart = normalized.split("/").filter(Boolean)[0] || "";
+    return /^id[A-Za-z0-9]+$/.test(firstPart) ? firstPart : "";
+  }
+
   async function findProfile(slug) {
+    const normalizedSlug = normalizeSlug(slug);
     const select = [
       "id", "doctorId", "slug", "name", "qualifications", "specialties", "designation", "workplace",
       "bio", "expertise", "chamberInfo", "timings", "whatsappNumber", "profilePhotoUrl", "template",
       "isApproved", "approvalStatus"
     ].join(",");
 
-    const exact = await restFetch("publicProfiles", { select, slug: `eq.${slug}`, limit: "1" });
+    const exact = await restFetch("publicProfiles", { select, slug: `eq.${normalizedSlug}`, limit: "1" });
     if (exact && exact[0]) return exact[0];
 
-    if (!slug.startsWith("id")) {
+    const doctorCode = doctorCodeFromSlug(normalizedSlug);
+    if (doctorCode) {
+      const byDoctorCode = await restFetch("publicProfiles", { select, slug: `like.${doctorCode}/*`, limit: "1" });
+      if (byDoctorCode && byDoctorCode[0]) return byDoctorCode[0];
+    }
+
+    if (normalizedSlug && !normalizedSlug.startsWith("id")) {
       const profiles = await restFetch("publicProfiles", { select, limit: "100" });
-      return profiles.find((profile) => profile.slug === slug || String(profile.slug || "").endsWith(`/${slug}`)) || null;
+      return profiles.find((profile) => profile.slug === normalizedSlug || String(profile.slug || "").endsWith(`/${normalizedSlug}`)) || null;
     }
     return null;
   }
@@ -437,9 +469,13 @@
       }
 
       if (copied) {
-        showFeedback(text("Link copied!", "লিংক কপি হয়েছে!"), true);
+        const message = text("Link copied!", "লিংক কপি হয়েছে!");
+        showFeedback(message, true);
+        if (window.rxpulseShowToast) window.rxpulseShowToast(message, "success", 2800);
       } else {
-        showFeedback(text("Copy failed. Please copy from the address bar.", "কপি করা যায়নি। অ্যাড্রেস বার থেকে কপি করুন।"), false);
+        const message = text("Copy failed. Please copy from the address bar.", "কপি করা যায়নি। অ্যাড্রেস বার থেকে কপি করুন।");
+        showFeedback(message, false);
+        if (window.rxpulseShowToast) window.rxpulseShowToast(message, "error", 3800);
       }
     });
   }
@@ -447,7 +483,7 @@
   async function init() {
     const slug = currentSlugFromPath();
     if (!slug) {
-      renderState("hidden", text("Profile not found", "প্রোফাইল পাওয়া যায়নি"), text("The doctor profile link is incomplete or incorrect.", "ডাক্তার প্রোফাইল লিংকটি অসম্পূর্ণ বা ভুল।"));
+      renderState("hidden", text("Profile not found", "প্রোফাইল পাওয়া যায়নি"), text("The doctor profile link is incomplete. Please use the full public profile link shared by the doctor.", "ডাক্তার প্রোফাইল লিংকটি অসম্পূর্ণ। অনুগ্রহ করে ডাক্তারের দেওয়া সম্পূর্ণ পাবলিক প্রোফাইল লিংক ব্যবহার করুন।"));
       return;
     }
 

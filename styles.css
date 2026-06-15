@@ -3364,3 +3364,382 @@ section.legal .container {
     transition: opacity 0.25s ease;
   }
 }
+
+/* ============================================================
+   Public Website UI/UX Polish — responsive states + action feedback
+   ============================================================ */
+:root {
+  --interactive-ring: 0 0 0 4px rgba(20, 184, 166, 0.16);
+  --toast-bg: #0b1728;
+  --toast-success: #065f46;
+  --toast-warning: #92400e;
+  --toast-error: #991b1b;
+}
+
+body {
+  min-width: 0;
+}
+
+main {
+  min-width: 0;
+}
+
+.site-header {
+  isolation: isolate;
+}
+
+.site-nav a,
+.button,
+.lang-toggle,
+.nav-toggle,
+.footer-grid a,
+.mini-link {
+  touch-action: manipulation;
+}
+
+.site-nav a:active,
+.button:active,
+.lang-toggle:active,
+.nav-toggle:active,
+.tap-feedback {
+  transform: translateY(1px) scale(0.99);
+}
+
+.button,
+.nav-cta,
+.lang-toggle,
+.nav-toggle {
+  position: relative;
+  overflow: hidden;
+}
+
+.button[aria-busy="true"],
+.button.is-loading,
+a.is-loading,
+button[aria-busy="true"] {
+  cursor: progress;
+}
+
+.button[aria-busy="true"]::after,
+.button.is-loading::after,
+.nav-cta[aria-busy="true"]::after,
+.nav-cta.is-loading::after {
+  content: "";
+  width: 15px;
+  height: 15px;
+  margin-left: 8px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 999px;
+  animation: rxpulse-spin 0.75s linear infinite;
+  opacity: 0.85;
+}
+
+.auth-form input:hover {
+  border-color: #bdd8e4;
+  background: #fff;
+}
+
+.auth-form input:invalid:not(:placeholder-shown) {
+  border-color: #fecaca;
+}
+
+.form-message {
+  animation: rxpulse-message-enter 0.24s ease both;
+}
+
+@keyframes rxpulse-message-enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.rxpulse-toast-stack {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 2000;
+  display: grid;
+  gap: 10px;
+  width: min(92vw, 390px);
+  pointer-events: none;
+}
+
+.rxpulse-toast {
+  padding: 13px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 17px;
+  background: var(--toast-bg);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 680;
+  line-height: 1.45;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.28);
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  transition: opacity 0.24s ease, transform 0.24s ease;
+}
+
+.rxpulse-toast.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.rxpulse-toast.success {
+  background: var(--toast-success);
+}
+
+.rxpulse-toast.warning {
+  background: var(--toast-warning);
+}
+
+.rxpulse-toast.error {
+  background: var(--toast-error);
+}
+
+.reveal-ready {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.38s ease, transform 0.38s ease;
+}
+
+.reveal-ready.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card,
+.feature-card,
+.download-card,
+.price-card,
+.auth-panel,
+.success-card,
+.public-card,
+.pricing-note {
+  min-width: 0;
+}
+
+.card p,
+.feature-card p,
+.download-card p,
+.price-card p,
+.legal p,
+.legal li,
+.hero-lead,
+.page-hero p,
+.auth-lead,
+.footer-grid p,
+.preline,
+.chamber-address,
+.instruction-note,
+.availability-alert,
+.schedule-row,
+.status-pill,
+.trust-row span {
+  overflow-wrap: anywhere;
+}
+
+.card:hover,
+.feature-card:hover,
+.price-card:hover,
+.download-card:hover {
+  will-change: transform;
+}
+
+@media (hover: none) {
+  .card:hover,
+  .feature-card:hover,
+  .price-card:hover,
+  .download-card:hover,
+  .button:hover,
+  .nav-cta:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .pricing-note {
+    display: grid;
+  }
+
+  .auth-actions.between {
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-nav {
+    max-height: min(78vh, 520px);
+  }
+
+  .page-hero .narrow,
+  .hero-copy,
+  .auth-story {
+    max-width: 100%;
+  }
+
+  .card,
+  .feature-card,
+  .download-card,
+  .price-card,
+  .auth-panel,
+  .success-card,
+  .pricing-note,
+  .doctor-profile-state {
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.07);
+  }
+
+  .success-card {
+    text-align: left;
+  }
+
+  .success-icon {
+    margin-inline: 0;
+  }
+
+  .success-steps div {
+    justify-items: start;
+    text-align: left;
+  }
+
+  .auth-actions.between {
+    display: grid;
+    gap: 12px;
+  }
+
+  .auth-actions.between a {
+    text-align: center;
+  }
+
+  .turnstile-box {
+    width: 100%;
+    overflow: auto hidden;
+  }
+
+  .rxpulse-toast-stack {
+    left: 12px;
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: auto;
+  }
+
+  .rxpulse-toast {
+    border-radius: 15px;
+    font-size: 13.5px;
+  }
+}
+
+@media (max-width: 460px) {
+  .container,
+  .doctor-profile-shell .container {
+    width: min(100% - 22px, var(--max));
+  }
+
+  .hero,
+  .page-hero,
+  .section,
+  .auth-hero {
+    padding-block: 30px;
+  }
+
+  .site-nav {
+    left: 10px;
+    right: 10px;
+  }
+
+  .hero-actions,
+  .actions,
+  .auth-actions {
+    width: 100%;
+  }
+
+  .button {
+    min-height: 45px;
+    padding-inline: 14px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .trust-row span,
+  .status-pill {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .step-list div,
+  .timeline-item,
+  .flow-card div {
+    grid-template-columns: 1fr;
+  }
+
+  .step-list strong,
+  .timeline-item > span,
+  .flow-card span {
+    margin-bottom: 4px;
+  }
+
+  .step-list p,
+  .flow-card p {
+    grid-column: auto;
+  }
+
+  .auth-panel {
+    padding: 18px;
+  }
+
+  .auth-form input {
+    min-height: 46px;
+    font-size: 16px;
+  }
+
+  .footer-grid a {
+    width: 100%;
+  }
+
+  .doctor-profile-state {
+    margin: 22px auto;
+    padding: 28px 18px;
+  }
+
+  .profile-share {
+    display: grid;
+  }
+
+  .profile-copy-feedback {
+    min-height: 0;
+  }
+
+  .schedule-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .schedule-row em {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 360px) {
+  h1,
+  .auth-story h1,
+  .page-hero h1 {
+    font-size: 26px;
+  }
+
+  .brand span:last-child {
+    display: none;
+  }
+
+  .mobile-lang-toggle {
+    min-width: 62px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready,
+  .rxpulse-toast,
+  .form-message {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
