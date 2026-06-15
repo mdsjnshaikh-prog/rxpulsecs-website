@@ -44,6 +44,17 @@
     return lowered.startsWith("http://") || lowered.startsWith("https://") ? trimmed : "";
   }
 
+  function safeImageUrl(url) {
+    if (!url || typeof url !== "string") return "";
+    const trimmed = url.trim();
+    const lowered = trimmed.toLowerCase();
+    if (lowered.startsWith("http://") || lowered.startsWith("https://")) return trimmed;
+    // Doctor photos may be stored as browser-ready data URLs by the app.
+    // Allow only base64 image MIME types; reject arbitrary data: content.
+    if (/^data:image\/(png|jpe?g|webp|gif);base64,/i.test(trimmed)) return trimmed;
+    return "";
+  }
+
   function safeTel(phone) {
     return String(phone || "").replace(/[^+0-9]/g, "");
   }
@@ -319,16 +330,33 @@
                   `).join("")}
                 </div>
               ` : ""}
-              ${chamberSchedule.length ? `
-                <div class="schedule-list">
-                  <h3>${escapeHtml(text("Weekly chamber schedule", "সাপ্তাহিক চেম্বার সময়সূচি"))}</h3>
-                  ${chamberSchedule.map((item) => renderScheduleRow(item)).join("")}
-                </div>
-              ` : ""}
+              ${chamberSchedule.length ? renderScheduleSection(chamberSchedule) : ""}
             </section>
           `;
         }).join("")}
       </aside>
+    `;
+  }
+
+  function renderScheduleSection(chamberSchedule) {
+    const openCount = chamberSchedule.filter((item) => item.status !== "Closed" && item.status !== "Cancelled").length;
+    const openLabel = openCount === 1
+      ? text("1 day open", "১ দিন খোলা")
+      : text(`${openCount} days open`, `${openCount} দিন খোলা`);
+
+    return `
+      <div class="schedule-card">
+        <div class="schedule-header">
+          <div>
+            <p class="section-kicker">${escapeHtml(text("Visit time", "চেম্বারের সময়"))}</p>
+            <h3>${escapeHtml(text("Weekly chamber schedule", "সাপ্তাহিক চেম্বার সময়সূচি"))}</h3>
+          </div>
+          <span class="schedule-summary-pill">${escapeHtml(openLabel)}</span>
+        </div>
+        <div class="schedule-grid">
+          ${chamberSchedule.map((item) => renderScheduleRow(item)).join("")}
+        </div>
+      </div>
     `;
   }
 
@@ -340,17 +368,35 @@
   function renderScheduleRow(item) {
     const status = item.status || "Closed";
     const isClosed = status === "Closed" || status === "Cancelled";
+    const isLimited = status === "Limited";
+    const timeText = isClosed
+      ? statusLabel(status)
+      : `${formatTime(item.start_time) || "-"} – ${formatTime(item.end_time) || "-"}`;
+    const dayName = item.day_of_week || "";
+
     return `
-      <div class="schedule-row ${isClosed ? "closed" : ""}">
-        <span>${escapeHtml(item.day_of_week || "")}</span>
-        <strong>${isClosed ? escapeHtml(statusLabel(status)) : `${escapeHtml(formatTime(item.start_time) || "-")} – ${escapeHtml(formatTime(item.end_time) || "-")}`}</strong>
-        ${status === "Limited" ? `<em>${escapeHtml(statusLabel("Limited"))}</em>` : ""}
+      <div class="schedule-day-card ${isClosed ? "is-closed" : "is-open"} ${isLimited ? "is-limited" : ""}">
+        <div class="schedule-day-top">
+          <span class="schedule-day-name">${escapeHtml(dayName)}</span>
+          <span class="schedule-status-badge">${escapeHtml(isClosed ? statusLabel(status) : statusLabel(isLimited ? "Limited" : "Available"))}</span>
+        </div>
+        <strong class="schedule-time-text">${escapeHtml(timeText)}</strong>
       </div>
     `;
   }
 
+  function looksLikeInternalPrompt(value) {
+    const body = String(value || "").toLowerCase();
+    return body.includes("do not apply any changes")
+      || body.includes("markdown report")
+      || body.includes("doctorportfolio.tsx")
+      || body.includes("appLayout.tsx".toLowerCase())
+      || body.includes("phase_5")
+      || body.includes("claude_final");
+  }
+
   function renderBio(profile) {
-    if (!profile.bio) return "";
+    if (!profile.bio || looksLikeInternalPrompt(profile.bio)) return "";
     return `
       <section class="public-card bio-card">
         <p class="section-kicker">${escapeHtml(text("About", "পরিচিতি"))}</p>
@@ -362,11 +408,12 @@
 
   function renderIdentity(profile) {
     const initial = (profile.name || "D").trim().charAt(0).toUpperCase() || "D";
-    const photo = safeHttpUrl(profile.profilePhotoUrl);
+    const photo = safeImageUrl(profile.profilePhotoUrl);
+    const fallback = `<div class="doctor-photo fallback-photo">${escapeHtml(initial)}</div>`;
     return `
       <div class="doctor-identity">
         <div class="doctor-photo-wrap">
-          ${photo ? `<img class="doctor-photo" src="${escapeAttr(photo)}" alt="${escapeAttr(profile.name || "Doctor")}" loading="lazy"/>` : `<div class="doctor-photo fallback-photo">${escapeHtml(initial)}</div>`}
+          ${photo ? `<img class="doctor-photo" src="${escapeAttr(photo)}" alt="${escapeAttr(profile.name || "Doctor")}" loading="lazy" decoding="async" data-initial="${escapeAttr(initial)}"/>` : fallback}
         </div>
         <div>
           <p class="verified-pill">${escapeHtml(text("Verified RxPulse public profile", "ভেরিফায়েড RxPulse পাবলিক প্রোফাইল"))}</p>
@@ -413,6 +460,17 @@
         </div>
       </article>
     `;
+  }
+
+  function initPhotoFallback() {
+    document.querySelectorAll(".doctor-photo-wrap img.doctor-photo").forEach((img) => {
+      img.addEventListener("error", function () {
+        const fallback = document.createElement("div");
+        fallback.className = "doctor-photo fallback-photo";
+        fallback.textContent = this.getAttribute("data-initial") || "D";
+        this.replaceWith(fallback);
+      }, { once: true });
+    });
   }
 
   // Wires up the "Copy profile link" button after the profile is rendered.
@@ -501,6 +559,7 @@
       const chamberHtml = renderChamberWidget(chamberData.chambers, chamberData.schedule, chamberData.overrides);
       document.title = `${profile.name || "Doctor"} | RxPulse Public Portfolio`;
       root.innerHTML = renderTemplate(profile, chamberHtml);
+      initPhotoFallback();
       initCopyLink();
     } catch (error) {
       console.error("[RxPulse Public Profile]", error);
