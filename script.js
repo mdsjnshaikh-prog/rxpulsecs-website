@@ -151,6 +151,11 @@
       if (!target || !document.body.contains(target)) return;
       if (target.matches("[data-language-toggle], .nav-toggle")) return;
 
+      try {
+        const rect = target.getBoundingClientRect();
+        target.style.setProperty("--tap-x", ((event.clientX - rect.left) / Math.max(rect.width, 1) * 100) + "%");
+        target.style.setProperty("--tap-y", ((event.clientY - rect.top) / Math.max(rect.height, 1) * 100) + "%");
+      } catch (_) {}
       target.classList.add("tap-feedback");
       window.setTimeout(function () { target.classList.remove("tap-feedback"); }, 260);
 
@@ -224,7 +229,26 @@
     items.forEach(function (item) { observer.observe(item); });
   }
 
+
+  function initSectionProgress() {
+    const bar = document.createElement("div");
+    bar.className = "rxpulse-scroll-progress";
+    bar.setAttribute("aria-hidden", "true");
+    document.body.appendChild(bar);
+
+    function update() {
+      const max = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+      const pct = Math.min(100, Math.max(0, (window.scrollY / max) * 100));
+      bar.style.transform = "scaleX(" + (pct / 100) + ")";
+    }
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+  }
+
   initNavigation();
+  initSectionProgress();
   initLanguage();
   initActionFeedback();
   initReveal();
