@@ -72,9 +72,47 @@
     toggle.addEventListener("click", function () {
       const current = document.documentElement.lang === "bn" ? "bn" : "en";
       applyLanguage(current === "en" ? "bn" : "en");
+      // Brief visual confirmation that the language actually switched.
+      toggle.classList.add("lang-toggle-flash");
+      setTimeout(function () { toggle.classList.remove("lang-toggle-flash"); }, 450);
     });
   });
 
+  // Mailto feedback: when a user taps an email link, low-tech users often do
+  // not realise their email app is opening. Show a small, non-blocking hint.
+  function initMailtoFeedback() {
+    var mailLinks = Array.from(document.querySelectorAll('a[href^="mailto:"]'));
+    if (!mailLinks.length) return;
+
+    var hint = document.createElement("div");
+    hint.className = "mailto-hint";
+    hint.setAttribute("role", "status");
+    hint.setAttribute("aria-live", "polite");
+    hint.hidden = true;
+    document.body.appendChild(hint);
+
+    var hideTimer = null;
+
+    function showHint() {
+      var lang = document.documentElement.lang === "bn" ? "bn" : "en";
+      hint.textContent = lang === "bn"
+        ? "আপনার ইমেইল অ্যাপ খোলা হচ্ছে... না খুললে support@rxpulsecs.com এ লিখুন।"
+        : "Opening your email app... If nothing opens, please email support@rxpulsecs.com.";
+      hint.hidden = false;
+      hint.classList.add("show");
+      if (hideTimer) clearTimeout(hideTimer);
+      hideTimer = setTimeout(function () {
+        hint.classList.remove("show");
+        setTimeout(function () { hint.hidden = true; }, 300);
+      }, 5000);
+    }
+
+    mailLinks.forEach(function (link) {
+      link.addEventListener("click", showHint);
+    });
+  }
+
   initNavigation();
   initLanguage();
+  initMailtoFeedback();
 })();

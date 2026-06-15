@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Page Not Found | RxPulse Clinician Suite</title>
-<meta content="The requested RxPulse page was not found." name="description"/>
-<link href="https://www.rxpulsecs.com/404.html" rel="canonical"/>
+<title>Doctor Public Portfolio | RxPulse Clinician Suite</title>
+<meta content="Public doctor portfolio powered by RxPulse Clinician Suite." name="description"/>
+<link href="https://www.rxpulsecs.com/doctors/" rel="canonical"/>
 <link href="/styles.css?v=20260615-uiux1" rel="stylesheet"/>
-<script defer="" src="/script.js?v=20260615-uiux1"></script>
+<script defer src="/script.js?v=20260615-uiux1"></script>
+<script src="/supabase-config.js?v=20260615-phase5g"></script>
+<script defer src="/doctor-profile.js?v=20260615-uiux1"></script>
 </head>
-<body class="auth-page success-page">
+<body class="doctor-public-page">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header">
 <div class="container nav">
@@ -18,7 +19,8 @@
 <span class="brand-mark">Rx</span>
 <span>Pulse</span>
 </a>
-<button aria-label="Switch language" class="lang-toggle mobile-lang-toggle" data-language-toggle="" type="button">বাংলা</button><button aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" type="button">
+<button aria-label="Switch language" class="lang-toggle mobile-lang-toggle" data-language-toggle type="button">বাংলা</button>
+<button aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" type="button">
 <span></span><span></span><span></span>
 </button>
 <nav aria-label="Primary navigation" class="site-nav" id="site-nav">
@@ -28,21 +30,17 @@
 <a data-bn="ডাউনলোড" data-en="Download" href="/download.html">Download</a>
 <a data-bn="সাপোর্ট" data-en="Support" href="/support.html">Support</a>
 <a class="nav-cta" data-bn="অ্যাকাউন্ট তৈরি" data-en="Create Account" href="/doctor-signup.html">Create Account</a>
-<button aria-label="Switch language" class="lang-toggle" data-language-toggle="" type="button">EN</button>
+<button aria-label="Switch language" class="lang-toggle" data-language-toggle type="button">EN</button>
 </nav>
 </div>
 </header>
 <main id="main-content">
-<section class="success-hero">
-<div class="container success-wrap">
-<div class="success-card">
-<div aria-hidden="true" class="success-icon warning">!</div>
-<p class="eyebrow">404</p>
-<h1 data-bn="Page পাওয়া যায়নি" data-en="Page not found">Page not found</h1>
-<p class="auth-lead" data-bn="পেজটি সরানো হয়েছে বা ঠিকানাটি ভুল হতে পারে। RxPulse-এর মূল পেজে ফিরতে মেনু ব্যবহার করুন।" data-en="The page may have moved or the address may be incorrect. Use the menu to return to the main RxPulse pages.">The page may have moved or the address may be incorrect. Use the menu to return to the main RxPulse pages.</p>
-<div class="actions center-actions">
-<a class="button primary" data-bn="হোমে যান" data-en="Go home" href="/index.html">Go home</a>
-<a class="button secondary" data-bn="সাপোর্টে যোগাযোগ করুন" data-en="Contact support" href="/support.html">Contact support</a>
+<section class="doctor-profile-shell" aria-live="polite">
+<div class="container">
+<div id="doctor-profile-root" class="doctor-profile-root">
+<div class="doctor-profile-state loading-state">
+<div class="loading-spinner" aria-hidden="true"></div>
+<p data-en="Loading doctor profile..." data-bn="ডাক্তারের প্রোফাইল লোড হচ্ছে...">Loading doctor profile...</p>
 </div>
 </div>
 </div>

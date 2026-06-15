@@ -1,0 +1,3 @@
+# RxPulse public doctor portfolio routes
+/doctors/* /doctors.html 200
+/u/* /doctors.html 200

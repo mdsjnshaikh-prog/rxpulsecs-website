@@ -119,6 +119,33 @@
     }
   }
 
+  // setButtonBusy — shows clear progress on the button itself (not only the
+  // message box) so low-tech / slow-connection users can see the action is
+  // running. Stores the original label so it can be restored afterwards.
+  function setButtonBusy(button, busy, busyLabel) {
+    if (!button) return;
+    if (busy) {
+      if (!button.dataset.originalLabel) {
+        button.dataset.originalLabel = button.textContent;
+      }
+      button.disabled = true;
+      button.setAttribute("aria-busy", "true");
+      if (busyLabel) button.textContent = busyLabel;
+    } else {
+      button.disabled = false;
+      button.removeAttribute("aria-busy");
+      if (button.dataset.originalLabel) {
+        button.textContent = button.dataset.originalLabel;
+        delete button.dataset.originalLabel;
+      }
+    }
+  }
+
+  // Returns the right busy label for the active language.
+  function busyText(en, bn) {
+    return currentLang() === "bn" ? (bn || en) : en;
+  }
+
   function supportMailto(subject, body) {
     return "mailto:support@rxpulsecs.com" +
       "?subject=" + encodeURIComponent(subject || "RxPulse Support") +
@@ -182,8 +209,8 @@
       }
 
       signupSubmitting = true;
-      if (submit) submit.disabled = true;
-      setMessage("signup-message", "", "Sending verification email...");
+      setButtonBusy(submit, true, busyText("Sending...", "পাঠানো হচ্ছে..."));
+      setMessage("signup-message", "", "Sending verification email... Please wait.");
 
       try {
         const data = await postJson(SIGNUP_START_ENDPOINT, {
@@ -216,7 +243,7 @@
         resetTurnstile();
       } finally {
         signupSubmitting = false;
-        if (submit) submit.disabled = false;
+        setButtonBusy(submit, false);
       }
     }
 
@@ -278,8 +305,8 @@
         return;
       }
 
-      submit.disabled = true;
-      setMessage("complete-message", "", "Creating your RxPulse account...");
+      setButtonBusy(submit, true, busyText("Creating account...", "অ্যাকাউন্ট তৈরি হচ্ছে..."));
+      setMessage("complete-message", "", "Creating your RxPulse account... Please wait.");
 
       try {
         const data = await postJson(SIGNUP_COMPLETE_ENDPOINT, {
@@ -310,7 +337,7 @@
           setMessage("complete-message", "error", friendlyError(error, "Account creation failed. Please try again or contact support."));
         }
       } finally {
-        submit.disabled = false;
+        setButtonBusy(submit, false);
       }
     });
   }
@@ -339,8 +366,8 @@
         return;
       }
 
-      submit.disabled = true;
-      setMessage("forgot-message", "", "Sending reset link...");
+      setButtonBusy(submit, true, busyText("Sending...", "পাঠানো হচ্ছে..."));
+      setMessage("forgot-message", "", "Sending reset link... Please wait.");
 
       try {
         await postJson(FORGOT_ENDPOINT, {
@@ -358,7 +385,7 @@
         state.forgotTurnstileToken = "";
         resetTurnstile();
       } finally {
-        submit.disabled = false;
+        setButtonBusy(submit, false);
       }
     });
   }
@@ -447,8 +474,8 @@
         return;
       }
 
-      submit.disabled = true;
-      setMessage("reset-message", "", "Updating password...");
+      setButtonBusy(submit, true, busyText("Updating...", "আপডেট হচ্ছে..."));
+      setMessage("reset-message", "", "Updating password... Please wait.");
 
       try {
         const result = await client.auth.updateUser({ password: password });
@@ -459,7 +486,7 @@
       } catch (error) {
         setMessage("reset-message", "error", friendlyError(error, "Password update failed. Please request a new reset link."));
       } finally {
-        submit.disabled = false;
+        setButtonBusy(submit, false);
       }
     });
   }

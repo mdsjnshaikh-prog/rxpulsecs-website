@@ -2848,3 +2848,519 @@ section.legal .container {
     min-width: 0;
   }
 }
+
+/* Phase 5G: public doctor portfolio route */
+.doctor-public-page {
+  background: linear-gradient(180deg, #f8fbfc 0%, #eef7f6 100%);
+}
+
+.doctor-profile-shell {
+  padding: 48px 0 72px;
+}
+
+.doctor-profile-root {
+  min-height: 420px;
+}
+
+.doctor-profile-state {
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 44px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.state-icon,
+.loading-spinner {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.loading-spinner {
+  border: 4px solid #d8ece9;
+  border-top-color: var(--primary);
+  background: transparent;
+  animation: rxpulse-spin 0.9s linear infinite;
+}
+
+@keyframes rxpulse-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Reduced motion: stop the spinner from animating for users who prefer it. */
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner {
+    animation: none;
+  }
+  .button:hover {
+    transform: none;
+  }
+}
+
+/* Share / copy-profile-link bar on the public doctor profile. */
+.profile-share {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.profile-copy-btn {
+  min-height: 44px;
+  padding: 10px 18px;
+}
+
+.profile-copy-feedback {
+  font-weight: 800;
+  font-size: 0.9rem;
+  min-height: 1.2em;
+}
+
+.profile-copy-feedback.ok {
+  color: var(--primary-dark);
+}
+
+.profile-copy-feedback.fail {
+  color: var(--danger);
+}
+
+.public-doctor-profile {
+  position: relative;
+  overflow: hidden;
+}
+
+.public-doctor-profile .template-accent {
+  height: 12px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-2));
+}
+
+.public-doctor-profile.template2 .template-accent {
+  background: linear-gradient(90deg, #0f172a, #3b82f6, #14b8a6);
+}
+
+.public-doctor-profile.template3 .template-accent {
+  background: linear-gradient(90deg, #123c69, #0f766e, #d4af37);
+}
+
+.public-doctor-profile.template4 .template-accent {
+  background: linear-gradient(90deg, #7c3aed, #ec4899, #f59e0b);
+}
+
+.public-doctor-profile.template5 .template-accent {
+  background: linear-gradient(90deg, #0891b2, #14b8a6, #84cc16);
+}
+
+.public-card {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(216, 227, 235, 0.9);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-hero {
+  padding: 34px;
+  margin-bottom: 24px;
+}
+
+.doctor-identity {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.doctor-photo-wrap {
+  position: relative;
+}
+
+.doctor-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 32px;
+  object-fit: cover;
+  border: 6px solid #fff;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.13);
+  background: #eef2f7;
+}
+
+.fallback-photo {
+  display: grid;
+  place-items: center;
+  font-size: 58px;
+  font-weight: 900;
+  color: var(--primary-dark);
+  background: linear-gradient(135deg, #e8fbf8, #f8fafc);
+}
+
+.verified-pill,
+.section-kicker,
+.specialty-pill {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.verified-pill {
+  padding: 7px 12px;
+  margin-bottom: 12px;
+  color: var(--primary-dark);
+  background: var(--primary-soft);
+  border: 1px solid rgba(20, 184, 166, 0.22);
+}
+
+.section-kicker {
+  color: var(--primary-dark);
+  margin-bottom: 10px;
+}
+
+.profile-hero h1 {
+  margin: 0 0 6px;
+  font-size: clamp(2.1rem, 5vw, 4.1rem);
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+  color: var(--heading);
+}
+
+.qualification {
+  color: var(--muted);
+  font-weight: 800;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.specialty-pill {
+  padding: 8px 13px;
+  color: #0f172a;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 12px;
+}
+
+.workplace {
+  color: #334155;
+  font-weight: 700;
+}
+
+.public-profile-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 390px;
+  gap: 24px;
+  align-items: start;
+}
+
+.profile-main-column,
+.profile-side-column,
+.chamber-stack {
+  display: grid;
+  gap: 20px;
+}
+
+.bio-card,
+.expertise-card,
+.chamber-widget {
+  padding: 26px;
+}
+
+.public-card h2 {
+  margin: 0 0 14px;
+  color: var(--heading);
+  letter-spacing: -0.035em;
+  line-height: 1.16;
+}
+
+.preline {
+  white-space: pre-wrap;
+  color: #405268;
+  font-weight: 600;
+}
+
+.expertise-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.expertise-list span {
+  padding: 10px 13px;
+  border: 1px solid #dbe7ee;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #223449;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.chamber-address {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.mini-link {
+  display: inline-flex;
+  margin: 0 0 16px;
+  color: var(--primary-dark);
+  font-weight: 900;
+  text-decoration: underline;
+}
+
+.contact-actions {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.instruction-note,
+.availability-alert {
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid #fde68a;
+  background: #fffbeb;
+  color: #92400e;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.availability-alert {
+  border-color: #fecdd3;
+  background: #fff1f2;
+  color: #9f1239;
+}
+
+.availability-alert p {
+  margin: 6px 0 0;
+}
+
+.availability-alert small {
+  display: block;
+  margin-top: 4px;
+  font-weight: 800;
+}
+
+.schedule-list {
+  margin-top: 20px;
+}
+
+.schedule-list h3 {
+  margin: 0 0 12px;
+  color: #1e293b;
+  font-size: 16px;
+}
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: 105px 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 14px;
+}
+
+.schedule-row:last-child {
+  border-bottom: 0;
+}
+
+.schedule-row span {
+  color: #475569;
+  font-weight: 800;
+}
+
+.schedule-row strong {
+  color: #0f172a;
+}
+
+.schedule-row.closed strong {
+  color: #be123c;
+}
+
+.schedule-row em {
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 11px;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.template2 .public-card {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(18px);
+  border-color: rgba(148, 163, 184, 0.32);
+}
+
+.template2 .profile-hero {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 118, 110, 0.86));
+  color: #fff;
+}
+
+.template2 .profile-hero h1,
+.template2 .profile-hero .workplace,
+.template2 .profile-hero .qualification {
+  color: #fff;
+}
+
+.template3 .profile-hero {
+  border-top: 8px solid #d4af37;
+}
+
+.template3 .doctor-photo {
+  border-radius: 999px;
+}
+
+.template4 .profile-hero {
+  background: linear-gradient(135deg, #fff7ed, #fdf2f8);
+}
+
+.template4 .doctor-identity {
+  grid-template-columns: 1fr 160px;
+}
+
+.template4 .doctor-photo-wrap {
+  order: 2;
+}
+
+.template5 .public-profile-grid {
+  grid-template-columns: 1fr;
+}
+
+.template5 .profile-side-column {
+  max-width: 760px;
+}
+
+.template5 .doctor-photo {
+  border-radius: 26px;
+}
+
+@media (max-width: 920px) {
+  .doctor-profile-shell {
+    padding: 30px 0 56px;
+  }
+
+  .profile-hero {
+    padding: 24px;
+  }
+
+  .doctor-identity,
+  .template4 .doctor-identity {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .template4 .doctor-photo-wrap {
+    order: 0;
+  }
+
+  .public-profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .doctor-photo {
+    width: 132px;
+    height: 132px;
+    border-radius: 26px;
+  }
+
+  .schedule-row {
+    grid-template-columns: 92px 1fr;
+  }
+
+  .schedule-row em {
+    grid-column: 2;
+    width: fit-content;
+  }
+}
+
+@media (max-width: 560px) {
+  .doctor-profile-shell .container {
+    width: min(100% - 28px, var(--max));
+  }
+
+  .bio-card,
+  .expertise-card,
+  .chamber-widget,
+  .profile-hero {
+    border-radius: 22px;
+    padding: 20px;
+  }
+
+  .profile-hero h1 {
+    font-size: 2.05rem;
+  }
+
+  .contact-actions .button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ============================================================
+   Phase: Interactive UI/UX feedback additions
+   ============================================================ */
+
+/* Toast-style hint shown when a mailto: link is tapped, so users on
+   simple devices understand their email app is opening. */
+.mailto-hint {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%) translateY(12px);
+  max-width: min(92vw, 460px);
+  padding: 12px 18px;
+  border-radius: 16px;
+  background: #0b1728;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  text-align: center;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 1000;
+}
+
+.mailto-hint.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Quick flash when the language toggle is pressed, confirming the switch. */
+.lang-toggle-flash {
+  animation: rxpulse-lang-flash 0.45s ease;
+}
+
+@keyframes rxpulse-lang-flash {
+  0%   { box-shadow: 0 0 0 0 rgba(15, 118, 110, 0.45); }
+  100% { box-shadow: 0 0 0 10px rgba(15, 118, 110, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lang-toggle-flash {
+    animation: none;
+  }
+  .mailto-hint {
+    transition: opacity 0.25s ease;
+  }
+}
