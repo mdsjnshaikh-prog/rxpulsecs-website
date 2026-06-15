@@ -1,5 +1,12 @@
 # RxPulse public doctor portfolio routes
-/doctors /doctors.html 200
-/doctors/ /doctors.html 200
+#
+# IMPORTANT: Do NOT add "/doctors /doctors.html 200" or "/doctors/ /doctors.html 200".
+# Cloudflare Pages already serves doctors.html at the clean URL /doctors, and it
+# automatically 308-redirects /doctors.html -> /doctors. Rewriting the clean /doctors
+# URL back to the .html file fights that canonicalization and produces an infinite
+# redirect loop ("The page isn't redirecting properly").
+#
+# Only the deep, file-less paths below need an explicit SPA-style rewrite so the
+# doctors.html shell can read the slug from the URL and load the profile.
 /doctors/* /doctors.html 200
 /u/* /doctors.html 200
