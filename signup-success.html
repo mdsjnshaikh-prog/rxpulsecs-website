@@ -63,16 +63,21 @@
       const icon = document.getElementById('success-icon');
       const title = document.getElementById('success-title');
       const copy = document.getElementById('success-copy');
+      const enTitle = 'Verification link needs attention';
+      const bnTitle = 'Verification link-এ সমস্যা হয়েছে';
+      const enCopy = errorDescription || 'This email confirmation link may no longer work. Please request a new verification email or contact RxPulse support.';
+      const bnCopy = 'এই email confirmation link কাজ নাও করতে পারে। অনুগ্রহ করে নতুন verification email পাঠানোর চেষ্টা করুন অথবা RxPulse support-এ যোগাযোগ করুন।';
+      const currentLang = document.documentElement.lang === 'bn' ? 'bn' : 'en';
       if (icon) { icon.textContent = '!'; icon.classList.add('warning'); }
       if (title) {
-        title.textContent = 'Verification link needs attention';
-        title.dataset.en = 'Verification link needs attention';
-        title.dataset.bn = 'Verification link needs attention';
+        title.textContent = currentLang === 'bn' ? bnTitle : enTitle;
+        title.dataset.en = enTitle;
+        title.dataset.bn = bnTitle;
       }
       if (copy) {
-        copy.textContent = errorDescription || 'This email confirmation may no longer work. Please try again or contact RxPulse support.';
-        copy.dataset.en = copy.textContent;
-        copy.dataset.bn = copy.textContent;
+        copy.textContent = currentLang === 'bn' ? bnCopy : enCopy;
+        copy.dataset.en = enCopy;
+        copy.dataset.bn = bnCopy;
       }
     }
   })();
