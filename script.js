@@ -98,11 +98,6 @@
         const isOpen = nav.classList.toggle("open");
         navToggle.setAttribute("aria-expanded", String(isOpen));
         document.body.classList.toggle("nav-open", isOpen);
-        showToast(
-          isOpen ? uiText("Menu opened", "মেনু খোলা হয়েছে") : uiText("Menu closed", "মেনু বন্ধ হয়েছে"),
-          "info",
-          1500
-        );
       });
     }
 
@@ -129,21 +124,6 @@
       setTimeout(function () { toggle.classList.remove("lang-toggle-flash"); }, 450);
     });
   });
-
-  function isPlainClick(event) {
-    return !(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.defaultPrevented);
-  }
-
-  function isInternalNavigable(href) {
-    if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) return false;
-    try {
-      const url = new URL(href, window.location.href);
-      if (url.origin !== window.location.origin) return false;
-      return url.pathname !== window.location.pathname || url.search !== window.location.search || url.hash !== window.location.hash;
-    } catch (_) {
-      return false;
-    }
-  }
 
   function initActionFeedback() {
     document.addEventListener("click", function (event) {
@@ -180,17 +160,20 @@
         return;
       }
 
-      if (!isPlainClick(event)) return;
+      if (target.target === "_blank") return;
 
-      if (target.target === "_blank") {
-        showToast(uiText("Opening in a new tab...", "নতুন ট্যাবে খোলা হচ্ছে..."), "info", 2200);
-        return;
-      }
+      const hrefIsInternal = (() => {
+        try {
+          const url = new URL(href, window.location.href);
+          return url.origin === window.location.origin;
+        } catch (_) {
+          return false;
+        }
+      })();
 
-      if (isInternalNavigable(href)) {
+      if (hrefIsInternal) {
         target.classList.add("is-loading");
         target.setAttribute("aria-busy", "true");
-        showToast(uiText("Opening page...", "পেজ খোলা হচ্ছে..."), "info", 2200);
       }
     }, true);
 
@@ -228,7 +211,6 @@
 
     items.forEach(function (item) { observer.observe(item); });
   }
-
 
   function initSectionProgress() {
     const bar = document.createElement("div");
