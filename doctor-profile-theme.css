@@ -1,0 +1,267 @@
+/* RxPulse public doctor profile category themes.
+   Uses one doctors.html page and switches visual treatment by the doctor's verified specialty category. */
+
+body.doctor-public-page {
+  --doctor-theme-primary: #0f766e;
+  --doctor-theme-secondary: #14b8a6;
+  --doctor-theme-soft: #e8fbf8;
+  --doctor-theme-soft-2: #f0fdfa;
+  --doctor-theme-strong: #0f172a;
+  --doctor-theme-border: rgba(20, 184, 166, 0.24);
+  --doctor-theme-shadow: rgba(15, 118, 110, 0.13);
+}
+
+body.doctor-public-page.doctor-theme-medicine {
+  --doctor-theme-primary: #0f766e;
+  --doctor-theme-secondary: #2563eb;
+  --doctor-theme-soft: #ecfeff;
+  --doctor-theme-soft-2: #eff6ff;
+  --doctor-theme-strong: #0f3f48;
+  --doctor-theme-border: rgba(14, 116, 144, 0.22);
+  --doctor-theme-shadow: rgba(14, 116, 144, 0.14);
+  background:
+    radial-gradient(circle at 9% 12%, rgba(37, 99, 235, 0.12), transparent 24rem),
+    linear-gradient(180deg, #f8fbff 0%, #ecfeff 100%);
+}
+
+body.doctor-public-page.doctor-theme-surgery {
+  --doctor-theme-primary: #0f766e;
+  --doctor-theme-secondary: #64748b;
+  --doctor-theme-soft: #f0fdfa;
+  --doctor-theme-soft-2: #f8fafc;
+  --doctor-theme-strong: #1e293b;
+  --doctor-theme-border: rgba(15, 118, 110, 0.22);
+  --doctor-theme-shadow: rgba(51, 65, 85, 0.14);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(15, 118, 110, 0.12), transparent 24rem),
+    linear-gradient(180deg, #f8fafc 0%, #eef7f6 100%);
+}
+
+body.doctor-public-page.doctor-theme-obgyn {
+  --doctor-theme-primary: #be185d;
+  --doctor-theme-secondary: #7c3aed;
+  --doctor-theme-soft: #fdf2f8;
+  --doctor-theme-soft-2: #f5f3ff;
+  --doctor-theme-strong: #831843;
+  --doctor-theme-border: rgba(190, 24, 93, 0.2);
+  --doctor-theme-shadow: rgba(190, 24, 93, 0.13);
+  background:
+    radial-gradient(circle at 12% 10%, rgba(236, 72, 153, 0.12), transparent 24rem),
+    linear-gradient(180deg, #fff7fb 0%, #f5f3ff 100%);
+}
+
+body.doctor-public-page.doctor-theme-paediatrics {
+  --doctor-theme-primary: #0891b2;
+  --doctor-theme-secondary: #f59e0b;
+  --doctor-theme-soft: #ecfeff;
+  --doctor-theme-soft-2: #fffbeb;
+  --doctor-theme-strong: #164e63;
+  --doctor-theme-border: rgba(8, 145, 178, 0.22);
+  --doctor-theme-shadow: rgba(8, 145, 178, 0.13);
+  background:
+    radial-gradient(circle at 12% 14%, rgba(245, 158, 11, 0.12), transparent 22rem),
+    radial-gradient(circle at 90% 18%, rgba(8, 145, 178, 0.1), transparent 20rem),
+    linear-gradient(180deg, #f8fdff 0%, #fffbeb 100%);
+}
+
+body.doctor-public-page.doctor-theme-dental {
+  --doctor-theme-primary: #0284c7;
+  --doctor-theme-secondary: #14b8a6;
+  --doctor-theme-soft: #f0f9ff;
+  --doctor-theme-soft-2: #ecfeff;
+  --doctor-theme-strong: #075985;
+  --doctor-theme-border: rgba(2, 132, 199, 0.22);
+  --doctor-theme-shadow: rgba(2, 132, 199, 0.13);
+  background:
+    radial-gradient(circle at 10% 12%, rgba(20, 184, 166, 0.13), transparent 22rem),
+    linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+}
+
+body.doctor-public-page.doctor-theme-clinical {
+  --doctor-theme-primary: #7c3aed;
+  --doctor-theme-secondary: #0f766e;
+  --doctor-theme-soft: #f5f3ff;
+  --doctor-theme-soft-2: #ecfdf5;
+  --doctor-theme-strong: #4c1d95;
+  --doctor-theme-border: rgba(124, 58, 237, 0.2);
+  --doctor-theme-shadow: rgba(124, 58, 237, 0.13);
+  background:
+    radial-gradient(circle at 10% 14%, rgba(124, 58, 237, 0.11), transparent 24rem),
+    linear-gradient(180deg, #fbfaff 0%, #ecfdf5 100%);
+}
+
+body.doctor-public-page.doctor-theme-diagnostic-public {
+  --doctor-theme-primary: #4f46e5;
+  --doctor-theme-secondary: #f59e0b;
+  --doctor-theme-soft: #eef2ff;
+  --doctor-theme-soft-2: #fffbeb;
+  --doctor-theme-strong: #312e81;
+  --doctor-theme-border: rgba(79, 70, 229, 0.2);
+  --doctor-theme-shadow: rgba(79, 70, 229, 0.13);
+  background:
+    radial-gradient(circle at 11% 13%, rgba(79, 70, 229, 0.1), transparent 24rem),
+    radial-gradient(circle at 88% 20%, rgba(245, 158, 11, 0.11), transparent 20rem),
+    linear-gradient(180deg, #fbfbff 0%, #fffbeb 100%);
+}
+
+.doctor-public-page .public-doctor-profile .template-accent,
+.doctor-public-page .public-doctor-profile.template2 .template-accent,
+.doctor-public-page .public-doctor-profile.template3 .template-accent,
+.doctor-public-page .public-doctor-profile.template4 .template-accent,
+.doctor-public-page .public-doctor-profile.template5 .template-accent {
+  background: linear-gradient(90deg, var(--doctor-theme-primary), var(--doctor-theme-secondary));
+  box-shadow: 0 14px 34px var(--doctor-theme-shadow);
+}
+
+.doctor-public-page .public-doctor-profile .profile-hero {
+  position: relative;
+  overflow: hidden;
+  border-color: var(--doctor-theme-border);
+  box-shadow: 0 24px 58px var(--doctor-theme-shadow);
+}
+
+.doctor-public-page .public-doctor-profile .profile-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 92% 14%, var(--doctor-theme-soft), transparent 19rem),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0));
+  opacity: 0.86;
+}
+
+.doctor-public-page .public-doctor-profile .profile-hero::after {
+  content: var(--doctor-theme-icon, "✦");
+  position: absolute;
+  right: clamp(18px, 4vw, 44px);
+  top: clamp(22px, 4vw, 42px);
+  color: var(--doctor-theme-primary);
+  font-size: clamp(56px, 10vw, 104px);
+  line-height: 1;
+  opacity: 0.085;
+  pointer-events: none;
+  transform: rotate(-8deg);
+}
+
+.doctor-public-page .public-doctor-profile .profile-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.doctor-public-page .specialty-theme-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin: 0 0 14px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--doctor-theme-border);
+  background: linear-gradient(135deg, var(--doctor-theme-soft), #ffffff);
+  color: var(--doctor-theme-strong);
+  font-size: 12px;
+  font-weight: 1000;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.doctor-public-page .specialty-theme-pill span {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.doctor-public-page .verified-pill {
+  color: var(--doctor-theme-strong);
+  background: var(--doctor-theme-soft);
+  border-color: var(--doctor-theme-border);
+}
+
+.doctor-public-page .specialty-pill {
+  color: var(--doctor-theme-strong);
+  background: linear-gradient(135deg, var(--doctor-theme-soft), var(--doctor-theme-soft-2));
+  border-color: var(--doctor-theme-border);
+}
+
+.doctor-public-page .bmdc-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin: 0 0 12px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.82);
+  color: #334155;
+  font-size: 13px;
+  font-weight: 850;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.045);
+}
+
+.doctor-public-page .bmdc-pill span {
+  color: #64748b;
+  font-weight: 900;
+}
+
+.doctor-public-page .bmdc-pill strong {
+  color: var(--doctor-theme-strong);
+  font-weight: 1000;
+}
+
+.doctor-public-page .public-card h2,
+.doctor-public-page .section-kicker,
+.doctor-public-page .mini-link {
+  color: var(--doctor-theme-strong);
+}
+
+.doctor-public-page .schedule-card {
+  border-color: var(--doctor-theme-border);
+  background: linear-gradient(180deg, var(--doctor-theme-soft), rgba(255, 255, 255, 0.98));
+}
+
+.doctor-public-page .schedule-summary-pill,
+.doctor-public-page .is-open .schedule-status-badge {
+  background: var(--doctor-theme-soft);
+  color: var(--doctor-theme-strong);
+}
+
+.doctor-public-page .primary {
+  background: linear-gradient(135deg, var(--doctor-theme-primary), var(--doctor-theme-secondary));
+  box-shadow: 0 14px 30px var(--doctor-theme-shadow);
+}
+
+.doctor-public-page .secondary {
+  color: var(--doctor-theme-strong);
+  border-color: var(--doctor-theme-border);
+}
+
+@media (max-width: 920px) {
+  .doctor-public-page .public-doctor-profile .profile-hero::after {
+    top: auto;
+    bottom: 18px;
+    right: 18px;
+    font-size: 76px;
+  }
+
+  .doctor-public-page .specialty-theme-pill,
+  .doctor-public-page .bmdc-pill,
+  .doctor-public-page .specialty-pill {
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .doctor-public-page .public-doctor-profile .profile-hero::after {
+    font-size: 58px;
+    opacity: 0.07;
+  }
+
+  .doctor-public-page .specialty-theme-pill,
+  .doctor-public-page .bmdc-pill {
+    font-size: 11px;
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+  }
+}
