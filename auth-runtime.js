@@ -15,6 +15,7 @@
     state.signupTurnstileToken = "";
   };
   window.rxpulseForgotTurnstileSuccess = function (token) {
+    state.forgotTurnstileToken = "";
     state.forgotTurnstileToken = token || "";
   };
   window.rxpulseForgotTurnstileExpired = function () {
@@ -43,36 +44,31 @@
     }
   }
 
-  // Sets a rich HTML message block (warning style) with a "Contact Support" CTA.
-  // Used for the account_admin_deleted case only — content is fully controlled
-  // (no user input interpolated into HTML), so innerHTML is safe here.
-  function showAdminDeletedBlock(messageId) {
+  // Sets a rich warning message with a "Contact Support" CTA.
+  // Used for generic account-unavailable signup cases only. Content is fully
+  // controlled here (no user input interpolated into HTML), so innerHTML is safe.
+  function showAccountUnavailableBlock(messageId) {
     var el = $(messageId);
     if (!el) return;
 
     var lang = currentLang();
 
     var heading = lang === "bn"
-      ? "অ্যাকাউন্ট সীমাবদ্ধ"
-      : "Account Restricted";
+      ? "অ্যাকাউন্ট তৈরি করা যাচ্ছে না"
+      : "Account unavailable";
 
     var body = lang === "bn"
-      ? "এই ইমেইলটি এমন একটি অ্যাকাউন্টের সাথে যুক্ত ছিল যা প্রশাসক কর্তৃক মুছে দেওয়া হয়েছে। পুনরায় অ্যাকাউন্ট খুলতে সহায়তার জন্য সাপোর্টে যোগাযোগ করুন।"
-      : "This email is associated with an account that was removed by an administrator. Please contact support if you need assistance re-registering.";
+      ? "এই ইমেইল দিয়ে নতুন অ্যাকাউন্ট তৈরি করা যাচ্ছে না। সহায়তার জন্য RxPulse সাপোর্টে যোগাযোগ করুন।"
+      : "This email cannot be used to create a new account. Please contact RxPulse support for help.";
 
     var btnText = lang === "bn"
       ? "সাপোর্টে যোগাযোগ করুন"
       : "Contact Support";
 
-    var mailtoHref =
-      "mailto:support@rxpulsecs.com" +
-      "?subject=" + encodeURIComponent("Account Re-registration Request") +
-      "&body=" + encodeURIComponent(
-        "Hello RxPulse Support,\n\n" +
-        "I am trying to create a new account but I was informed that my email " +
-        "is associated with an account that was previously removed by an administrator.\n\n" +
-        "Please help me understand my options.\n\nThank you."
-      );
+    var mailtoHref = supportMailto(
+      "RxPulse Account Support Request",
+      "Hello RxPulse Support,\n\nI am trying to create a RxPulse doctor account, but the signup page says this email cannot be used to create a new account.\n\nPlease help me understand my options.\n\nThank you."
+    );
 
     el.className = "form-message warning";
     el.innerHTML =
@@ -174,8 +170,9 @@
         return "This signup needs support review. Please contact RxPulse support.";
       case "turnstile_failed":
         return "Security verification failed. Please complete the security check again.";
+      case "account_unavailable":
       case "account_admin_deleted":
-        return "This account was previously removed by admin. Please contact support.";
+        return "This email cannot be used to create a new account. Please contact support.";
       case "email_send_failed":
         return "Could not send the verification email. Please try again later.";
       default:
@@ -237,8 +234,8 @@
         resetTurnstile();
 
       } catch (error) {
-        if (error.code === "account_admin_deleted") {
-          showAdminDeletedBlock("signup-message");
+        if (error.code === "account_unavailable" || error.code === "account_admin_deleted") {
+          showAccountUnavailableBlock("signup-message");
         } else if (error.code === "legacy_unconfirmed_auth_user") {
           const messageEl = $("signup-message");
           setMessage(messageEl, "warning", signupErrorMessage(error));
@@ -338,7 +335,7 @@
           setMessage("complete-message", "error", "This signup link is invalid or expired. Please start signup again from the doctor signup page.");
         } else if (code === "account_exists") {
           setMessage("complete-message", "error", "This email already has an account. Please log in or reset your password.");
-        } else if (code === "legacy_unconfirmed_auth_user" || code === "account_admin_deleted") {
+        } else if (code === "legacy_unconfirmed_auth_user" || code === "account_unavailable" || code === "account_admin_deleted") {
           setMessage("complete-message", "warning", friendlyError(error, "This signup needs support review. Please contact support."));
         } else {
           setMessage("complete-message", "error", friendlyError(error, "Account creation failed. Please try again or contact support."));
