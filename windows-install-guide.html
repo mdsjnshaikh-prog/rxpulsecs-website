@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Windows Install Guide | RxPulse Clinician Suite</title>
-<meta content="Step-by-step Windows installer, SmartScreen, checksum, and safe update guidance for RxPulse Clinician Suite desktop beta." name="description"/>
+<title>Windows Setup Guide | RxPulse Clinician Suite</title>
+<meta content="Safe setup and update guidance for RxPulse Clinician Suite desktop beta access." name="description"/>
 <link href="https://www.rxpulsecs.com/windows-install-guide.html" rel="canonical"/>
 <link href="/styles.css?v=20260615-full-uiux-redesign-v1" rel="stylesheet"/>
 <script defer="" src="/script.js?v=20260615-full-uiux-redesign-v1"></script>
@@ -13,13 +13,8 @@
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header">
 <div class="container nav">
-<a aria-label="RxPulse home" class="brand" href="/index.html">
-<span class="brand-mark">Rx</span>
-<span>Pulse</span>
-</a>
-<button aria-label="Switch language" class="lang-toggle mobile-lang-toggle" data-language-toggle="" type="button">বাংলা</button><button aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" type="button">
-<span></span><span></span><span></span>
-</button>
+<a aria-label="RxPulse home" class="brand" href="/index.html"><span class="brand-mark">Rx</span><span>Pulse</span></a>
+<button aria-label="Switch language" class="lang-toggle mobile-lang-toggle" data-language-toggle="" type="button">বাংলা</button><button aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" type="button"><span></span><span></span><span></span></button>
 <nav aria-label="Primary navigation" class="site-nav" id="site-nav">
 <a data-bn="হোম" data-en="Home" href="/index.html">Home</a>
 <a data-bn="ফিচার" data-en="Features" href="/features.html">Features</a>
@@ -34,30 +29,29 @@
 <main id="main-content">
 <section class="page-hero">
 <div class="container narrow">
-<p class="eyebrow" data-bn="Windows install guide" data-en="Windows install guide">Windows install guide</p>
-<h1 data-bn="RxPulse desktop beta নিরাপদভাবে install করুন।" data-en="Install the RxPulse desktop beta safely.">Install the RxPulse desktop beta safely.</h1>
-<p data-bn="এই guide approved doctors-এর জন্য। Code signing certificate এখনো budget কারণে যোগ করা হয়নি, তাই Windows SmartScreen warning দেখা স্বাভাবিক। Installer শুধু official RxPulse support/download channel থেকে নিন।" data-en="This guide is for approved doctors. The code-signing certificate is intentionally deferred for budget reasons, so a Windows SmartScreen warning may appear. Get the installer only from the official RxPulse support/download channel.">This guide is for approved doctors. The code-signing certificate is intentionally deferred for budget reasons, so a Windows SmartScreen warning may appear. Get the installer only from the official RxPulse support/download channel.</p>
+<p class="eyebrow" data-bn="Windows setup guide" data-en="Windows setup guide">Windows setup guide</p>
+<h1 data-bn="RxPulse desktop beta নিরাপদভাবে সেটআপ করুন।" data-en="Set up the RxPulse desktop beta safely.">Set up the RxPulse desktop beta safely.</h1>
+<p data-bn="এই guide approved doctors-এর জন্য। Desktop beta controlled support-assisted access-এর মাধ্যমে দেওয়া হয়। Setup file শুধুমাত্র official RxPulse support/download channel থেকে নিন এবং কোনো সন্দেহ থাকলে support-এর সাথে confirm করুন।" data-en="This guide is for approved doctors. The desktop beta is provided through controlled, support-assisted access. Get the setup file only from the official RxPulse support/download channel and confirm with support if anything looks unclear.">This guide is for approved doctors. The desktop beta is provided through controlled, support-assisted access. Get the setup file only from the official RxPulse support/download channel and confirm with support if anything looks unclear.</p>
 </div>
 </section>
 <section class="section">
 <div class="container split">
 <article class="card">
 <span class="status-pill" data-bn="Step 1" data-en="Step 1">Step 1</span>
-<h2 data-bn="ফাইলের নাম ও checksum মিলিয়ে নিন" data-en="Verify file name and checksum">Verify file name and checksum</h2>
+<h2 data-bn="Official source নিশ্চিত করুন" data-en="Confirm the official source">Confirm the official source</h2>
 <ul class="clean-list">
+<li data-bn="Setup file শুধুমাত্র official RxPulse support/download channel থেকে নিন।" data-en="Use only the official RxPulse support/download channel for the setup file.">Use only the official RxPulse support/download channel for the setup file.</li>
 <li data-bn="ফাইলের নাম হবে: RxPulse-Clinician-Suite-1.2.0-Setup-x64.exe" data-en="File name should be: RxPulse-Clinician-Suite-1.2.0-Setup-x64.exe">File name should be: RxPulse-Clinician-Suite-1.2.0-Setup-x64.exe</li>
-<li data-bn="Support/download channel থেকে পাওয়া SHA-256 বা SHA256SUMS.txt-এর সাথে মিলিয়ে নিন।" data-en="Match the SHA-256 value with the value provided by support or SHA256SUMS.txt.">Match the SHA-256 value with the value provided by support or SHA256SUMS.txt.</li>
-<li data-bn="Checksum না মিললে installer চালাবেন না; support-এ যোগাযোগ করুন।" data-en="If the checksum does not match, do not run the installer; contact support.">If the checksum does not match, do not run the installer; contact support.</li>
+<li data-bn="Source, file name বা version নিয়ে সন্দেহ থাকলে support-এ যোগাযোগ করুন।" data-en="Contact support if the source, file name, or version is unclear.">Contact support if the source, file name, or version is unclear.</li>
 </ul>
 </article>
 <article class="card">
 <span class="status-pill" data-bn="Step 2" data-en="Step 2">Step 2</span>
-<h2 data-bn="Windows SmartScreen warning এলে" data-en="If Windows SmartScreen appears">If Windows SmartScreen appears</h2>
+<h2 data-bn="Security check করুন" data-en="Complete the security check">Complete the security check</h2>
 <ul class="clean-list">
-<li data-bn="Warning-এ 'Windows protected your PC' দেখা যেতে পারে।" data-en="You may see 'Windows protected your PC'.">You may see 'Windows protected your PC'.</li>
-<li data-bn="ফাইলের নাম ও checksum আগে verify করুন।" data-en="First verify the file name and checksum.">First verify the file name and checksum.</li>
-<li data-bn="তারপর More info চাপুন।" data-en="Then click More info.">Then click More info.</li>
-<li data-bn="Publisher unknown দেখালে ভয় পাবেন না—এই beta build unsigned।" data-en="Do not panic if the publisher is unknown; this beta build is unsigned.">Do not panic if the publisher is unknown; this beta build is unsigned.</li>
+<li data-bn="Support/download channel থেকে দেওয়া SHA-256 বা SHA256SUMS.txt-এর সাথে মিলিয়ে নিন।" data-en="Match the SHA-256 value with the value provided by support or SHA256SUMS.txt.">Match the SHA-256 value with the value provided by support or SHA256SUMS.txt.</li>
+<li data-bn="Checksum না মিললে setup file চালাবেন না; support-এ যোগাযোগ করুন।" data-en="If the checksum does not match, do not run the setup file; contact support.">If the checksum does not match, do not run the setup file; contact support.</li>
+<li data-bn="Security warning দেখালে file details confirm না হওয়া পর্যন্ত এগোবেন না।" data-en="If a security warning appears, do not proceed until the file details are confirmed.">If a security warning appears, do not proceed until the file details are confirmed.</li>
 </ul>
 </article>
 </div>
@@ -66,11 +60,11 @@
 <div class="container split">
 <article class="card">
 <span class="status-pill" data-bn="Step 3" data-en="Step 3">Step 3</span>
-<h2 data-bn="Run anyway দিয়ে install করুন" data-en="Choose Run anyway and install">Choose Run anyway and install</h2>
+<h2 data-bn="Setup শেষ করে RxPulse খুলুন" data-en="Complete setup and open RxPulse">Complete setup and open RxPulse</h2>
 <ul class="clean-list">
-<li data-bn="More info চাপার পর Run anyway button দেখাবে।" data-en="After clicking More info, Windows shows the Run anyway button.">After clicking More info, Windows shows the Run anyway button.</li>
-<li data-bn="Run anyway চাপুন শুধুমাত্র যদি installer official source থেকে পাওয়া এবং checksum match করে।" data-en="Click Run anyway only if the installer came from the official source and the checksum matches.">Click Run anyway only if the installer came from the official source and the checksum matches.</li>
-<li data-bn="Installation শেষ হলে Start Menu বা desktop shortcut থেকে RxPulse খুলুন।" data-en="After installation, open RxPulse from the Start Menu or desktop shortcut.">After installation, open RxPulse from the Start Menu or desktop shortcut.</li>
+<li data-bn="Security check complete হলে setup process চালান।" data-en="Start the setup process after the security check is complete.">Start the setup process after the security check is complete.</li>
+<li data-bn="Setup শেষ হলে Start Menu বা desktop shortcut থেকে RxPulse খুলুন।" data-en="After setup, open RxPulse from the Start Menu or desktop shortcut.">After setup, open RxPulse from the Start Menu or desktop shortcut.</li>
+<li data-bn="প্রথম login এবং cloud sync-এর জন্য internet দরকার।" data-en="Internet is required for first login and cloud sync.">Internet is required for first login and cloud sync.</li>
 </ul>
 </article>
 <article class="card">
@@ -80,7 +74,7 @@
 <li data-bn="App update/reinstall করার আগে Cloud Sync Complete নিশ্চিত করুন।" data-en="Before updating or reinstalling, confirm Cloud Sync Complete.">Before updating or reinstalling, confirm Cloud Sync Complete.</li>
 <li data-bn="একই Windows user/device workspace-এ এক doctor account ব্যবহার করুন।" data-en="Use one doctor account per Windows user/device workspace.">Use one doctor account per Windows user/device workspace.</li>
 <li data-bn="Patient screenshot/support file পাঠালে রোগীর পরিচয় ঢেকে দিন।" data-en="Hide patient identity before sending screenshots or support files.">Hide patient identity before sending screenshots or support files.</li>
-<li data-bn="Install বা login সমস্যা হলে support@rxpulsecs.com-এ Windows version, app version এবং screenshot পাঠান।" data-en="For install or login problems, email support@rxpulsecs.com with Windows version, app version, and screenshot.">For install or login problems, email support@rxpulsecs.com with Windows version, app version, and screenshot.</li>
+<li data-bn="Setup বা login সমস্যা হলে support@rxpulsecs.com-এ Windows version, app version এবং screenshot পাঠান।" data-en="For setup or login problems, email support@rxpulsecs.com with Windows version, app version, and screenshot.">For setup or login problems, email support@rxpulsecs.com with Windows version, app version, and screenshot.</li>
 </ul>
 </article>
 </div>
@@ -88,13 +82,13 @@
 <section class="section">
 <div class="container narrow">
 <div class="card">
-<h2 data-bn="সংক্ষিপ্ত visual walkthrough" data-en="Short visual walkthrough">Short visual walkthrough</h2>
+<h2 data-bn="সংক্ষিপ্ত setup checklist" data-en="Short setup checklist">Short setup checklist</h2>
 <ol class="clean-list">
-<li data-bn="Screen 1: Windows protected your PC → More info" data-en="Screen 1: Windows protected your PC → More info">Screen 1: Windows protected your PC → More info</li>
-<li data-bn="Screen 2: App name verify করুন → Run anyway" data-en="Screen 2: Verify app name → Run anyway">Screen 2: Verify app name → Run anyway</li>
-<li data-bn="Screen 3: RxPulse installer opens → complete setup" data-en="Screen 3: RxPulse installer opens → complete setup">Screen 3: RxPulse installer opens → complete setup</li>
+<li data-bn="Official RxPulse source থেকে setup file নিন" data-en="Get the setup file from the official RxPulse source">Get the setup file from the official RxPulse source</li>
+<li data-bn="File name ও SHA-256 checksum verify করুন" data-en="Verify the file name and SHA-256 checksum">Verify the file name and SHA-256 checksum</li>
+<li data-bn="Warning, mismatch বা doubt থাকলে support-এর সাথে confirm করুন" data-en="If there is a warning, mismatch, or doubt, confirm with support">If there is a warning, mismatch, or doubt, confirm with support</li>
 </ol>
-<p data-bn="পরবর্তী public release-এর আগে real Windows screenshot যোগ করা হবে। Pilot পর্যায়ে support-assisted install ব্যবহার করুন।" data-en="Real Windows screenshots will be added before wider public release. For the pilot stage, use support-assisted installation.">Real Windows screenshots will be added before wider public release. For the pilot stage, use support-assisted installation.</p>
+<p data-bn="পরবর্তী public release-এর আগে real Windows screenshot যোগ করা হবে। Pilot পর্যায়ে support-assisted setup ব্যবহার করুন।" data-en="Real Windows screenshots will be added before wider public release. For the pilot stage, use support-assisted setup.">Real Windows screenshots will be added before wider public release. For the pilot stage, use support-assisted setup.</p>
 <div class="hero-actions">
 <a class="button primary" data-bn="Desktop beta access চাইুন" data-en="Request desktop beta access" href="mailto:support@rxpulsecs.com?subject=RxPulse%20Desktop%20Beta%20Access%20Request">Request desktop beta access</a>
 <a class="button secondary" data-bn="Download page-এ ফিরুন" data-en="Back to download page" href="/download.html">Back to download page</a>
@@ -106,34 +100,14 @@
 <footer class="site-footer">
 <div class="container footer-grid">
 <div>
-<a aria-label="RxPulse home" class="brand footer-brand" href="/index.html">
-<span class="brand-mark">Rx</span>
-<span>Pulse</span>
-</a>
+<a aria-label="RxPulse home" class="brand footer-brand" href="/index.html"><span class="brand-mark">Rx</span><span>Pulse</span></a>
 <p data-bn="বাংলাদেশি ডাক্তারদের জন্য সহজ প্রেসক্রিপশন ও রোগীর রেকর্ড সফটওয়্যার। দৈনন্দিন চেম্বার ভিজিট, ফলো-আপ রেকর্ড এবং পরিষ্কার প্রিন্টেড প্রেসক্রিপশনে সহায়তা করে।" data-en="A simple prescription and patient record software for Bangladeshi doctors. It helps with daily visits, follow-up records, and clean printed prescriptions.">A simple prescription and patient record software for Bangladeshi doctors. It helps with daily visits, follow-up records, and clean printed prescriptions.</p>
 </div>
-<div>
-<h3 data-bn="প্রোডাক্ট" data-en="Product">Product</h3>
-<a data-bn="ফিচার" data-en="Features" href="/features.html">Features</a>
-<a data-bn="কীভাবে কাজ করে" data-en="How It Works" href="/workflow.html">How It Works</a>
-<a data-bn="ডাউনলোড" data-en="Download" href="/download.html">Download</a>
+<div><h3 data-bn="প্রোডাক্ট" data-en="Product">Product</h3><a data-bn="ফিচার" data-en="Features" href="/features.html">Features</a><a data-bn="কীভাবে কাজ করে" data-en="How It Works" href="/workflow.html">How It Works</a><a data-bn="ডাউনলোড" data-en="Download" href="/download.html">Download</a></div>
+<div><h3 data-bn="অ্যাকাউন্ট" data-en="Account">Account</h3><a data-bn="ডাক্তার অ্যাকাউন্ট" data-en="Doctor account" href="/doctor-signup.html">Doctor account</a><a data-bn="পাসওয়ার্ড রিসেট" data-en="Reset password" href="/forgot-password.html">Reset password</a><a data-bn="সাপোর্ট" data-en="Support" href="/support.html">Support</a></div>
+<div><h3 data-bn="আইনি" data-en="Legal">Legal</h3><a data-bn="প্রাইভেসি" data-en="Privacy" href="/privacy.html">Privacy</a><a data-bn="শর্তাবলি" data-en="Terms">Terms</a></div>
 </div>
-<div>
-<h3 data-bn="অ্যাকাউন্ট" data-en="Account">Account</h3>
-<a data-bn="ডাক্তার অ্যাকাউন্ট" data-en="Doctor account" href="/doctor-signup.html">Doctor account</a>
-<a data-bn="পাসওয়ার্ড রিসেট" data-en="Reset password" href="/forgot-password.html">Reset password</a>
-<a data-bn="সাপোর্ট" data-en="Support" href="/support.html">Support</a>
-</div>
-<div>
-<h3 data-bn="আইনি" data-en="Legal">Legal</h3>
-<a data-bn="প্রাইভেসি" data-en="Privacy" href="/privacy.html">Privacy</a>
-<a data-bn="শর্তাবলি" data-en="Terms" href="/terms.html">Terms</a>
-</div>
-</div>
-<div class="container footer-bottom">
-<span>© 2026 RxPulse Clinician Suite. All rights reserved.</span>
-<span data-bn="সাপোর্ট: support@rxpulsecs.com" data-en="Support: support@rxpulsecs.com">Support: support@rxpulsecs.com</span>
-</div>
+<div class="container footer-bottom"><span>© 2026 RxPulse Clinician Suite. All rights reserved.</span><span data-bn="সাপোর্ট: support@rxpulsecs.com" data-en="Support: support@rxpulsecs.com">Support: support@rxpulsecs.com</span></div>
 </footer>
 </body>
 </html>
