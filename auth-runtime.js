@@ -165,7 +165,7 @@
       case "signup_verification_cooldown":
         return "A verification email was sent recently. Please check your inbox/spam folder." + waitText;
       case "account_exists":
-        return "This email already has an account. Please log in from the RxPulse app or reset your password.";
+        return "This email already has an account. Please log in from the RxPulse Windows desktop app or reset your password.";
       case "legacy_unconfirmed_auth_user":
         return "This signup needs support review. Please contact RxPulse support.";
       case "turnstile_failed":
@@ -313,7 +313,7 @@
       setMessage("complete-message", "", "Creating your RxPulse account... Please wait.");
 
       try {
-        const data = await postJson(SIGNUP_COMPLETE_ENDPOINT, {
+        await postJson(SIGNUP_COMPLETE_ENDPOINT, {
           token: token,
           password: password
         });
@@ -321,20 +321,18 @@
         setMessage(
           "complete-message",
           "success",
-          data && data.message
-            ? data.message
-            : "Your account has been created. Please log in to complete your doctor profile."
+          "Your account has been created. Opening the Windows desktop download and access guidance."
         );
         form.reset();
         setTimeout(function () {
-          window.location.href = "https://app.rxpulsecs.com/#/login";
+          window.location.replace("https://www.rxpulsecs.com/download.html");
         }, 2200);
       } catch (error) {
         var code = error && error.code;
         if (code === "invalid_or_expired_token") {
           setMessage("complete-message", "error", "This signup link is invalid or expired. Please start signup again from the doctor signup page.");
         } else if (code === "account_exists") {
-          setMessage("complete-message", "error", "This email already has an account. Please log in or reset your password.");
+          setMessage("complete-message", "error", "This email already has an account. Please use the Windows desktop app or reset your password.");
         } else if (code === "legacy_unconfirmed_auth_user" || code === "account_unavailable" || code === "account_admin_deleted") {
           setMessage("complete-message", "warning", friendlyError(error, "This signup needs support review. Please contact support."));
         } else {
@@ -485,7 +483,7 @@
         const result = await client.auth.updateUser({ password: password });
         if (result.error) throw result.error;
         await client.auth.signOut();
-        setMessage("reset-message", "success", "Password updated successfully. Please return to the RxPulse app and log in with your new password.");
+        setMessage("reset-message", "success", "Password updated successfully. Please return to the RxPulse Windows desktop app and log in with your new password.");
         form.reset();
       } catch (error) {
         setMessage("reset-message", "error", friendlyError(error, "Password update failed. Please request a new reset link."));
