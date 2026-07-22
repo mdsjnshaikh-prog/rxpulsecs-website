@@ -11,7 +11,7 @@
 <script defer="" src="/script.js?v=20260615-full-uiux-redesign-v1"></script>
 <script src="/supabase-config.js?v=20260613-phase1b2"></script>
 <script async="" defer="" src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
-<script defer="" src="/auth-runtime.js?v=20260621-signup-unavailable-v1"></script>
+<script defer="" src="/auth-runtime.js?v=20260723-issue147-turnstile-v1"></script>
 </head>
 <body class="auth-page">
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -63,7 +63,7 @@
 <label data-bn="ইমেইল ঠিকানা" data-en="Email address" for="signup-email">Email address</label>
 <input autocomplete="email" id="signup-email" inputmode="email" name="email" placeholder="doctor@example.com" required="" type="email"/>
 <div class="turnstile-box">
-<div class="cf-turnstile" data-callback="rxpulseSignupTurnstileSuccess" data-error-callback="rxpulseSignupTurnstileExpired" data-expired-callback="rxpulseSignupTurnstileExpired" data-sitekey="0x4AAAAAADh1hSwbScv1YXhK"></div>
+<div class="cf-turnstile" data-action="doctor_signup_start" data-callback="rxpulseSignupTurnstileSuccess" data-error-callback="rxpulseSignupTurnstileExpired" data-expired-callback="rxpulseSignupTurnstileExpired" data-sitekey="0x4AAAAAADh1hSwbScv1YXhK"></div>
 </div>
 <button class="button primary full-width" data-bn="Verification email পাঠান" data-en="Send verification email" id="signup-submit" type="submit">Send verification email</button>
 </form>
