@@ -10,6 +10,7 @@ const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), "u
 const signupHtml = read("doctor-signup.html");
 const forgotHtml = read("forgot-password.html");
 const authRuntime = read("auth-runtime.js");
+const recoveryRuntime = read("password-recovery-runtime.js");
 const portalAdapter = read("password-recovery-portal.js");
 
 function executePortalAdapter(search) {
@@ -41,15 +42,15 @@ test("uses exact Turnstile actions required by the backend", () => {
 
 test("keeps both public requests bound to their Turnstile tokens", () => {
   assert.match(authRuntime, /turnstileToken:\s*state\.signupTurnstileToken/);
-  assert.match(authRuntime, /turnstileToken:\s*state\.forgotTurnstileToken/);
   assert.match(authRuntime, /if \(!state\.signupTurnstileToken\)/);
-  assert.match(authRuntime, /if \(!state\.forgotTurnstileToken\)/);
+  assert.match(recoveryRuntime, /turnstileToken:\s*state\.forgotTurnstileToken/);
+  assert.match(recoveryRuntime, /if \(!state\.forgotTurnstileToken\)/);
 });
 
 test("clears token state and resets the widget after each completed request", () => {
   assert.ok((authRuntime.match(/state\.signupTurnstileToken = "";/g) || []).length >= 3);
-  assert.ok((authRuntime.match(/state\.forgotTurnstileToken = "";/g) || []).length >= 4);
-  assert.ok((authRuntime.match(/resetTurnstile\(\);/g) || []).length >= 4);
+  assert.ok((recoveryRuntime.match(/state\.forgotTurnstileToken = "";/g) || []).length >= 2);
+  assert.ok((recoveryRuntime.match(/resetTurnstile\(\);/g) || []).length >= 1);
 });
 
 test("maps only the exact admin query value to the admin portal", async () => {
@@ -86,12 +87,12 @@ test("does not alter unrelated fetch requests", async () => {
   assert.equal(context.requests[0].init.body, originalBody);
 });
 
-test("loads the portal adapter after the existing auth runtime", () => {
-  const authRuntimeIndex = forgotHtml.indexOf("/auth-runtime.js?");
+test("loads the portal adapter after the password recovery runtime", () => {
+  const recoveryRuntimeIndex = forgotHtml.indexOf("/password-recovery-runtime.js?");
   const adapterIndex = forgotHtml.indexOf("/password-recovery-portal.js?");
 
-  assert.ok(authRuntimeIndex >= 0);
-  assert.ok(adapterIndex > authRuntimeIndex);
+  assert.ok(recoveryRuntimeIndex >= 0);
+  assert.ok(adapterIndex > recoveryRuntimeIndex);
 });
 
 test("does not put an account email into the recovery URL", () => {
