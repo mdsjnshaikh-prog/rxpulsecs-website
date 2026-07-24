@@ -8,6 +8,7 @@ const root = process.cwd();
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), "utf8");
 
 const signupHtml = read("doctor-signup.html");
+const completeSignupHtml = read("complete-signup.html");
 const forgotHtml = read("forgot-password.html");
 const authRuntime = read("auth-runtime.js");
 const recoveryRuntime = read("password-recovery-runtime.js");
@@ -35,20 +36,22 @@ function executePortalAdapter(search) {
   return { window, requests };
 }
 
-test("uses exact Turnstile actions required by the backend", () => {
-  assert.match(signupHtml, /data-action="doctor_signup_start"/);
+test("keeps signup pages retired while preserving forgot-password Turnstile action", () => {
+  assert.doesNotMatch(signupHtml, /<form\b/i);
+  assert.doesNotMatch(signupHtml, /type="email"/i);
+  assert.doesNotMatch(signupHtml, new RegExp(["cf-turnstile", "doctor_" + "signup_start", "rxpulse" + "SignupTurnstile"].join("|"), "i"));
+  assert.doesNotMatch(completeSignupHtml, new RegExp(["<form\\b", "type=\"password\"", "complete-" + "signup-form"].join("|"), "i"));
   assert.match(forgotHtml, /data-action="forgot_password"/);
 });
 
-test("keeps both public requests bound to their Turnstile tokens", () => {
-  assert.match(authRuntime, /turnstileToken:\s*state\.signupTurnstileToken/);
-  assert.match(authRuntime, /if \(!state\.signupTurnstileToken\)/);
+test("removes browser signup requests while keeping recovery requests bound to Turnstile tokens", () => {
+  assert.doesNotMatch(authRuntime, new RegExp(["RXPULSE_PUBLIC_" + "SIGNUP", "public-doctor-" + "signup", "SIGNUP_" + "START_ENDPOINT", "SIGNUP_" + "COMPLETE_ENDPOINT"].join("|")));
+  assert.doesNotMatch(authRuntime, new RegExp(["doctor-" + "signup-form", "complete-" + "signup-form", "signup" + "TurnstileToken", "rxpulse" + "SignupTurnstile"].join("|")));
   assert.match(recoveryRuntime, /turnstileToken:\s*state\.forgotTurnstileToken/);
   assert.match(recoveryRuntime, /if \(!state\.forgotTurnstileToken\)/);
 });
 
-test("clears token state and resets the widget after each completed request", () => {
-  assert.ok((authRuntime.match(/state\.signupTurnstileToken = "";/g) || []).length >= 3);
+test("clears recovery token state and resets the widget after each completed recovery request", () => {
   assert.ok((recoveryRuntime.match(/state\.forgotTurnstileToken = "";/g) || []).length >= 2);
   assert.ok((recoveryRuntime.match(/resetTurnstile\(\);/g) || []).length >= 1);
 });
