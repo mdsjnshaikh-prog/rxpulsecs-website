@@ -10,6 +10,9 @@ const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), "u
 const signupHtml = read("doctor-signup.html");
 const completeSignupHtml = read("complete-signup.html");
 const forgotHtml = read("forgot-password.html");
+const indexHtml = read("index.html");
+const workflowHtml = read("workflow.html");
+const downloadHtml = read("download.html");
 const authRuntime = read("auth-runtime.js");
 const recoveryRuntime = read("password-recovery-runtime.js");
 const portalAdapter = read("password-recovery-portal.js");
@@ -49,6 +52,31 @@ test("removes browser signup requests while keeping recovery requests bound to T
   assert.doesNotMatch(authRuntime, new RegExp(["doctor-" + "signup-form", "complete-" + "signup-form", "signup" + "TurnstileToken", "rxpulse" + "SignupTurnstile"].join("|")));
   assert.match(recoveryRuntime, /turnstileToken:\s*state\.forgotTurnstileToken/);
   assert.match(recoveryRuntime, /if \(!state\.forgotTurnstileToken\)/);
+});
+
+test("keeps desktop onboarding copy aligned and non-circular", () => {
+  const retiredSignupLinkCopy = /verification link|open the link|link খুলুন|verification link খুলে/i;
+
+  assert.doesNotMatch(indexHtml, retiredSignupLinkCopy);
+  assert.doesNotMatch(workflowHtml, retiredSignupLinkCopy);
+
+  const downloadStep = workflowHtml.indexOf('data-en="Download and install RxPulse"');
+  const emailStep = workflowHtml.indexOf('data-en="Open the app and enter email"');
+  const codeStep = workflowHtml.indexOf('data-en="Enter six-digit code"');
+  const passwordStep = workflowHtml.indexOf('data-en="Create password"');
+  const approvalStep = workflowHtml.indexOf('data-en="Submit for administrator approval"');
+
+  assert.ok(downloadStep >= 0);
+  assert.ok(downloadStep < emailStep);
+  assert.ok(emailStep < codeStep);
+  assert.ok(codeStep < passwordStep);
+  assert.ok(passwordStep < approvalStep);
+
+  assert.match(downloadHtml, /prospective and existing doctors by request/i);
+  assert.match(downloadHtml, /email you intend to use for your RxPulse account/i);
+  assert.doesNotMatch(downloadHtml, /Access mode: approved doctors by request/i);
+  assert.doesNotMatch(downloadHtml, /request access from your registered email/i);
+  assert.match(downloadHtml, /clinical access remains unavailable until professional profile review and administrator approval/i);
 });
 
 test("clears recovery token state and resets the widget after each completed recovery request", () => {
