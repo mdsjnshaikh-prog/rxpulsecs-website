@@ -32,9 +32,9 @@ Complete static public website package for `rxpulsecs.com`.
 
 - `_redirects` is intentionally not included because previous clean URL routing caused Cloudflare Pages redirect loops.
 - All internal page navigation uses `.html` pages.
-- Public signup collects only email/password and Cloudflare Turnstile token.
-- Public signup does not collect BMDC, name, phone, degree, specialty, chamber, trial, subscription, or approval data.
-- BMDC and professional approval details are completed inside the RxPulse app through Save & Apply.
+- Public browser doctor signup is retired; account creation happens inside the RxPulse Windows app.
+- The public website must not collect signup emails, signup passwords, verification codes, or signup tokens.
+- BMDC and professional approval details are completed inside the RxPulse app and submitted for administrator approval.
 
 ## Required before upload
 

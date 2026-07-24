@@ -1,19 +1,10 @@
 (function () {
-  const SIGNUP_START_ENDPOINT = window.RXPULSE_PUBLIC_SIGNUP_START_FUNCTION || window.RXPULSE_PUBLIC_SIGNUP_FUNCTION;
-  const SIGNUP_COMPLETE_ENDPOINT = window.RXPULSE_PUBLIC_SIGNUP_COMPLETE_FUNCTION;
   const FORGOT_ENDPOINT = window.RXPULSE_FORGOT_PASSWORD_FUNCTION;
 
   const state = {
-    signupTurnstileToken: "",
     forgotTurnstileToken: ""
   };
 
-  window.rxpulseSignupTurnstileSuccess = function (token) {
-    state.signupTurnstileToken = token || "";
-  };
-  window.rxpulseSignupTurnstileExpired = function () {
-    state.signupTurnstileToken = "";
-  };
   window.rxpulseForgotTurnstileSuccess = function (token) {
     state.forgotTurnstileToken = "";
     state.forgotTurnstileToken = token || "";
@@ -42,42 +33,6 @@
     if (text && type && window.rxpulseShowToast) {
       window.rxpulseShowToast(text, type === "error" ? "error" : type === "warning" ? "warning" : "success", 4200);
     }
-  }
-
-  // Sets a rich warning message with a "Contact Support" CTA.
-  // Used for generic account-unavailable signup cases only. Content is fully
-  // controlled here (no user input interpolated into HTML), so innerHTML is safe.
-  function showAccountUnavailableBlock(messageId) {
-    var el = $(messageId);
-    if (!el) return;
-
-    var lang = currentLang();
-
-    var heading = lang === "bn"
-      ? "অ্যাকাউন্ট তৈরি করা যাচ্ছে না"
-      : "Account unavailable";
-
-    var body = lang === "bn"
-      ? "এই ইমেইল দিয়ে নতুন অ্যাকাউন্ট তৈরি করা যাচ্ছে না। সহায়তার জন্য RxPulse সাপোর্টে যোগাযোগ করুন।"
-      : "This email cannot be used to create a new account. Please contact RxPulse support for help.";
-
-    var btnText = lang === "bn"
-      ? "সাপোর্টে যোগাযোগ করুন"
-      : "Contact Support";
-
-    var mailtoHref = supportMailto(
-      "RxPulse Account Support Request",
-      "Hello RxPulse Support,\n\nI am trying to create a RxPulse doctor account, but the signup page says this email cannot be used to create a new account.\n\nPlease help me understand my options.\n\nThank you."
-    );
-
-    el.className = "form-message warning";
-    el.innerHTML =
-      "<strong>" + heading + "</strong>" +
-      "<p style=\"margin:6px 0 12px;font-weight:400;font-size:0.92em;\">" + body + "</p>" +
-      "<a href=\"" + mailtoHref + "\" " +
-        "style=\"display:inline-block;background:#b45309;color:#fff;padding:8px 18px;" +
-        "border-radius:9999px;font-size:0.85rem;font-weight:700;text-decoration:none;" +
-        "letter-spacing:0.01em;\">" + btnText + "</a>";
   }
 
   function validEmail(email) {
@@ -153,195 +108,6 @@
     return "mailto:support@rxpulsecs.com" +
       "?subject=" + encodeURIComponent(subject || "RxPulse Support") +
       "&body=" + encodeURIComponent(body || "Hello RxPulse Support,\n\nI need help with my RxPulse account.\n\nThank you.");
-  }
-
-  function signupErrorMessage(error) {
-    var code = error && error.code;
-    var waitText = error && error.retryAfterSeconds
-      ? " Please try again after " + Math.ceil(error.retryAfterSeconds / 60) + " minute(s)."
-      : "";
-
-    switch (code) {
-      case "signup_verification_cooldown":
-        return "A verification email was sent recently. Please check your inbox/spam folder." + waitText;
-      case "account_exists":
-        return "This email already has an account. Please log in from the RxPulse Windows desktop app or reset your password.";
-      case "legacy_unconfirmed_auth_user":
-        return "This signup needs support review. Please contact RxPulse support.";
-      case "turnstile_failed":
-        return "Security verification failed. Please complete the security check again.";
-      case "account_unavailable":
-      case "account_admin_deleted":
-        return "This email cannot be used to create a new account. Please contact support.";
-      case "email_send_failed":
-        return "Could not send the verification email. Please try again later.";
-      default:
-        return friendlyError(error, "Signup could not be started. Please try again or contact support.");
-    }
-  }
-
-  function initSignup() {
-    const form = $("doctor-signup-form");
-    if (!form) return;
-
-    const submit = $("signup-submit");
-    const emailInput = $("signup-email");
-    let signupSubmitting = false;
-
-    async function handleSignupStart(event) {
-      if (event && typeof event.preventDefault === "function") event.preventDefault();
-      if (signupSubmitting) return;
-
-      setMessage("signup-message", "", "");
-
-      if (!SIGNUP_START_ENDPOINT) {
-        setMessage("signup-message", "error", "Signup is not configured. Please contact support.");
-        return;
-      }
-
-      const email = (emailInput && emailInput.value ? emailInput.value : "").trim();
-
-      if (!validEmail(email)) {
-        setMessage("signup-message", "error", "Please enter a valid email address.");
-        if (emailInput) emailInput.focus();
-        return;
-      }
-
-      if (!state.signupTurnstileToken) {
-        setMessage("signup-message", "error", "Please complete the security verification.");
-        return;
-      }
-
-      signupSubmitting = true;
-      setButtonBusy(submit, true, busyText("Sending...", "পাঠানো হচ্ছে..."));
-      setMessage("signup-message", "", "Sending verification email... Please wait.");
-
-      try {
-        const data = await postJson(SIGNUP_START_ENDPOINT, {
-          email: email,
-          turnstileToken: state.signupTurnstileToken
-        });
-
-        setMessage(
-          "signup-message",
-          "success",
-          data && data.message
-            ? data.message
-            : "Please check your email. The signup verification link is valid for 5 minutes."
-        );
-        form.reset();
-        state.signupTurnstileToken = "";
-        resetTurnstile();
-
-      } catch (error) {
-        if (error.code === "account_unavailable" || error.code === "account_admin_deleted") {
-          showAccountUnavailableBlock("signup-message");
-        } else if (error.code === "legacy_unconfirmed_auth_user") {
-          const messageEl = $("signup-message");
-          setMessage(messageEl, "warning", signupErrorMessage(error));
-        } else {
-          setMessage("signup-message", "error", signupErrorMessage(error));
-        }
-
-        state.signupTurnstileToken = "";
-        resetTurnstile();
-      } finally {
-        signupSubmitting = false;
-        setButtonBusy(submit, false);
-      }
-    }
-
-    form.addEventListener("submit", handleSignupStart);
-
-    // Mobile/browser-cache safety: some browsers keep an older cached JS handler
-    // or fail to submit when a security widget is focused. A direct click listener
-    // ensures the visible button always triggers the same guarded request.
-    if (submit) {
-      submit.addEventListener("click", handleSignupStart);
-    }
-  }
-
-  function initCompleteSignup() {
-    const form = $("complete-signup-form");
-    if (!form) return;
-
-    const submit = $("complete-submit");
-    const passwordInput = $("complete-password");
-    const confirmInput = $("complete-confirm-password");
-    const params = new URLSearchParams(window.location.search);
-    const token = (params.get("token") || "").trim();
-
-    if (!SIGNUP_COMPLETE_ENDPOINT) {
-      setMessage("complete-message", "error", "Signup completion is not configured. Please contact support.");
-      if (submit) submit.disabled = true;
-      return;
-    }
-
-    if (!token || token.length < 32) {
-      setMessage("complete-message", "error", "This signup link is invalid or expired. Please start signup again.");
-      if (submit) submit.disabled = true;
-      return;
-    }
-
-    setMessage("complete-message", "success", "Email verification link detected. Please set your password within 5 minutes of receiving the email.");
-
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      const password = passwordInput.value || "";
-      const confirmPassword = confirmInput.value || "";
-
-      if (password.length < 8) {
-        setMessage("complete-message", "error", "Password must be at least 8 characters.");
-        passwordInput.focus();
-        return;
-      }
-
-      if (password.length > 128) {
-        setMessage("complete-message", "error", "Password is too long. Please use 128 characters or fewer.");
-        passwordInput.focus();
-        return;
-      }
-
-      if (password !== confirmPassword) {
-        setMessage("complete-message", "error", "Passwords do not match.");
-        confirmInput.focus();
-        return;
-      }
-
-      setButtonBusy(submit, true, busyText("Creating account...", "অ্যাকাউন্ট তৈরি হচ্ছে..."));
-      setMessage("complete-message", "", "Creating your RxPulse account... Please wait.");
-
-      try {
-        await postJson(SIGNUP_COMPLETE_ENDPOINT, {
-          token: token,
-          password: password
-        });
-
-        setMessage(
-          "complete-message",
-          "success",
-          "Your account has been created. Opening the Windows desktop download and access guidance."
-        );
-        form.reset();
-        setTimeout(function () {
-          window.location.replace("https://www.rxpulsecs.com/download.html");
-        }, 2200);
-      } catch (error) {
-        var code = error && error.code;
-        if (code === "invalid_or_expired_token") {
-          setMessage("complete-message", "error", "This signup link is invalid or expired. Please start signup again from the doctor signup page.");
-        } else if (code === "account_exists") {
-          setMessage("complete-message", "error", "This email already has an account. Please use the Windows desktop app or reset your password.");
-        } else if (code === "legacy_unconfirmed_auth_user" || code === "account_unavailable" || code === "account_admin_deleted") {
-          setMessage("complete-message", "warning", friendlyError(error, "This signup needs support review. Please contact support."));
-        } else {
-          setMessage("complete-message", "error", friendlyError(error, "Account creation failed. Please try again or contact support."));
-        }
-      } finally {
-        setButtonBusy(submit, false);
-      }
-    });
   }
 
   function initForgotPassword() {
@@ -494,8 +260,6 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    initSignup();
-    initCompleteSignup();
     initForgotPassword();
     initResetPassword();
   });
