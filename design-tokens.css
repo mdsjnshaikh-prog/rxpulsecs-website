@@ -1,0 +1,136 @@
+/**
+ * RxPulse Design Tokens
+ * =====================
+ * Single source of truth for color, type, space, radius, shadow, motion, and z-index.
+ * Load this file first on every public page.
+ *
+ * Naming: --rx-* preferred; legacy aliases (--bg, --primary, …) kept for existing CSS.
+ */
+
+:root {
+  /* —— Brand / color —— */
+  --rx-color-bg: #f3f8fb;
+  --rx-color-bg-soft: #eafaf7;
+  --rx-color-surface: #ffffff;
+  --rx-color-surface-soft: #f7fbfc;
+  --rx-color-text: #223044;
+  --rx-color-heading: #071526;
+  --rx-color-muted: #5c6b7c;
+  --rx-color-border: #d7e4eb;
+  --rx-color-border-strong: #b7cad6;
+  --rx-color-primary: #0f8a7e;
+  --rx-color-primary-dark: #07675f;
+  --rx-color-primary-2: #16c4b1;
+  --rx-color-primary-soft: #e7fbf7;
+  --rx-color-accent: #f59e0b;
+  --rx-color-danger: #be123c;
+  --rx-color-info: #2563eb;
+  --rx-color-success: #065f46;
+  --rx-color-warning: #92400e;
+  --rx-color-on-primary: #ffffff;
+  --rx-color-footer-bg: #0b1220;
+  --rx-color-footer-text: #cbd5e1;
+
+  /* —— Typography —— */
+  --rx-font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Bengali", "Hind Siliguri", Arial, sans-serif;
+  --rx-font-size-xs: 12px;
+  --rx-font-size-sm: 13.5px;
+  --rx-font-size-md: 15px;
+  --rx-font-size-base: 16px;
+  --rx-font-size-lg: 18px;
+  --rx-font-size-xl: clamp(22px, 2.2vw, 28px);
+  --rx-font-size-2xl: clamp(24px, 2.8vw, 36px);
+  --rx-font-size-3xl: clamp(30px, 3.6vw, 46px);
+  --rx-font-size-display: clamp(32px, 4.2vw, 52px);
+  --rx-font-weight-medium: 500;
+  --rx-font-weight-semibold: 650;
+  --rx-font-weight-bold: 700;
+  --rx-line-height-tight: 1.12;
+  --rx-line-height-snug: 1.25;
+  --rx-line-height-body: 1.66;
+  --rx-letter-spacing-tight: -0.03em;
+  --rx-letter-spacing-wide: 0.12em;
+
+  /* —— Spacing scale (4px base) —— */
+  --rx-space-1: 4px;
+  --rx-space-2: 8px;
+  --rx-space-3: 12px;
+  --rx-space-4: 16px;
+  --rx-space-5: 20px;
+  --rx-space-6: 24px;
+  --rx-space-7: 28px;
+  --rx-space-8: 32px;
+  --rx-space-10: 40px;
+  --rx-space-12: 48px;
+  --rx-space-section: clamp(48px, 6vw, 80px);
+  --rx-space-hero: clamp(44px, 5.5vw, 72px);
+
+  /* —— Radius —— */
+  --rx-radius-sm: 16px;
+  --rx-radius-md: 20px;
+  --rx-radius: 24px;
+  --rx-radius-lg: 32px;
+  --rx-radius-pill: 999px;
+
+  /* —— Shadow —— */
+  --rx-shadow-xs: 0 8px 20px rgba(15, 23, 42, 0.06);
+  --rx-shadow-sm: 0 14px 34px rgba(15, 23, 42, 0.08);
+  --rx-shadow-md: 0 28px 72px rgba(15, 23, 42, 0.13);
+  --rx-shadow-green: 0 18px 42px rgba(15, 138, 126, 0.22);
+  --rx-shadow-toast: 0 16px 40px rgba(15, 23, 42, 0.26);
+  --rx-interactive-ring: 0 0 0 4px rgba(20, 184, 166, 0.16);
+
+  /* —— Layout —— */
+  --rx-max-width: 1120px;
+  --rx-max-narrow: 820px;
+  --rx-container-gutter: 48px;
+
+  /* —— Motion —— */
+  --rx-ease: ease;
+  --rx-duration-fast: 0.18s;
+  --rx-duration: 0.24s;
+  --rx-duration-slow: 0.4s;
+
+  /* —— Z-index —— */
+  --rx-z-skip: 1000;
+  --rx-z-header: 50;
+  --rx-z-toast: 2000;
+  --rx-z-progress: 9999;
+
+  /* —— Toast surfaces —— */
+  --rx-toast-bg: #0b1728;
+  --rx-toast-success: #065f46;
+  --rx-toast-warning: #92400e;
+  --rx-toast-error: #991b1b;
+
+  /* —— Legacy aliases (used throughout styles.css) —— */
+  --bg: var(--rx-color-bg);
+  --bg-soft: var(--rx-color-bg-soft);
+  --surface: var(--rx-color-surface);
+  --surface-soft: var(--rx-color-surface-soft);
+  --text: var(--rx-color-text);
+  --heading: var(--rx-color-heading);
+  --muted: var(--rx-color-muted);
+  --border: var(--rx-color-border);
+  --border-strong: var(--rx-color-border-strong);
+  --primary: var(--rx-color-primary);
+  --primary-dark: var(--rx-color-primary-dark);
+  --primary-2: var(--rx-color-primary-2);
+  --primary-soft: var(--rx-color-primary-soft);
+  --accent: var(--rx-color-accent);
+  --danger: var(--rx-color-danger);
+  --info: var(--rx-color-info);
+  --shadow-xs: var(--rx-shadow-xs);
+  --shadow-sm: var(--rx-shadow-sm);
+  --shadow: var(--rx-shadow-md);
+  --shadow-green: var(--rx-shadow-green);
+  --radius-sm: var(--rx-radius-sm);
+  --radius: var(--rx-radius);
+  --radius-lg: var(--rx-radius-lg);
+  --max: var(--rx-max-width);
+  --interactive-ring: var(--rx-interactive-ring);
+  --toast-bg: var(--rx-toast-bg);
+  --toast-success: var(--rx-toast-success);
+  --toast-warning: var(--rx-toast-warning);
+  --toast-error: var(--rx-toast-error);
+}
