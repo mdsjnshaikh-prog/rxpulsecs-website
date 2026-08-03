@@ -1,7 +1,7 @@
-/* RxPulse styles.css — restored via split imports */
-@import url("/styles-a.css?v=20260803-restore");
-@import url("/styles-b.css?v=20260803-restore");
-/* FAQ/Bangla/onboarding/media */
+/* Temporary restore: full stylesheet from last known-good commit */
+@import url("https://cdn.jsdelivr.net/gh/mdsjnshaikh-prog/rxpulsecs-website@1a4ef80c2cc3c65ef6b5a32ff17352c6e54b1c4e/styles.css");
+
+/* FAQ / Bangla / onboarding / media (perf) */
 html[lang="bn"] body{line-height:1.8;letter-spacing:0.01em}
 html[lang="bn"] h1,html[lang="bn"] h2,html[lang="bn"] h3{letter-spacing:0;line-height:1.28;font-weight:650}
 html[lang="bn"] .hero-lead,html[lang="bn"] .page-hero p,html[lang="bn"] .auth-lead,html[lang="bn"] .card p,html[lang="bn"] .feature-card p,html[lang="bn"] .timeline-item p,html[lang="bn"] .faq-item p{line-height:1.85}
