@@ -19,6 +19,8 @@ Complete static public website package for `rxpulsecs.com`.
 
 ## Included runtime files
 
+- `design-tokens.css` (design tokens)
+- `ui-components.css` (button, card, section-head, step, toast)
 - `styles.css`
 - `script.js`
 - `auth-runtime.js`
