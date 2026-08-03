@@ -1,0 +1,177 @@
+/* RxPulse UI enhancements — FAQ accordion, shared onboarding path, Bangla typography */
+html[lang="bn"] body {
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
+html[lang="bn"] h1,
+html[lang="bn"] h2,
+html[lang="bn"] h3 {
+  letter-spacing: 0;
+  line-height: 1.28;
+  font-weight: 650;
+}
+
+html[lang="bn"] .hero-lead,
+html[lang="bn"] .page-hero p,
+html[lang="bn"] .auth-lead,
+html[lang="bn"] .card p,
+html[lang="bn"] .feature-card p,
+html[lang="bn"] .timeline-item p,
+html[lang="bn"] .faq-item p {
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+}
+
+html[lang="bn"] .site-nav a,
+html[lang="bn"] .button,
+html[lang="bn"] .lang-toggle {
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+}
+
+/* FAQ accordion */
+.faq-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.faq-item[open] {
+  border-color: rgba(20, 184, 166, 0.35);
+  box-shadow: var(--shadow-sm);
+}
+
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 18px;
+  cursor: pointer;
+  list-style: none;
+  color: var(--heading);
+  font-weight: 650;
+  font-size: 15.5px;
+  line-height: 1.4;
+  touch-action: manipulation;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.faq-item[open] summary::after {
+  content: "–";
+  background: var(--primary);
+  color: #fff;
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0 18px 18px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* Shared 6-step onboarding path (Home + Workflow) */
+.onboarding-path {
+  display: grid;
+  gap: 12px;
+  max-width: 920px;
+  margin-inline: auto;
+}
+
+.onboarding-path .timeline-item {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 6px 16px;
+  align-items: start;
+  padding: 16px 18px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-xs);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.onboarding-path .timeline-item:hover {
+  border-color: rgba(20, 184, 166, 0.35);
+  box-shadow: var(--shadow-sm);
+}
+
+.onboarding-path .timeline-item > span {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+  box-shadow: 0 10px 20px rgba(15, 118, 110, 0.16);
+}
+
+.onboarding-path .timeline-item h3,
+.onboarding-path .timeline-item h2 {
+  margin: 0 0 6px;
+  font-size: clamp(17px, 1.6vw, 20px);
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.onboarding-path .timeline-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+@media (max-width: 560px) {
+  .faq-item summary {
+    font-size: 15px;
+    padding: 14px 16px;
+  }
+  .faq-item p {
+    padding: 0 16px 16px;
+    font-size: 14.5px;
+  }
+  .onboarding-path .timeline-item {
+    grid-template-columns: 40px minmax(0, 1fr);
+    padding: 14px;
+  }
+  .onboarding-path .timeline-item > span {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+}
