@@ -1,3 +1,20 @@
-/* RESTORED PLACEHOLDER - will replace */
-body{font-family:system-ui,sans-serif;margin:0;padding:2rem;line-height:1.5}
-.site-header,.site-footer,.button,.card,.section{display:block}
+/* RxPulse styles.css — restored via split imports */
+@import url("/styles-a.css?v=20260803-restore");
+@import url("/styles-b.css?v=20260803-restore");
+/* FAQ/Bangla/onboarding/media */
+html[lang="bn"] body{line-height:1.8;letter-spacing:0.01em}
+html[lang="bn"] h1,html[lang="bn"] h2,html[lang="bn"] h3{letter-spacing:0;line-height:1.28;font-weight:650}
+html[lang="bn"] .hero-lead,html[lang="bn"] .page-hero p,html[lang="bn"] .auth-lead,html[lang="bn"] .card p,html[lang="bn"] .feature-card p,html[lang="bn"] .timeline-item p,html[lang="bn"] .faq-item p{line-height:1.85}
+.faq-list{display:grid;gap:12px;margin-top:24px}
+.faq-item{border:1px solid var(--border,#d7e4eb);border-radius:16px;background:#fff;overflow:hidden}
+.faq-item summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:650;display:flex;justify-content:space-between;gap:12px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";font-weight:700;color:var(--primary,#0f8a7e)}
+.faq-item[open] summary::after{content:"–"}
+.faq-item p{margin:0;padding:0 18px 16px;color:var(--muted,#5c6b7c)}
+.onboarding-path{display:grid;gap:12px;max-width:920px}
+.onboarding-path .timeline-item{display:grid;grid-template-columns:48px minmax(0,1fr);gap:6px 16px;padding:16px 18px;background:#fff;border:1px solid var(--border,#d7e4eb);border-radius:20px}
+.onboarding-path .timeline-item>span{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--primary,#0f8a7e),var(--primary-2,#16c4b1));color:#fff;font-weight:700}
+.onboarding-path .timeline-item h2,.onboarding-path .timeline-item h3{margin:0 0 6px;font-size:clamp(17px,1.6vw,20px);font-weight:650}
+.onboarding-path .timeline-item p{margin:0;color:var(--muted,#5c6b7c);font-size:14.5px;line-height:1.6}
+img,picture,video{max-width:100%;height:auto}img{content-visibility:auto}
