@@ -1,4 +1,23 @@
 (function () {
+  // Ensure design tokens + component library CSS are present on every page
+  // that loads script.js (covers pages that still only link styles.css).
+  var HEAD = document.head || document.getElementsByTagName("head")[0];
+  if (!HEAD || document.querySelector('link[href*="design-tokens.css"]')) return;
+  var v = "20260803-design-tokens-v1";
+  var styles = document.querySelector('link[href*="styles.css"]');
+  ["design-tokens.css", "ui-components.css"].forEach(function (file) {
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/" + file + "?v=" + v;
+    if (styles && styles.parentNode) {
+      styles.parentNode.insertBefore(link, styles);
+    } else {
+      HEAD.appendChild(link);
+    }
+  });
+})();
+
+(function () {
   const STORAGE_KEY = "rxpulse-public-language";
   const toggles = Array.from(document.querySelectorAll("[data-language-toggle]"));
   const navToggle = document.querySelector(".nav-toggle");
@@ -54,7 +73,6 @@
       el.textContent = el.dataset[nextLang] || el.textContent;
     });
 
-    // Update page title when bilingual title attributes are present
     const titleEl = document.querySelector("title[data-title-en][data-title-bn]");
     if (titleEl) {
       const t = titleEl.getAttribute("data-title-" + nextLang);
