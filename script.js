@@ -1,7 +1,7 @@
-/* Force latest design-system CSS (device polish) */
+/* Force latest design-system CSS (hero-fix) */
 (function () {
   try {
-    var ver = "20260805-device";
+    var ver = "20260805-hero-fix";
     document.querySelectorAll('link[rel="stylesheet"]').forEach(function (link) {
       var href = link.getAttribute("href") || "";
       if (href.indexOf("ui-components.css") !== -1 && href.indexOf(ver) === -1) {
@@ -40,7 +40,6 @@
     stack.className = "rxpulse-toast-stack";
     stack.setAttribute("role", "status");
     stack.setAttribute("aria-live", "polite");
-    stack.setAttribute("aria-atomic", "false");
     document.body.appendChild(stack);
     return stack;
   }
@@ -60,7 +59,6 @@
       }, 280);
     }, duration || 3200);
   }
-
   window.rxpulseShowToast = showToast;
 
   function applyLanguage(lang) {
@@ -103,8 +101,7 @@
     const currentPath = normalizePath(window.location.pathname);
     nav.querySelectorAll("a[href]").forEach(function (link) {
       const href = link.getAttribute("href") || "";
-      const hrefPath = normalizePath(href);
-      if (hrefPath && currentPath === hrefPath) link.setAttribute("aria-current", "page");
+      if (normalizePath(href) && currentPath === normalizePath(href)) link.setAttribute("aria-current", "page");
       link.addEventListener("click", closeMenu);
     });
     if (navToggle) {
@@ -114,66 +111,30 @@
         document.body.classList.toggle("nav-open", isOpen);
       });
     }
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") closeMenu();
-    });
-    window.addEventListener("resize", function () {
-      if (window.innerWidth > 1024) closeMenu();
-    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
+    window.addEventListener("resize", function () { if (window.innerWidth > 1024) closeMenu(); });
   }
 
   toggles.forEach(function (toggle) {
     toggle.addEventListener("click", function () {
       const next = currentLang() === "en" ? "bn" : "en";
       applyLanguage(next);
-      toggle.classList.add("lang-toggle-flash");
       showToast(next === "bn" ? "ভাষা বাংলা করা হয়েছে" : "Language switched to English", "success", 2200);
-      setTimeout(function () { toggle.classList.remove("lang-toggle-flash"); }, 450);
     });
   });
 
   function initActionFeedback() {
     document.addEventListener("click", function (event) {
       const target = event.target.closest("a[href], button");
-      if (!target || !document.body.contains(target)) return;
-      if (target.matches("[data-language-toggle], .nav-toggle")) return;
-      try {
-        const rect = target.getBoundingClientRect();
-        target.style.setProperty("--tap-x", ((event.clientX - rect.left) / Math.max(rect.width, 1) * 100) + "%");
-        target.style.setProperty("--tap-y", ((event.clientY - rect.top) / Math.max(rect.height, 1) * 100) + "%");
-      } catch (_) {}
-      target.classList.add("tap-feedback");
-      window.setTimeout(function () { target.classList.remove("tap-feedback"); }, 260);
-      if (target.tagName === "BUTTON") return;
+      if (!target || target.matches("[data-language-toggle], .nav-toggle")) return;
       const href = target.getAttribute("href") || "";
-      if (href.startsWith("mailto:")) {
-        showToast(uiText("Opening your email app...", "আপনার ইমেইল অ্যাপ খোলা হচ্ছে..."), "info", 4200);
-        return;
-      }
-      if (href.startsWith("tel:")) {
-        showToast(uiText("Opening phone dialer...", "ফোন ডায়ালার খোলা হচ্ছে..."), "info", 2800);
-        return;
-      }
-      if (target.target === "_blank") return;
-      try {
-        const url = new URL(href, window.location.href);
-        if (url.origin === window.location.origin) {
-          target.classList.add("is-loading");
-          target.setAttribute("aria-busy", "true");
-        }
-      } catch (_) {}
+      if (href.startsWith("mailto:")) showToast(uiText("Opening your email app...", "আপনার ইমেইল অ্যাপ খোলা হচ্ছে..."), "info", 4200);
     }, true);
-    window.addEventListener("pageshow", function () {
-      document.querySelectorAll(".is-loading[aria-busy='true']").forEach(function (el) {
-        el.classList.remove("is-loading");
-        el.removeAttribute("aria-busy");
-      });
-    });
   }
 
   function initReveal() {
     const items = Array.from(document.querySelectorAll(
-      ".hero-copy, .hero-card, .card, .feature-card, .download-card, .price-card, .timeline-item, .step-list > div, .auth-panel, .success-card"
+      ".card, .feature-card, .download-card, .price-card, .timeline-item, .step-list > div, .auth-panel, .success-card, .support-card"
     ));
     if (!items.length) return;
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -191,6 +152,11 @@
       });
     }, { threshold: 0.08, rootMargin: "0px 0px -24px 0px" });
     items.forEach(function (item) { observer.observe(item); });
+    window.setTimeout(function () {
+      document.querySelectorAll(".reveal-ready:not(.in-view)").forEach(function (el) {
+        el.classList.add("in-view");
+      });
+    }, 1200);
   }
 
   function initSectionProgress() {
@@ -200,8 +166,7 @@
     document.body.appendChild(bar);
     function update() {
       const max = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-      const pct = Math.min(100, Math.max(0, (window.scrollY / max) * 100));
-      bar.style.transform = "scaleX(" + (pct / 100) + ")";
+      bar.style.transform = "scaleX(" + (Math.min(100, Math.max(0, (window.scrollY / max) * 100)) / 100) + ")";
     }
     update();
     window.addEventListener("scroll", update, { passive: true });
