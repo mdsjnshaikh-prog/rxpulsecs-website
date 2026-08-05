@@ -6,25 +6,20 @@
 <title data-title-en="RxPulse Clinician Suite | Prescription and Patient Records for Doctors" data-title-bn="RxPulse Clinician Suite | ডাক্তারদের জন্য প্রেসক্রিপশন ও রোগীর রেকর্ড">RxPulse Clinician Suite | Prescription and Patient Records for Doctors</title>
 <meta content="RxPulse helps Bangladeshi doctors write prescriptions, keep patient records, manage follow-up visits, and print clean prescriptions for daily chamber work." name="description"/>
 <link href="https://www.rxpulsecs.com/index.html" rel="canonical"/>
-<link href="/design-tokens.css?v=20260804-faq-merge" rel="stylesheet"/>
-<link href="/ui-components.css?v=20260804-faq-merge" rel="stylesheet"/>
-<link href="/styles.css?v=20260804-faq-merge" rel="stylesheet"/>
+<link href="/design-tokens.css?v=20260805-ui-polish" rel="stylesheet"/>
+<link href="/ui-components.css?v=20260805-ui-polish" rel="stylesheet"/>
+<link href="/styles.css?v=20260805-ui-polish" rel="stylesheet"/>
 <script defer="" src="/script.js?v=20260803-design-tokens-v1"></script>
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header">
 <div class="container nav">
-<a aria-label="RxPulse home" class="brand" href="/index.html">
-<span class="brand-mark">Rx</span>
-<span>Pulse</span>
-</a>
+<a aria-label="RxPulse home" class="brand" href="/index.html"><span class="brand-mark">Rx</span><span>Pulse</span></a>
 <button aria-label="Switch language" class="lang-toggle mobile-lang-toggle" data-language-toggle="" type="button">বাংলা</button>
-<button aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" type="button">
-<span></span><span></span><span></span>
-</button>
+<button aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" type="button"><span></span><span></span><span></span></button>
 <nav aria-label="Primary navigation" class="site-nav" id="site-nav">
-<a data-bn="হোম" data-en="Home" href="/index.html">Home</a>
+<a data-bn="হোম" data-en="Home" href="/index.html" aria-current="page">Home</a>
 <a data-bn="ফিচার" data-en="Features" href="/features.html">Features</a>
 <a data-bn="কীভাবে কাজ করে" data-en="How It Works" href="/workflow.html">How It Works</a>
 <a data-bn="ডাউনলোড" data-en="Download" href="/download.html">Download</a>
@@ -35,7 +30,7 @@
 </div>
 </header>
 <main id="main-content">
-<section class="hero">
+<section class="hero hero--compact">
 <div class="container hero-grid">
 <div class="hero-copy">
 <p class="eyebrow" data-bn="বাংলাদেশি ডাক্তারদের জন্য" data-en="For Bangladeshi doctors">For Bangladeshi doctors</p>
@@ -69,18 +64,27 @@
 </div>
 </div>
 </section>
-<section class="section">
+<section class="section section--tight">
 <div class="container section-head">
 <p class="eyebrow" data-bn="কেন RxPulse" data-en="Why RxPulse">Why RxPulse</p>
 <h2 data-bn="জটিল সফটওয়্যার নয়—দৈনন্দিন চেম্বার কাজের জন্য।" data-en="Built for daily chamber work, not complicated software.">Built for daily chamber work, not complicated software.</h2>
 </div>
 <div class="container cards-3">
-<article class="card"><span class="card-icon">01</span><h3 data-bn="দ্রুত প্রেসক্রিপশন" data-en="Faster prescriptions">Faster prescriptions</h3><p data-bn="রোগীর তথ্য, vitals, findings, ওষুধ, পরামর্শ ও প্রিন্ট—ডাক্তারদের সাধারণ ধাপ অনুযায়ী সাজানো।" data-en="Patient details, vitals, findings, medicines, advice, and print—arranged in the order doctors usually work.">Patient details, vitals, findings, medicines, advice, and print—arranged in the order doctors usually work.</p></article>
-<article class="card"><span class="card-icon">02</span><h3 data-bn="রোগীর রেকর্ড" data-en="Patient records">Patient records</h3><p data-bn="আগের ভিজিট, চিকিৎসা ইতিহাস ও ফলো-আপ এক জায়গায় রাখুন।" data-en="Keep previous visits, treatment history, and follow-ups in one place.">Keep previous visits, treatment history, and follow-ups in one place.</p></article>
-<article class="card"><span class="card-icon">03</span><h3 data-bn="পরিষ্কার প্রিন্ট" data-en="Clean printouts">Clean printouts</h3><p data-bn="রোগীদের জন্য সহজবোধ্য প্রিন্টেড প্রেসক্রিপশন।" data-en="Clear printed prescriptions patients can understand.">Clear printed prescriptions patients can understand.</p></article>
+<article class="card"><span class="card-icon">01</span>
+<h3 data-bn="দ্রুত প্রেসক্রিপশন" data-en="Faster prescriptions">Faster prescriptions</h3>
+<p data-bn="রোগীর তথ্য, vitals, findings, ওষুধ, পরামর্শ ও প্রিন্ট—ডাক্তারদের সাধারণ ধাপ অনুযায়ী সাজানো।" data-en="Patient details, vitals, findings, medicines, advice, and print—arranged in the order doctors usually work.">Patient details, vitals, findings, medicines, advice, and print—arranged in the order doctors usually work.</p>
+</article>
+<article class="card"><span class="card-icon">02</span>
+<h3 data-bn="রোগীর রেকর্ড" data-en="Patient records">Patient records</h3>
+<p data-bn="আগের ভিজিট, চিকিৎসা ইতিহাস ও ফলো-আপ এক জায়গায় রাখুন।" data-en="Keep previous visits, treatment history, and follow-ups in one place.">Keep previous visits, treatment history, and follow-ups in one place.</p>
+</article>
+<article class="card"><span class="card-icon">03</span>
+<h3 data-bn="পরিষ্কার প্রিন্ট" data-en="Clean printouts">Clean printouts</h3>
+<p data-bn="রোগীদের জন্য সহজবোধ্য প্রিন্টেড প্রেসক্রিপশন।" data-en="Clear printed prescriptions patients can understand.">Clear printed prescriptions patients can understand.</p>
+</article>
 </div>
 </section>
-<section class="section soft">
+<section class="section soft section--tight">
 <div class="container section-head">
 <p class="eyebrow" data-bn="শুরু করার ধাপ" data-en="Getting started">Getting started</p>
 <h2 data-bn="ছয়টি সহজ ধাপ" data-en="Six simple steps">Six simple steps</h2>
@@ -105,20 +109,15 @@
 <p data-bn="বাংলাদেশি ডাক্তারদের জন্য সহজ প্রেসক্রিপশন ও রোগীর রেকর্ড সফটওয়্যার।" data-en="A simple prescription and patient record software for Bangladeshi doctors.">A simple prescription and patient record software for Bangladeshi doctors.</p>
 </div>
 <div><h3 data-bn="প্রোডাক্ট" data-en="Product">Product</h3>
-<a data-bn="ফিচার" data-en="Features" href="/features.html">Features</a>
-<a data-bn="কীভাবে কাজ করে" data-en="How It Works" href="/workflow.html">How It Works</a>
-<a data-bn="ডাউনলোড" data-en="Download" href="/download.html">Download</a></div>
+<a href="/features.html">Features</a><a href="/workflow.html">How It Works</a><a href="/download.html">Download</a></div>
 <div><h3 data-bn="অ্যাকাউন্ট" data-en="Account">Account</h3>
-<a data-bn="RxPulse ডাউনলোড" data-en="Download RxPulse" href="/download.html">Download RxPulse</a>
-<a data-bn="পাসওয়ার্ড রিসেট" data-en="Reset password" href="/forgot-password.html">Reset password</a>
-<a data-bn="সাপোর্ট" data-en="Support" href="/support.html">Support</a></div>
+<a href="/download.html">Download RxPulse</a><a href="/forgot-password.html">Reset password</a><a href="/support.html">Support</a></div>
 <div><h3 data-bn="আইনি" data-en="Legal">Legal</h3>
-<a data-bn="প্রাইভেসি" data-en="Privacy" href="/privacy.html">Privacy</a>
-<a data-bn="শর্তাবলি" data-en="Terms" href="/terms.html">Terms</a></div>
+<a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>
 </div>
 <div class="container footer-bottom">
 <span>© 2026 RxPulse Clinician Suite. All rights reserved.</span>
-<span data-bn="সাপোর্ট: support@rxpulsecs.com" data-en="Support: support@rxpulsecs.com">Support: support@rxpulsecs.com</span>
+<span>Support: support@rxpulsecs.com</span>
 </div>
 </footer>
 </body>
