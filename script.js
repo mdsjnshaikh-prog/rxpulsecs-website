@@ -1,7 +1,7 @@
-/* Force latest design-system CSS (container size queries cq2) */
+/* Force latest design-system CSS (device polish) */
 (function () {
   try {
-    var ver = "20260805-cq2";
+    var ver = "20260805-device";
     document.querySelectorAll('link[rel="stylesheet"]').forEach(function (link) {
       var href = link.getAttribute("href") || "";
       if (href.indexOf("ui-components.css") !== -1 && href.indexOf(ver) === -1) {
