@@ -1,7 +1,7 @@
-/* Force latest design-system CSS (responsive layer) */
+/* Force latest design-system CSS (container queries) */
 (function () {
   try {
-    var ver = "20260805-responsive";
+    var ver = "20260805-cq";
     document.querySelectorAll('link[rel="stylesheet"]').forEach(function (link) {
       var href = link.getAttribute("href") || "";
       if (href.indexOf("ui-components.css") !== -1 && href.indexOf(ver) === -1) {
