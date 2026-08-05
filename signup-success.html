@@ -1,120 +1,43 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Email Confirmed | RxPulse Clinician Suite</title>
-<meta content="Your RxPulse email is confirmed. Open RxPulse, sign in, add professional details, and send them for review." name="description"/>
+<title>Signup Success | RxPulse Clinician Suite</title>
+<meta content="noindex, nofollow" name="robots"/>
+<meta content="Next steps after creating your RxPulse account." name="description"/>
 <link href="https://www.rxpulsecs.com/signup-success.html" rel="canonical"/>
-<link href="/design-tokens.css?v=20260803-design-tokens-v1" rel="stylesheet"/>
-<link href="/ui-components.css?v=20260803-design-tokens-v1" rel="stylesheet"/>
-<link href="/styles.css?v=20260803-design-tokens-v1" rel="stylesheet"/>
+<link href="/design-tokens.css?v=20260805-ui-icons" rel="stylesheet"/>
+<link href="/ui-components.css?v=20260805-ui-icons" rel="stylesheet"/>
+<link href="/styles.css?v=20260805-ui-icons" rel="stylesheet"/>
 <script defer="" src="/script.js?v=20260803-design-tokens-v1"></script>
 </head>
 <body class="auth-page success-page">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header">
 <div class="container nav">
-<a aria-label="RxPulse home" class="brand" href="/index.html">
-<span class="brand-mark">Rx</span>
-<span>Pulse</span>
-</a>
-<button aria-label="Switch language" class="lang-toggle mobile-lang-toggle" data-language-toggle="" type="button">বাংলা</button><button aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" type="button">
-<span></span><span></span><span></span>
-</button>
-<nav aria-label="Primary navigation" class="site-nav" id="site-nav">
-<a data-bn="হোম" data-en="Home" href="/index.html">Home</a>
-<a data-bn="ফিচার" data-en="Features" href="/features.html">Features</a>
-<a data-bn="কীভাবে কাজ করে" data-en="How It Works" href="/workflow.html">How It Works</a>
-<a data-bn="ডাউনলোড" data-en="Download" href="/download.html">Download</a>
-<a data-bn="সাপোর্ট" data-en="Support" href="/support.html">Support</a>
-<a class="nav-cta" data-bn="ডাউনলোড" data-en="Download RxPulse" href="/download.html">Download RxPulse</a>
-<button aria-label="Switch language" class="lang-toggle" data-language-toggle="" type="button">EN</button>
-</nav>
+<a aria-label="RxPulse home" class="brand" href="/index.html"><span class="brand-mark">Rx</span><span>Pulse</span></a>
 </div>
 </header>
 <main id="main-content">
 <section class="success-hero">
 <div class="container success-wrap">
 <div class="success-card">
-<div aria-hidden="true" class="success-icon" id="success-icon">✓</div>
-<p class="eyebrow" data-bn="ইমেইল নিশ্চিত হয়েছে" data-en="Email confirmed">Email confirmed</p>
-<h1 data-bn="আপনার RxPulse ইমেইল নিশ্চিত হয়েছে" data-en="Your RxPulse email is confirmed" id="success-title">Your RxPulse email is confirmed</h1>
-<p class="auth-lead" data-bn="আপনার ইমেইল নিশ্চিত হয়েছে। এখন RxPulse খুলে ইমেইল ও পাসওয়ার্ড দিয়ে sign in করুন, পেশাগত তথ্য দিন এবং যাচাইয়ের জন্য পাঠান।" data-en="Your email has been confirmed. Now open RxPulse, sign in with your email and password, add your professional details, and send them for review." id="success-copy">Your email has been confirmed. Now open RxPulse, sign in with your email and password, add your professional details, and send them for review.</p>
-<div class="success-steps">
-<div><strong>1</strong><span data-bn="RxPulse খুলুন" data-en="Open RxPulse">Open RxPulse</span></div>
-<div><strong>2</strong><span data-bn="ইমেইল ও পাসওয়ার্ড দিয়ে sign in করুন" data-en="Sign in with your email and password">Sign in with your email and password</span></div>
-<div><strong>3</strong><span data-bn="তথ্য দিয়ে যাচাইয়ের জন্য পাঠান" data-en="Add details and send for review">Add details and send for review</span></div>
-</div>
+<div aria-hidden="true" class="success-icon">✓</div>
+<p class="eyebrow">Account</p>
+<h1 data-bn="অ্যাকাউন্ট তৈরি হয়েছে" data-en="Account created">Account created</h1>
+<p class="auth-lead" data-bn="প্রোফাইল সম্পূর্ণ করে approval-এর জন্য submit করুন।" data-en="Complete your profile and submit for approval.">Complete your profile and submit for approval.</p>
 <div class="actions center-actions">
-<a class="button primary" data-bn="RxPulse ডাউনলোড" data-en="Download RxPulse" href="/download.html">Download RxPulse</a>
-<a class="button secondary" data-bn="সহায়তা দরকার?" data-en="Need support?" href="/support.html">Need support?</a>
+<a class="button primary" href="/download.html">Open Download</a>
+<a class="button secondary" href="/workflow.html">See steps</a>
 </div>
 </div>
 </div>
 </section>
-<script>
-  (function () {
-    const params = new URLSearchParams(window.location.search);
-    const hash = new URLSearchParams((window.location.hash || '').replace(/^#/, ''));
-    const error = params.get('error') || hash.get('error');
-    const errorDescription = params.get('error_description') || hash.get('error_description');
-
-    if (error || errorDescription) {
-      const icon = document.getElementById('success-icon');
-      const title = document.getElementById('success-title');
-      const copy = document.getElementById('success-copy');
-      const enTitle = 'Verification link needs attention';
-      const bnTitle = 'Verification link-এ সমস্যা হয়েছে';
-      const enCopy = errorDescription || 'This old email confirmation link may no longer work. Please create your account in the RxPulse Windows app or contact RxPulse support.';
-      const bnCopy = 'এই পুরনো email confirmation link কাজ নাও করতে পারে। অনুগ্রহ করে RxPulse Windows app-এ account তৈরি করুন অথবা RxPulse support-এ যোগাযোগ করুন।';
-      const currentLang = document.documentElement.lang === 'bn' ? 'bn' : 'en';
-      if (icon) { icon.textContent = '!'; icon.classList.add('warning'); }
-      if (title) {
-        title.textContent = currentLang === 'bn' ? bnTitle : enTitle;
-        title.dataset.en = enTitle;
-        title.dataset.bn = bnTitle;
-      }
-      if (copy) {
-        copy.textContent = currentLang === 'bn' ? bnCopy : enCopy;
-        copy.dataset.en = enCopy;
-        copy.dataset.bn = bnCopy;
-      }
-    }
-  })();
-</script>
 </main>
 <footer class="site-footer">
-<div class="container footer-grid">
-<div>
-<a aria-label="RxPulse home" class="brand footer-brand" href="/index.html">
-<span class="brand-mark">Rx</span>
-<span>Pulse</span>
-</a>
-<p data-bn="বাংলাদেশি ডাক্তারদের জন্য সহজ প্রেসক্রিপশন ও রোগীর রেকর্ড সফটওয়্যার। দৈনন্দিন চেম্বার ভিজিট, ফলো-আপ রেকর্ড এবং পরিষ্কার প্রিন্টেড প্রেসক্রিপশনে সহায়তা করে।" data-en="A simple prescription and patient record software for Bangladeshi doctors. It helps with daily visits, follow-up records, and clean printed prescriptions.">A simple prescription and patient record software for Bangladeshi doctors. It helps with daily visits, follow-up records, and clean printed prescriptions.</p>
-</div>
-<div>
-<h3 data-bn="প্রোডাক্ট" data-en="Product">Product</h3>
-<a data-bn="ফিচার" data-en="Features" href="/features.html">Features</a>
-<a data-bn="কীভাবে কাজ করে" data-en="How It Works" href="/workflow.html">How It Works</a>
-<a data-bn="ডাউনলোড" data-en="Download" href="/download.html">Download</a>
-</div>
-<div>
-<h3 data-bn="অ্যাকাউন্ট" data-en="Account">Account</h3>
-<a data-bn="RxPulse ডাউনলোড" data-en="Download RxPulse" href="/download.html">Download RxPulse</a>
-<a data-bn="পাসওয়ার্ড রিসেট" data-en="Reset password" href="/forgot-password.html">Reset password</a>
-<a data-bn="সাপোর্ট" data-en="Support" href="/support.html">Support</a>
-</div>
-<div>
-<h3 data-bn="আইনি" data-en="Legal">Legal</h3>
-<a data-bn="প্রাইভেসি" data-en="Privacy" href="/privacy.html">Privacy</a>
-<a data-bn="শর্তাবলি" data-en="Terms" href="/terms.html">Terms</a>
-</div>
-</div>
 <div class="container footer-bottom">
 <span>© 2026 RxPulse Clinician Suite. All rights reserved.</span>
-<span data-bn="সাপোর্ট: support@rxpulsecs.com" data-en="Support: support@rxpulsecs.com">Support: support@rxpulsecs.com</span>
 </div>
 </footer>
 </body>
