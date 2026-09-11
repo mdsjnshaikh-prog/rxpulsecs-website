@@ -148,8 +148,7 @@
   async function findProfile(slug) {
     const normalizedSlug = normalizeSlug(slug);
     const select = [
-      "id", "doctorId", "slug", "name", "specialties", "bmdcNumber",
-      "isApproved", "approvalStatus"
+      "id", "slug", "name", "specialties", "bmdcNumber"
     ].join(",");
 
     const exact = await restFetch("publicProfiles", { select, slug: `eq.${normalizedSlug}`, limit: "1" });
@@ -286,7 +285,8 @@
 
       await waitForRenderedProfile();
       const profile = await findProfile(slug);
-      if (!profile || profile.isApproved !== true || profile.approvalStatus !== "approved") return;
+      // Anonymous RLS already excludes non-public profiles.
+      if (!profile) return;
 
       insertBmdcNumber(profile);
 
