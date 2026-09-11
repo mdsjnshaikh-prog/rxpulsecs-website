@@ -14,6 +14,7 @@
   };
 
   function getLang() {
+    if (typeof document === "undefined") return "en";
     return document.documentElement.lang === "bn" ? "bn" : "en";
   }
 
