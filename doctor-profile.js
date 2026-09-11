@@ -1,5 +1,10 @@
 (function () {
-  const root = document.getElementById("doctor-profile-root");
+  const root = typeof document !== "undefined" ? document.getElementById("doctor-profile-root") : null;
+  const PUBLIC_PROFILE_SELECT = [
+    "id", "slug", "name", "qualifications", "specialties", "bmdcNumber", "designation", "workplace",
+    "bio", "expertise", "chamberInfo", "timings", "whatsappNumber", "profilePhotoUrl", "template",
+    "writings", "updated_at"
+  ];
   const DAYS = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
   const STATUS_LABELS = {
     Available: { en: "Open", bn: "চেম্বার খোলা" },
@@ -177,11 +182,7 @@
 
   async function findProfile(slug) {
     const normalizedSlug = normalizeSlug(slug);
-    const select = [
-      "id", "doctorId", "slug", "name", "qualifications", "specialties", "designation", "workplace",
-      "bio", "expertise", "chamberInfo", "timings", "whatsappNumber", "profilePhotoUrl", "template",
-      "isApproved", "approvalStatus"
-    ].join(",");
+    const select = PUBLIC_PROFILE_SELECT.join(",");
 
     const exact = await restFetch("publicProfiles", { select, slug: `eq.${normalizedSlug}`, limit: "1" });
     if (exact && exact[0]) return exact[0];
@@ -420,6 +421,7 @@
           <h1>${escapeHtml(profile.name || text("Doctor", "ডাক্তার"))}</h1>
           ${profile.qualifications ? `<p class="qualification">${escapeHtml(profile.qualifications)}</p>` : ""}
           ${profile.specialties ? `<p class="specialty-pill">${escapeHtml(profile.specialties)}</p>` : ""}
+          ${profile.bmdcNumber ? `<p class="bmdc-pill"><span>${escapeHtml(text("BMDC Registration", "BMDC রেজিস্ট্রেশন"))}</span><strong>${escapeHtml(profile.bmdcNumber)}</strong></p>` : ""}
           ${(profile.designation || profile.workplace) ? `<p class="workplace">${escapeHtml([profile.designation, profile.workplace].filter(Boolean).join(" • "))}</p>` : ""}
         </div>
       </div>
@@ -549,13 +551,14 @@
 
     try {
       const profile = await findProfile(slug);
-      if (!profile || profile.isApproved !== true || profile.approvalStatus !== "approved") {
+      // Anonymous RLS is the public-visibility authority. If a row is returned,
+      // the account, portfolio, and subscription gates have already passed.
+      if (!profile) {
         renderState("hidden", text("Profile not available", "প্রোফাইলটি পাওয়া যাচ্ছে না"), text("This doctor profile is not public right now. It may be awaiting approval or hidden because the subscription is not active.", "এই ডাক্তার প্রোফাইলটি এখন পাবলিক নয়। অনুমোদন বাকি থাকতে পারে অথবা সক্রিয় সাবস্ক্রিপশন না থাকায় লুকানো থাকতে পারে।"));
         return;
       }
 
-      const doctorId = profile.doctorId || profile.id;
-      const chamberData = await loadChamberData(doctorId);
+      const chamberData = await loadChamberData(profile.id);
       const chamberHtml = renderChamberWidget(chamberData.chambers, chamberData.schedule, chamberData.overrides);
       document.title = `${profile.name || "Doctor"} | RxPulse Public Portfolio`;
       root.innerHTML = renderTemplate(profile, chamberHtml);
@@ -584,5 +587,19 @@
     }
   }
 
-  init();
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+      PUBLIC_PROFILE_SELECT,
+      escapeHtml,
+      findProfile,
+      loadChamberData,
+      renderChamberWidget,
+      renderIdentity,
+      renderTemplate,
+      safeHttpUrl,
+      safeImageUrl,
+    };
+  }
+
+  if (root) init();
 })();
